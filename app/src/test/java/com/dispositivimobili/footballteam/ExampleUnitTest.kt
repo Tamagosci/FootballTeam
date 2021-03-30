@@ -1,4 +1,4 @@
-package com.dispositivimobili.footballmanager
+package com.dispositivimobili.footballteam
 
 import org.junit.Test
 

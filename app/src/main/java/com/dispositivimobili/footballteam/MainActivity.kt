@@ -1,4 +1,4 @@
-package com.dispositivimobili.footballmanager
+package com.dispositivimobili.footballteam
 
 import android.os.Bundle
 import com.google.android.material.floatingactionbutton.FloatingActionButton
