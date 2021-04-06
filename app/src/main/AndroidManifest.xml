@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FootballManager">
         <activity
-            android:name="com.dispositivimobili.footballteam.RegisterActivity"
+            android:name="com.dispositivimobili.footballteam.SelectionActivity"
             android:label="@string/app_name"
             android:theme="@style/Theme.FootballManager.NoActionBar">
             <intent-filter>
