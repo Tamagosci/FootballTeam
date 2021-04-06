@@ -1,26 +1,27 @@
 package com.dispositivimobili.footballteam
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.activity_login.editTextUserName
+import kotlinx.android.synthetic.main.activity_register.*
 import java.util.regex.Pattern
 
-class LoginActivity : AppCompatActivity() {
+class RegisterActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        setContentView(R.layout.activity_register)
     }
 
-    fun checkLogin(v: View?) {
-        val email: String = editTextUserName.getText().toString()
-        if(!isValidEmail(email)){
-            editTextUserName.setError(getString(R.string.invalid_email))
+    fun checkRegister(v: View?) {
+        val email: String = editTextTextEmailAddress.getText().toString()
+        if (!isValidEmail(email)) {
+            editTextTextEmailAddress.setError(getString(R.string.invalid_email))
         }
-        val password: String = editTextPassword.getText().toString()
-        if(!isValidPassword(password)){
-            editTextPassword.setError(getString(R.string.invalid_password))
+        val password: String = editTextTextPassword.getText().toString()
+        if (!isValidPassword(password)) {
+            editTextTextPassword.setError(getString(R.string.invalid_password))
         }
     }
 
@@ -38,5 +39,4 @@ class LoginActivity : AppCompatActivity() {
         return matcher.matches()
 
     }
-
 }
