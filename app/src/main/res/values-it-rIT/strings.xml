@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Football Team</string>
+    <string name="email_address">indirizzo e-mail</string>
+    <string name="password">password</string>
+    <string name="signin">ENTRA</string>
+    <string name="invalid_email">indirizzo e-mail non valido</string>
+    <string name="invalid_password">password non valida</string>
+    <string name="insert_data">Inserisci i tuoi dati</string>
+    <string name="insert_name">Nome</string>
+    <string name="insert_surname">Cognome</string>
+    <string name="insert_email">E-mail</string>
+    <string name="insert_phone">Numero di telefono</string>
+    <string name="insert_password">Password</string>
+    <string name="register">REGISTRATI</string>
+    <string name="select">Seleziona cosa desideri fare</string>
+    <string name="action_settings">Impostazioni</string>
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Successivo</string>
+    <string name="previous">Precedente</string>
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="info_username_password">La password non può essere vuota e deve contenere almeno 4 caratteri. L\'indirizzo e-mail deve essere un indirizzo valido</string>
+</resources>
