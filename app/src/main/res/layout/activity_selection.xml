@@ -7,12 +7,12 @@
     android:padding="36dp">
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/textViewSelectionActivity"
         android:layout_width="0dp"
         android:layout_height="100dp"
         android:text="@string/select"
         android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/buttonLogin"
+        app:layout_constraintBottom_toTopOf="@+id/buttonLoginSelectionActivity"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -20,18 +20,18 @@
         app:layout_constraintVertical_bias="0.544" />
 
     <Button
-        android:id="@+id/buttonLogin"
+        android:id="@+id/buttonLoginSelectionActivity"
         android:layout_width="wrap_content"
         android:layout_height="68dp"
         android:text="@string/signin"
-        app:layout_constraintBottom_toTopOf="@+id/buttonRegister"
+        app:layout_constraintBottom_toTopOf="@+id/buttonRegisterSelectionActivity"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewSelectionActivity" />
 
     <Button
-        android:id="@+id/buttonRegister"
+        android:id="@+id/buttonRegisterSelectionActivity"
         android:layout_width="wrap_content"
         android:layout_height="68dp"
         android:text="@string/register"
@@ -39,6 +39,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonLogin"
+        app:layout_constraintTop_toBottomOf="@+id/buttonLoginSelectionActivity"
         app:layout_constraintVertical_bias="0.319" />
 </androidx.constraintlayout.widget.ConstraintLayout>

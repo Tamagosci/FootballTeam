@@ -3,8 +3,6 @@ package com.dispositivimobili.footballteam
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activity_login.*
-import kotlinx.android.synthetic.main.activity_login.editTextUserName
 import kotlinx.android.synthetic.main.activity_register.*
 import java.util.regex.Pattern
 
@@ -15,13 +13,13 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     fun checkRegister(v: View?) {
-        val email: String = editTextTextEmailAddress.getText().toString()
+        val email: String = editTextTextEmailAddressRegisterActivity.getText().toString()
         if (!isValidEmail(email)) {
-            editTextTextEmailAddress.setError(getString(R.string.invalid_email))
+            editTextTextEmailAddressRegisterActivity.setError(getString(R.string.invalid_email))
         }
-        val password: String = editTextTextPassword.getText().toString()
+        val password: String = editTextTextPasswordRegisterActivity.getText().toString()
         if (!isValidPassword(password)) {
-            editTextTextPassword.setError(getString(R.string.invalid_password))
+            editTextTextPasswordRegisterActivity.setError(getString(R.string.invalid_password))
         }
     }
 
