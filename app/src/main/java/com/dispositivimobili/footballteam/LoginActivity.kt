@@ -1,6 +1,5 @@
 package com.dispositivimobili.footballteam
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -14,13 +13,13 @@ class LoginActivity : AppCompatActivity() {
     }
 
     fun checkLogin(v: View?) {
-        val email: String = editTextUserName.getText().toString()
+        val email: String = editTextUserNameLoginActivity.getText().toString()
         if(!isValidEmail(email)){
-            editTextUserName.setError(getString(R.string.invalid_email))
+            editTextUserNameLoginActivity.setError(getString(R.string.invalid_email))
         }
-        val password: String = editTextPassword.getText().toString()
+        val password: String = editTextPasswordLoginActivity.getText().toString()
         if(!isValidPassword(password)){
-            editTextPassword.setError(getString(R.string.invalid_password))
+            editTextPasswordLoginActivity.setError(getString(R.string.invalid_password))
         }
     }
 
