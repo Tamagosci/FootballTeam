@@ -13,18 +13,19 @@ class RegisterActivity : AppCompatActivity() {
         setContentView(R.layout.activity_register)
     }
 
-    var start_email : Boolean = false
-    var start_password : Boolean = false
-
     fun checkRegister(v: View?) {
+        var start_email : Boolean = false
+        var start_password : Boolean = false
         val email: String = editTextTextEmailAddressRegisterActivity.getText().toString()
         if (!isValidEmail(email)) {
+            start_email = false
             editTextTextEmailAddressRegisterActivity.setError(getString(R.string.invalid_email))
         } else{
             start_email = true
         }
         val password: String = editTextTextPasswordRegisterActivity.getText().toString()
         if (!isValidPassword(password)) {
+            start_password = false
             editTextTextPasswordRegisterActivity.setError(getString(R.string.invalid_password))
         } else{
             start_password = true

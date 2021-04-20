@@ -9,7 +9,7 @@
 
     <string name="press_continue">Press to continue</string>
 
-    <string name="select">Select what you wanto to do</string>
+    <string name="select">Select what you want to do</string>
     <string name="signin">LOGIN</string>
     <string name="register">REGISTER</string>
 
@@ -19,7 +19,7 @@
     <string name="invalid_email">invalid email</string>
     <string name="invalid_password">invalid password</string>
 
-    <string name="insert_data">Insert your date</string>
+    <string name="insert_data">Insert your data</string>
     <string name="insert_name">Name</string>
     <string name="insert_surname">Surname</string>
     <string name="insert_email">Email</string>

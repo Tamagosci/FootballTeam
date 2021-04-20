@@ -13,18 +13,19 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
     }
 
-    var start_email : Boolean = false
-    var start_password : Boolean = false
-
     fun checkLogin(v: View?) {
+        var start_email : Boolean = false
+        var start_password : Boolean = false
         val email: String = editTextUserNameLoginActivity.getText().toString()
         if(!isValidEmail(email)){
+            start_email = false
             editTextUserNameLoginActivity.setError(getString(R.string.invalid_email))
         } else{
             start_email = true
         }
         val password: String = editTextPasswordLoginActivity.getText().toString()
         if(!isValidPassword(password)){
+            start_email = false
             editTextPasswordLoginActivity.setError(getString(R.string.invalid_password))
         } else{
             start_password = true
