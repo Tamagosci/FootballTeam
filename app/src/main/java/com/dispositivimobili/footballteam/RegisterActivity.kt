@@ -1,5 +1,6 @@
 package com.dispositivimobili.footballteam
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -12,14 +13,26 @@ class RegisterActivity : AppCompatActivity() {
         setContentView(R.layout.activity_register)
     }
 
+    var start_email : Boolean = false
+    var start_password : Boolean = false
+
     fun checkRegister(v: View?) {
         val email: String = editTextTextEmailAddressRegisterActivity.getText().toString()
         if (!isValidEmail(email)) {
             editTextTextEmailAddressRegisterActivity.setError(getString(R.string.invalid_email))
+        } else{
+            start_email = true
         }
         val password: String = editTextTextPasswordRegisterActivity.getText().toString()
         if (!isValidPassword(password)) {
             editTextTextPasswordRegisterActivity.setError(getString(R.string.invalid_password))
+        } else{
+            start_password = true
+        }
+
+        if(start_email == true && start_password == true){
+            val intent = Intent(this, PrincipalActivity::class.java)
+            startActivity(intent)
         }
     }
 
