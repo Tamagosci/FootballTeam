@@ -14,5 +14,15 @@ class imageFirstActivity : AppCompatActivity() {
             val intent = Intent(this, SelectionActivity::class.java)
             startActivity(intent)
         }
+
+        textViewImageFirstActivity_1.setOnClickListener{
+            val intent = Intent(this, SelectionActivity::class.java)
+            startActivity(intent)
+        }
+
+        textViewImageFirstActivity_2.setOnClickListener{
+            val intent = Intent(this, SelectionActivity::class.java)
+            startActivity(intent)
+        }
     }
 }
