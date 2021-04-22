@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="36dp"
-    android:background="@mipmap/ic_imagefootball_sfondoverde">
+    android:background="@mipmap/ic_imagefootball_sfondoverde_round">
 
     <TextView
         android:id="@+id/textViewSelectionActivity"

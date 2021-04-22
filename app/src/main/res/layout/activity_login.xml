@@ -22,7 +22,7 @@
         android:layout_marginTop="32dp"
         android:ems="10"
         android:hint="@string/email_address"
-        android:inputType="textPersonName"
+        android:inputType="textEmailAddress"
         app:layout_constraintBottom_toTopOf="@+id/editTextPasswordLoginActivity"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

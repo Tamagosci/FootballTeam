@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.FootballManager" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.FootballManager" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/green_300</item>
         <item name="colorPrimaryVariant">@color/green_700</item>
