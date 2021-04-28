@@ -2,17 +2,26 @@ package com.dispositivimobili.footballteam
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_image_first.*
 import kotlinx.android.synthetic.main.activity_login.*
 import java.util.regex.Pattern
 
 
 class LoginActivity : AppCompatActivity() {
+
+    private lateinit var auth: FirebaseAuth
+    private var TAG = "LoginActivity"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+
+        auth = Firebase.auth
 
         textViewRegisteredLoginActivity.setOnClickListener{
             val intent = Intent(this, RegisterActivity::class.java)
@@ -39,9 +48,28 @@ class LoginActivity : AppCompatActivity() {
                 start_password = true
             }
 
-            if (start_email == true && start_password == true) {
-                val intent = Intent(this, PrincipalActivity::class.java)
-                startActivity(intent)
+            loginUser(email, password)
+        }
+
+        private fun loginUser(email: String, password: String){
+            auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this) { task ->
+                if (task.isSuccessful){
+                    // Sign in success, update UI with the signed-in user's information
+                    Log.d(TAG, "signInWithEmail: success")
+                    val intent = Intent(this, PrincipalActivity::class.java)
+                    startActivity(intent)
+                } else{
+                    //if sign in fails, display a message to the user
+                    Log.w(TAG, "signInWithEmail: failure", task.exception)
+                    val builder = AlertDialog.Builder(this)
+                    with(builder)
+                    {
+                        setTitle("Authentication failed")
+                        setMessage(task.exception?.message)
+                        setPositiveButton("OK", null)
+                        show()
+                    }
+                }
             }
         }
 
@@ -57,6 +85,5 @@ class LoginActivity : AppCompatActivity() {
             val pattern = Pattern.compile(EMAIL_PATTERN)
             val matcher = pattern.matcher(email)
             return matcher.matches()
-
         }
 }

@@ -8,6 +8,13 @@
     android:orientation="vertical"
     tools:context=".PrincipalActivity">
 
+    <item
+        android:id="@+id/action_logout"
+        android:title="@string/action_logout"
+        android:icon="@android:drawable/ic_lock_power_off"
+        app:showAsAction="ifRoom"/>
+
+
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout2"
         android:layout_width="match_parent"

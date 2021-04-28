@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "963408443256",
+    "project_id": "football-manager-1b4ec",
+    "storage_bucket": "football-manager-1b4ec.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:963408443256:android:2008782891c2bb32227a8d",
+        "android_client_info": {
+          "package_name": "com.dispositivimobili.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "963408443256-ha7jvlol7vndrpg4m5410b3ebvv4es7n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBxOs4C1SSS6goqiYXKkT8jKS3gn_NcVVA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "963408443256-ha7jvlol7vndrpg4m5410b3ebvv4es7n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
