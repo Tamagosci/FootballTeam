@@ -16,6 +16,7 @@
     <string name="email_address">email address</string>
     <string name="password">password</string>
     <string name="info_username_password">The password cannot be blank and must contain at least 4 characters. The email address must be a valide address</string>
+    <string name="new_user_registered">New user? Registered</string>
     <string name="invalid_email">invalid email</string>
     <string name="invalid_password">invalid password</string>
 

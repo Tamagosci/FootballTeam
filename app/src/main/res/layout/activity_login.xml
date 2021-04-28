@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="36dp"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white">
+
 
     <ImageView
         android:id="@+id/imageViewLoginActivity"
@@ -22,6 +25,7 @@
         android:layout_marginTop="32dp"
         android:ems="10"
         android:hint="@string/email_address"
+        android:textColorHint="@color/black"
         android:inputType="textEmailAddress"
         app:layout_constraintBottom_toTopOf="@+id/editTextPasswordLoginActivity"
         app:layout_constraintEnd_toEndOf="parent"
@@ -35,6 +39,7 @@
         android:layout_marginBottom="24dp"
         android:ems="10"
         android:hint="@string/password"
+        android:textColorHint="@color/black"
         android:inputType="textPassword"
         app:layout_constraintBottom_toTopOf="@+id/buttonLoginActivity"
         app:layout_constraintEnd_toEndOf="parent"
@@ -48,6 +53,7 @@
         android:layout_marginBottom="32dp"
         android:text="@string/signin"
         android:onClick="checkLogin"
+        android:background="@drawable/two_state_button"
         app:layout_constraintBottom_toTopOf="@+id/textViewLoginActivity"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -58,10 +64,24 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:text="@string/info_username_password"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@id/textViewRegisteredLoginActivity"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonLoginActivity" />
+
+    <TextView
+        android:id="@+id/textViewRegisteredLoginActivity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/new_user_registered"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewLoginActivity" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

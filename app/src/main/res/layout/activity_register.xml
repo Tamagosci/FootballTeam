@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@mipmap/ic_imagefootball_foreground"
+    android:background="@mipmap/ic_imagefootball_erbaverde"
     android:padding="36dp">
 
     <TextView
@@ -12,12 +12,16 @@
         android:layout_width="0dp"
         android:layout_height="112dp"
         android:text="@string/insert_data"
+        android:textColor="@color/white"
+        android:textAlignment="inherit"
+        android:paddingTop="30dp"
         android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/editTextTextPersonNameRegisterActivity"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:gravity="center_horizontal" />
 
     <EditText
         android:id="@+id/editTextTextPersonNameRegisterActivity"
@@ -25,6 +29,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="@string/insert_name"
+        android:textColorHint="@color/white"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/editTextTextPersonSurnameRegisterActivity"
         app:layout_constraintEnd_toEndOf="parent"
@@ -37,6 +42,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="@string/insert_surname"
+        android:textColorHint="@color/white"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/editTextTextEmailAddressRegisterActivity"
         app:layout_constraintEnd_toEndOf="parent"
@@ -49,6 +55,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="@string/insert_email"
+        android:textColorHint="@color/white"
         android:inputType="textEmailAddress"
         app:layout_constraintBottom_toTopOf="@+id/editTextPhoneRegisterActivity"
         app:layout_constraintEnd_toEndOf="parent"
@@ -61,6 +68,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="@string/insert_phone"
+        android:textColorHint="@color/white"
         android:inputType="phone"
         app:layout_constraintBottom_toTopOf="@+id/editTextTextPasswordRegisterActivity"
         app:layout_constraintEnd_toEndOf="parent"
@@ -73,6 +81,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="@string/insert_password"
+        android:textColorHint="@color/white"
         android:inputType="textPassword"
         app:layout_constraintBottom_toTopOf="@+id/buttonRegisterActivity"
         app:layout_constraintEnd_toEndOf="parent"
@@ -84,7 +93,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="@string/register"
+        android:textColorHint="@color/white"
         android:onClick="checkRegister"
+        android:backgroundTint="@color/green_700"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

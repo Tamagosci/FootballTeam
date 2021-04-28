@@ -10,7 +10,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FootballManager">
         <activity android:name=".PrincipalActivity"/>
-        <activity android:name=".SelectionActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".RegisterActivity" />
         <activity
