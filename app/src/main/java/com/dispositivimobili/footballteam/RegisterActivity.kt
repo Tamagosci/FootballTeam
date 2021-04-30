@@ -7,19 +7,20 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_register.*
 import java.util.regex.Pattern
 
 class RegisterActivity : AppCompatActivity() {
 
-    private lateinit var auth: FirebaseAuth
     private var TAG = "RegisterActivity"
+    private var rootNode: FirebaseDatabase = FirebaseDatabase.getInstance()
+    private var reference: DatabaseReference = rootNode.getReference("users")
+    var id = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
-
-        auth = Firebase.auth
     }
 
     fun checkRegister(v: View?) {
@@ -29,6 +30,8 @@ class RegisterActivity : AppCompatActivity() {
         val surname: String = editTextTextPersonSurnameRegisterActivity.text.toString()
         val phone: String = editTextPhoneRegisterActivity.text.toString()
         val email: String = editTextTextEmailAddressRegisterActivity.getText().toString()
+        val password: String = editTextTextPasswordRegisterActivity.getText().toString()
+
         if(name.isEmpty()){
             editTextTextPersonNameRegisterActivity.error = "Enter name"
             return
@@ -37,17 +40,25 @@ class RegisterActivity : AppCompatActivity() {
             editTextTextPersonSurnameRegisterActivity.error = "Enter surname"
             return
         }
+        if(email.isEmpty()){
+            editTextTextEmailAddressRegisterActivity.error = "Enter email"
+            return
+        }
         if(phone.isEmpty()){
             editTextPhoneRegisterActivity.error = "Enter phone"
             return
         }
+        if(password.isEmpty()){
+            editTextTextPasswordRegisterActivity.error = "Enter password"
+            return
+        }
+
         if (!isValidEmail(email)) {
             start_email = false
             editTextTextEmailAddressRegisterActivity.setError(getString(R.string.invalid_email))
         } else{
             start_email = true
         }
-        val password: String = editTextTextPasswordRegisterActivity.getText().toString()
         if (!isValidPassword(password)) {
             start_password = false
             editTextTextPasswordRegisterActivity.setError(getString(R.string.invalid_password))
@@ -55,31 +66,16 @@ class RegisterActivity : AppCompatActivity() {
             start_password = true
         }
 
-        createUser(name, surname, email, phone, password)
-    }
-
-    private fun createUser(name: String, surname: String, email: String, phone: String, password: String){
-        auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this){ task ->
-            if(task.isSuccessful){
-                //Sign in success, update UI with the signed-in user's information
-                Log.d(TAG, "createUserWithEmail: success")
-                val currentUser = auth.currentUser
-                val uid = currentUser!!.uid
-                val userMap = HashMap<String, String>()
-                userMap["name"] = name
-                userMap["surname"] = surname
-                userMap["phone"] = phone
-                val database = FirebaseDatabase.getInstance().getReference("Users").child(uid)
-                database.setValue(userMap).addOnCompleteListener{ task ->
-                    if(task.isSuccesful){
-                       val intent = Intent(this, PrincipalActivity::class.java)
-                        startActivity(intent)
-                    }
-                }
-            } else{
-                Log.w(TAG, "createUserWithEmail: Failure", task.exception)
-                Toast.makeText(baseContext, "Authentication failed", Toast.LENGTH_SHORT).show()
-            }
+        //get all the values
+        val helperClass: User = User(name, surname, email, phone, password, id)
+        reference.child(id.toString()).setValue(helperClass)
+        if(start_email == true && start_password == true){
+            val intent = Intent(this, PrincipalActivity::class.java )
+            startActivity(intent)
+            Log.d(TAG, "createUserWithEmail: Success")
+        } else{
+            Log.w(TAG, "createUserWithEmail: Failure")
+            Toast.makeText(this, "Authentication failed", Toast.LENGTH_SHORT).show()
         }
     }
 

@@ -21,8 +21,6 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        auth = Firebase.auth
-
         textViewRegisteredLoginActivity.setOnClickListener{
             val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
@@ -48,7 +46,7 @@ class LoginActivity : AppCompatActivity() {
                 start_password = true
             }
 
-            loginUser(email, password)
+            //loginUser(email, password)
         }
 
         private fun loginUser(email: String, password: String){

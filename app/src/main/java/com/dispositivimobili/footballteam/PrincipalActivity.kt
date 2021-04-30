@@ -22,8 +22,6 @@ class PrincipalActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_principal)
 
-        auth = Firebase.auth
-
         val users = arrayOf(
                 "Virat Kohli", "Rohit Sharma", "Steve Smith",
                 "Kane Williamson", "Ross Taylor", "Mario Rossi",
@@ -46,16 +44,6 @@ class PrincipalActivity : AppCompatActivity() {
         }
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if(id == R.id.action_settings){
-
-        } else if(id == R.id.action_new_item){
-
-        }else if(id == R.id.action_logout){
-            auth.signOut()
-        }
-        return super.onOptionsItemSelected(item)
-    }
 
     class MyAdapter(private val context: Context, val data: Array<String>) : BaseAdapter() {
         override fun getCount(): Int {
