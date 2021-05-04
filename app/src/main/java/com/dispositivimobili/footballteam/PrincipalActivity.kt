@@ -12,11 +12,15 @@ import android.widget.ArrayAdapter
 import android.widget.BaseAdapter
 import android.widget.TextView
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_principal.*
 
 class PrincipalActivity : AppCompatActivity() {
 
     private lateinit var mAuth: FirebaseAuth
+    private var rootNode: FirebaseDatabase = FirebaseDatabase.getInstance()
+    private var reference: DatabaseReference = rootNode.getReference("player")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

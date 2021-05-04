@@ -62,10 +62,10 @@ class LoginActivity : AppCompatActivity() {
                 //"(?=.*[0-9])" +       //at least 1 digit
                 //"(?=.*[a-z])" +       //at least 1 lower case letter
                 //"(?=.*[A-Z])" +       //at least 1 upper case letter
-                "(?=.*[a-zA-Z])" +      //any letter
+                "(?=.*[a-zA-Z0-9])" +      //any letter
                 //"(?=.*[@#$%^&+=])" +    //at least 1 special character
                 "(?=\\S+$)" +           //no white spaces
-                ".{4,}" +               //at least 4 characters
+                ".{4,}" +               //at least 8 characters
                 "$"
 
         /*return if (password != null && password.length >= 4) {

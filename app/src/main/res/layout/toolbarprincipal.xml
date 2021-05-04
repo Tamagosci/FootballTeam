@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/green_700"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/textViewMenuToolbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="false"
+        android:layout_alignParentStart="true"
+        android:text="="
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        android:layout_alignParentLeft="true" />
+
+    <TextView
+        android:id="@+id/textViewNameToolbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="false"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_toEndOf="@+id/textViewMenuToolbar"
+        android:layout_toRightOf="@+id/textViewMenuToolbar"
+        android:text="La tua squadra"
+        android:textColor="@color/white"
+        android:textSize="30sp" />
+
+    <android.widget.Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_toLeftOf="@id/textViewNameToolbar"
+        android:layout_centerVertical="false"
+        android:background="@color/green_700"
+        android:text="+"
+        android:textColor="@color/white" />
+
+</RelativeLayout>

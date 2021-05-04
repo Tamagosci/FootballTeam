@@ -21,7 +21,7 @@
     <string name="previous">Precedente</string>
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
-    <string name="info_username_password">La password non può essere vuota e deve contenere almeno 4 caratteri. L\'indirizzo e-mail deve essere un indirizzo valido</string>
+    <string name="info_username_password">La password non può essere vuota e deve contenere almeno 8 caratteri o numeri e non deve contenere spazi vuoti. L\'indirizzo e-mail deve essere un indirizzo valido, con @ e .com o .it.</string>
     <string name="press_continue">Tocca per continuare</string>
     <string name="new_user_registered">Nuovo utente? Registrati</string>
     <string name="field_not_empty">Il campo non può essere lasciato vuoto</string>

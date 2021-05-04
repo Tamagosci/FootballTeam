@@ -45,27 +45,18 @@ class RegisterActivity : AppCompatActivity() {
         if(correct_data == true){
             mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(OnCompleteListener<AuthResult>() {
-                    Toast.makeText(this, "Registered successfully", Toast.LENGTH_SHORT).show()
+                    val helperClass: User = User(name, surname, email, phone, password)
+                    reference.child(phone.toString()).setValue(helperClass)
+                    Toast.makeText(this, "Authentication success", Toast.LENGTH_SHORT).show()
                     val intent = Intent(this, PrincipalActivity::class.java)
                     startActivity(intent)
+                    Log.d(TAG, "createUserWithEmail: Success")
                 })
                 .addOnFailureListener(OnFailureListener {
-                    Toast.makeText(this, "Registraion Error", Toast.LENGTH_SHORT).show()
+                    Log.w(TAG, "createUserWithEmail: Failure")
+                    Toast.makeText(this, "Authentication failed", Toast.LENGTH_SHORT).show()
                 })
         }
-
-        //get all the values
-        /*if(correct_data == true){
-            val helperClass: User = User(name, surname, email, phone, password)
-            reference.child(phone.toString()).setValue(helperClass)
-            val intent = Intent(this, PrincipalActivity::class.java )
-            startActivity(intent)
-            Log.d(TAG, "createUserWithEmail: Success")
-            Toast.makeText(this, "Authentication success", Toast.LENGTH_SHORT).show()
-        } else{
-            Log.w(TAG, "createUserWithEmail: Failure")
-            Toast.makeText(this, "Authentication failed", Toast.LENGTH_SHORT).show()
-        }*/
     }
 
     private fun validateName(): Boolean{
@@ -110,7 +101,7 @@ class RegisterActivity : AppCompatActivity() {
                 //"(?=.*[0-9])" +       //at least 1 digit
                 //"(?=.*[a-z])" +       //at least 1 lower case letter
                 //"(?=.*[A-Z])" +       //at least 1 upper case letter
-                "(?=.*[a-zA-Z])" +      //any letter
+                "(?=.*[a-zA-Z0-9])" +      //any letter
                 //"(?=.*[@#$%^&+=])" +    //at least 1 special character
                 "(?=\\S+$)" +           //no white spaces
                 ".{4,}" +               //at least 4 characters

@@ -21,6 +21,11 @@
             android:background="?attr/colorPrimary"
             app:popupTheme="@style/Theme.FootballManager.PopupOverlay" />
 
+        <android.widget.Button
+            android:id="@+id/buttonplus"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"/>
+
     </com.google.android.material.appbar.AppBarLayout>
 
     <ListView
