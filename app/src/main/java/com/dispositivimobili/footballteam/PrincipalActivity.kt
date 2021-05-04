@@ -16,11 +16,12 @@ import kotlinx.android.synthetic.main.activity_principal.*
 
 class PrincipalActivity : AppCompatActivity() {
 
-    private lateinit var auth: FirebaseAuth
+    private lateinit var mAuth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_principal)
+        mAuth = FirebaseAuth.getInstance()
 
         val users = arrayOf(
                 "Virat Kohli", "Rohit Sharma", "Steve Smith",
@@ -35,15 +36,12 @@ class PrincipalActivity : AppCompatActivity() {
         listViewPrincipalActivity.adapter = MyAdapter(this, users)
     }
 
-    override fun onStart(){
-        super.onStart()
-        val currentUser = auth.currentUser
-        if(currentUser == null){
-            val intent = Intent(this, LoginActivity::class.java)
-            startActivity(intent)
-        }
+    fun onLogout(v: View){
+        mAuth.signOut()
+        val intent = Intent(this, LoginActivity::class.java)
+        startActivity(intent)
+        finish()
     }
-
 
     class MyAdapter(private val context: Context, val data: Array<String>) : BaseAdapter() {
         override fun getCount(): Int {

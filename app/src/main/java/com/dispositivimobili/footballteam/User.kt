@@ -7,7 +7,6 @@ class User {
     var email: String = ""
     var phone: String = ""
     var password: String = ""
-    var i: Int = 0
 
     constructor(){
     }
@@ -20,12 +19,4 @@ class User {
         this.password = password
     }
 
-    constructor(name: String, surname: String, email: String, phone: String, password: String, i: Int) {
-        this.name = name
-        this.surname = surname
-        this.email = email
-        this.phone = phone
-        this.password = password
-        this.i = i
-    }
 }

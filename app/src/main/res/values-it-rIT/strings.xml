@@ -24,4 +24,6 @@
     <string name="info_username_password">La password non può essere vuota e deve contenere almeno 4 caratteri. L\'indirizzo e-mail deve essere un indirizzo valido</string>
     <string name="press_continue">Tocca per continuare</string>
     <string name="new_user_registered">Nuovo utente? Registrati</string>
+    <string name="field_not_empty">Il campo non può essere lasciato vuoto</string>
+    <string name="invalid_phone_number">Numero di telefono non valido</string>
 </resources>
