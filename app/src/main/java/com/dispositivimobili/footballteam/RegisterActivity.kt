@@ -28,13 +28,19 @@ class RegisterActivity : AppCompatActivity() {
         mAuth = FirebaseAuth.getInstance()
     }
 
+    fun returnLogin(v: View?){
+        val intent = Intent(this, LoginActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
+
     fun checkRegister(v: View?) {
         var correct_data : Boolean = false
-        val name: String = editTextTextPersonNameRegisterActivity.text.toString()
-        val surname: String = editTextTextPersonSurnameRegisterActivity.text.toString()
-        val phone: String = editTextPhoneRegisterActivity.text.toString()
-        val email: String = editTextTextEmailAddressRegisterActivity.text.toString()
-        val password: String = editTextTextPasswordRegisterActivity.text.toString()
+        val name: String = nameRegisterActivity.getText().toString()
+        val surname: String = surnameRegisterActivity.getText().toString()
+        val phone: String = phoneRegisterActivity.getText().toString()
+        val email: String = emailRegisterActivity.getText().toString()
+        val password: String = passwordRegisterActivity.getText().toString()
 
         if(!validateName() || !validateSurname() || !validateEmail() || !validatePhone() || !validatePassword()) {
             correct_data = false
@@ -45,14 +51,14 @@ class RegisterActivity : AppCompatActivity() {
         if(correct_data == true){
             mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(OnCompleteListener<AuthResult>() {
-                    val helperClass: User = User(name, surname, email, phone, password)
-                    reference.child(phone.toString()).setValue(helperClass)
+                    //val helperClass: User = User(name, surname, email, phone, password)
+                    //reference.child(phone.toString()).setValue(helperClass)
                     Toast.makeText(this, "Authentication success", Toast.LENGTH_SHORT).show()
                     val intent = Intent(this, PrincipalActivity::class.java)
                     startActivity(intent)
                     Log.d(TAG, "createUserWithEmail: Success")
                 })
-                .addOnFailureListener(OnFailureListener {
+                .addOnFailureListener(OnFailureListener() {
                     Log.w(TAG, "createUserWithEmail: Failure")
                     Toast.makeText(this, "Authentication failed", Toast.LENGTH_SHORT).show()
                 })
@@ -60,43 +66,43 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun validateName(): Boolean{
-        val name: String = editTextTextPersonNameRegisterActivity.text.toString()
+        val name: String = nameRegisterActivity.getText().toString()
         if(name.isEmpty()){
-            editTextTextPersonNameRegisterActivity.setError(getString(R.string.field_not_empty))
+            nameRegisterActivityEsterna.setError(getString(R.string.field_not_empty))
             return false
         } else{
-            editTextTextPersonNameRegisterActivity.setError(null)
+            nameRegisterActivityEsterna.setError(null)
             return true
         }
     }
 
     private fun validateSurname(): Boolean{
-        val surname: String = editTextTextPersonSurnameRegisterActivity.text.toString()
+        val surname: String = surnameRegisterActivity.getText().toString()
         if(surname.isEmpty()){
-            editTextTextPersonSurnameRegisterActivity.setError(getString(R.string.field_not_empty))
+            surnameRegisterActivityEsterna.setError(getString(R.string.field_not_empty))
             return false
         } else{
-            editTextTextPersonSurnameRegisterActivity.setError(null)
+            surnameRegisterActivityEsterna.setError(null)
             return true
         }
     }
 
     private fun validatePhone(): Boolean{
-        val phone: String = editTextPhoneRegisterActivity.text.toString()
+        val phone: String = phoneRegisterActivity.getText().toString()
         if(phone.isEmpty()){
-            editTextPhoneRegisterActivity.setError(getString(R.string.field_not_empty))
+            phoneRegisterActivityEsterna.setError(getString(R.string.field_not_empty))
             return false
         } else  if(phone.length != 10){
-            editTextPhoneRegisterActivity.setError(getString(R.string.invalid_phone_number))
+            phoneRegisterActivityEsterna.setError(getString(R.string.invalid_phone_number))
             return false
         } else{
-            editTextPhoneRegisterActivity.setError(null)
+            phoneRegisterActivityEsterna.setError(null)
             return true
         }
     }
 
     private fun validatePassword(): Boolean {
-        val password: String = editTextTextPasswordRegisterActivity.text.toString()
+        val password: String = passwordRegisterActivity.getText().toString()
         val PASSWORD_VAL = "^" +
                 //"(?=.*[0-9])" +       //at least 1 digit
                 //"(?=.*[a-z])" +       //at least 1 lower case letter
@@ -104,7 +110,7 @@ class RegisterActivity : AppCompatActivity() {
                 "(?=.*[a-zA-Z0-9])" +      //any letter
                 //"(?=.*[@#$%^&+=])" +    //at least 1 special character
                 "(?=\\S+$)" +           //no white spaces
-                ".{4,}" +               //at least 4 characters
+                ".{8,}" +               //at least 8 characters
                 "$"
 
         /*return if (password != null && password.length >= 4) {
@@ -115,19 +121,19 @@ class RegisterActivity : AppCompatActivity() {
         val matcher = pattern.matcher(password)
 
         if(password.isEmpty()){
-            editTextTextPasswordRegisterActivity.setError(getString(R.string.field_not_empty))
+            passwordRegisterActivityEsterna.setError(getString(R.string.field_not_empty))
             return false
         } else if(!matcher.matches()){
-            editTextTextPasswordRegisterActivity.setError(getString(R.string.invalid_password))
+            passwordRegisterActivityEsterna.setError(getString(R.string.invalid_password))
             return false
         }else{
-            editTextTextPasswordRegisterActivity.setError(null)
+            passwordRegisterActivityEsterna.setError(null)
             return true
         }
     }
 
     private fun validateEmail(): Boolean {
-        val email: String = editTextTextEmailAddressRegisterActivity.text.toString()
+        val email: String = emailRegisterActivity.getText().toString()
         val EMAIL_PATTERN = ("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
                 + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")
 
@@ -135,14 +141,14 @@ class RegisterActivity : AppCompatActivity() {
         val matcher = pattern.matcher(email)
 
         if(email.isEmpty()){
-            editTextTextEmailAddressRegisterActivity.setError(getString(R.string.field_not_empty))
+            emailRegisterActivityEsterna.setError(getString(R.string.field_not_empty))
             return false
         } else {
             if (!matcher.matches()) {
-                editTextTextEmailAddressRegisterActivity.setError(getString(R.string.invalid_email))
+                emailRegisterActivityEsterna.setError(getString(R.string.invalid_email))
                 return false
             } else {
-                editTextTextEmailAddressRegisterActivity.setError(null)
+                emailRegisterActivityEsterna.setError(null)
                 return true
             }
         }

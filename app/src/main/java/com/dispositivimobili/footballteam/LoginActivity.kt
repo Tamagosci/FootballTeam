@@ -1,13 +1,18 @@
 package com.dispositivimobili.footballteam
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_image_first.*
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_register.*
@@ -24,40 +29,42 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
         mAuth = FirebaseAuth.getInstance()
 
-        textViewRegisteredLoginActivity.setOnClickListener{
+        ButtonRegisteredLoginActivity.setOnClickListener{
             val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
         }
 
     }
 
-        fun checkLogin(v: View?) {
-            var correct_data : Boolean = false
-            val email: String = editTextUserNameLoginActivity.text.toString()
-            val password: String = editTextPasswordLoginActivity.text.toString()
+    fun checkLogin(v: View?) {
+        var correct_data : Boolean = false
+        val email: String = email_adressLoginActivity.getText().toString()
+        val password: String = passwordLoginActivity.getText().toString()
 
-            if(!validateEmail() || !validatePassword()) {
-                correct_data = false
-            } else {
-                correct_data = true
-            }
+        if(!validateEmail() || !validatePassword()) {
+            correct_data = false
+        } else {
+            correct_data = true
+        }
 
-            if(correct_data == true){
-                mAuth.signInWithEmailAndPassword(email, password)
+        if(correct_data == true){
+            mAuth.signInWithEmailAndPassword(email, password)
                     .addOnSuccessListener( {
                         Toast.makeText(this, "Login successfully", Toast.LENGTH_SHORT).show()
                         val intent = Intent(this, PrincipalActivity::class.java)
                         startActivity(intent)
+                        Log.d(TAG, "signInUserWithEmail: Success")
                     })
                     .addOnFailureListener({
+                        Log.w(TAG, "signInUserWithEmail: Failure")
                         Toast.makeText(this, "Login Failed", Toast.LENGTH_SHORT).show()
                     })
             }
         }
 
-
     private fun validatePassword(): Boolean {
-        val password: String = editTextPasswordLoginActivity.text.toString()
+        //val pass: String = passwordLoginActivity.text.toString()
+        val password: String = passwordLoginActivity.getText().toString()
         val PASSWORD_VAL = "^" +
                 //"(?=.*[0-9])" +       //at least 1 digit
                 //"(?=.*[a-z])" +       //at least 1 lower case letter
@@ -65,7 +72,7 @@ class LoginActivity : AppCompatActivity() {
                 "(?=.*[a-zA-Z0-9])" +      //any letter
                 //"(?=.*[@#$%^&+=])" +    //at least 1 special character
                 "(?=\\S+$)" +           //no white spaces
-                ".{4,}" +               //at least 8 characters
+                ".{8,}" +               //at least 8 characters
                 "$"
 
         /*return if (password != null && password.length >= 4) {
@@ -76,19 +83,19 @@ class LoginActivity : AppCompatActivity() {
         val matcher = pattern.matcher(password)
 
         if(password.isEmpty()){
-            editTextPasswordLoginActivity.setError(getString(R.string.field_not_empty))
+            passwordLoginActivityEsterna.setError(getString(R.string.field_not_empty))
             return false
         } else if(!matcher.matches()){
-            editTextPasswordLoginActivity.setError(getString(R.string.invalid_password))
+            passwordLoginActivityEsterna.setError(getString(R.string.invalid_password))
             return false
         }else{
-            editTextPasswordLoginActivity.setError(null)
+            passwordLoginActivityEsterna.setError(null)
             return true
         }
     }
 
     private fun validateEmail(): Boolean {
-        val email: String = editTextUserNameLoginActivity.text.toString()
+        val email: String = email_adressLoginActivity.text.toString()
         val EMAIL_PATTERN = ("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
                 + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")
 
@@ -96,14 +103,14 @@ class LoginActivity : AppCompatActivity() {
         val matcher = pattern.matcher(email)
 
         if(email.isEmpty()){
-            editTextUserNameLoginActivity.setError(getString(R.string.field_not_empty))
+            email_adressLoginActivityEsterna.setError(getString(R.string.field_not_empty))
             return false
         } else {
             if (!matcher.matches()) {
-                editTextUserNameLoginActivity.setError(getString(R.string.invalid_email))
+                email_adressLoginActivityEsterna.setError(getString(R.string.invalid_email))
                 return false
             } else {
-                editTextUserNameLoginActivity.setError(null)
+                email_adressLoginActivityEsterna.setError(null)
                 return true
             }
         }
