@@ -10,7 +10,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_register.*
-import kotlinx.android.synthetic.main.add_footballer.*
+import kotlinx.android.synthetic.main.add_player.*
 
 class AddFootballerActivity: AppCompatActivity() {
 
@@ -20,18 +20,18 @@ class AddFootballerActivity: AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.add_footballer)
+        setContentView(R.layout.add_player)
     }
 
     fun checkAdd(v: View){
         var correct_data = false
-        val name = textViewNameAddFootballer.text.toString()
-        val surname = textViewSurnameAddFootballer.text.toString()
-        val date = textViewDateAddFootballer.text.toString()
-        val phone = textViewTelAddFootballer.text.toString()
-        val ruolo = textViewRuoloAddFootballer.text.toString()
-        val results = textViewResultsAddFootballer.text.toString()
-        val certification = textViewCertificationAddFootballer.text.toString()
+        val name = namePlayer.getText().toString()
+        val surname = surnamePlayer.getText().toString()
+        val date = dataPlayer.getText().toString()
+        val phone = phonePlayer.getText().toString()
+        val ruolo = ruoloPlayer.getText().toString()
+        val results = resultsPlayer.getText().toString()
+        val certification = certificationPlayer.getText().toString()
 
         if(!validateName() || !validateSurname() || !validateDate() || !validatePhone() || !validateRuolo()) {
             correct_data = false
@@ -48,64 +48,67 @@ class AddFootballerActivity: AppCompatActivity() {
             Toast.makeText(this, "AddPlayer success", Toast.LENGTH_SHORT).show()
         } else{
             Log.w(TAG, "createPlayer: Failure")
-            Toast.makeText(this, "AddPlayern failed", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "AddPlayer failed", Toast.LENGTH_SHORT).show()
         }
     }
 
     private fun validateName(): Boolean{
-        val name: String = textViewNameAddFootballer.text.toString()
+        val name: String = namePlayer.getText().toString()
         if(name.isEmpty()){
-            textViewNameAddFootballer.setError(getString(R.string.field_not_empty))
+            namePlayerEsterna.setError(getString(R.string.field_not_empty))
             return false
         } else{
-            textViewNameAddFootballer.setError(null)
+            namePlayerEsterna.setError(null)
             return true
         }
     }
 
     private fun validateSurname(): Boolean{
-        val surname: String = textViewSurnameAddFootballer.text.toString()
+        val surname: String = surnamePlayer.getText().toString()
         if(surname.isEmpty()){
-            textViewSurnameAddFootballer.setError(getString(R.string.field_not_empty))
+            surnamePlayerEsterna.setError(getString(R.string.field_not_empty))
             return false
         } else{
-            textViewSurnameAddFootballer.setError(null)
+            surnamePlayerEsterna.setError(null)
             return true
         }
     }
 
     private fun validateDate(): Boolean{
-        val surname: String = textViewDateAddFootballer.text.toString()
+        val surname: String = dataPlayer.getText().toString()
         if(surname.isEmpty()){
-            textViewDateAddFootballer.setError(getString(R.string.field_not_empty))
+            dataPlayerEsterna.setError(getString(R.string.field_not_empty))
             return false
         } else{
-            textViewDateAddFootballer.setError(null)
+            dataPlayerEsterna.setError(null)
             return true
         }
     }
 
     private fun validatePhone(): Boolean{
-        val phone: String = textViewTelAddFootballer.text.toString()
+        val phone: String = phonePlayer.getText().toString()
         if(phone.isEmpty()){
-            textViewTelAddFootballer.setError(getString(R.string.field_not_empty))
+            phonePlayerEsterna.setError(getString(R.string.field_not_empty))
             return false
         } else  if(phone.length != 10){
-            textViewTelAddFootballer.setError(getString(R.string.invalid_phone_number))
+            phonePlayerEsterna.setError(getString(R.string.invalid_phone_number))
             return false
         } else{
-            textViewTelAddFootballer.setError(null)
+            phonePlayerEsterna.setError(null)
             return true
         }
     }
 
     private fun validateRuolo(): Boolean{
-        val surname: String = textViewRuoloAddFootballer.text.toString()
-        if(surname.isEmpty()){
-            textViewRuoloAddFootballer.setError(getString(R.string.field_not_empty))
+        val ruolo: String = ruoloPlayer.getText().toString()
+        if(ruolo.isEmpty()){
+            ruoloPlayerEsterna.setError(getString(R.string.field_not_empty))
             return false
-        } else{
-            textViewRuoloAddFootballer.setError(null)
+        }else  if(!(ruolo=="A" || ruolo=="C" || ruolo=="D" || ruolo=="P")) {
+            ruoloPlayerEsterna.setError("Invalid ruolo")
+            return false
+        }else{
+            ruoloPlayerEsterna.setError(null)
             return true
         }
     }

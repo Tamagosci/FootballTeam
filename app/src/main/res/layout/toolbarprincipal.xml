@@ -31,12 +31,13 @@
         android:textSize="30sp" />
 
     <android.widget.Button
-        android:id="@+id/button"
+        android:id="@+id/AddPlayerButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="0dp"
         android:gravity="center_horizontal"
+        android:onClick="plus"
         android:text="+"
         android:backgroundTint="@color/green_700"
         android:textAlignment="center"
