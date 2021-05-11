@@ -11,9 +11,9 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Inserisci i dati"
+        android:text="Dati personali"
         android:textColor="@color/black"
-        android:textSize="45sp"
+        android:textSize="30sp"
         android:textAlignment="center"
         android:layout_gravity="center_horizontal" />
 
@@ -38,13 +38,13 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingBottom="20dp"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:hint="Name"
-                android:paddingBottom="20dp"
-                android:id="@+id/namePlayerEsterna">
+                android:id="@+id/namePlayerEsternaSeeActivity">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/namePlayer"
+                    android:id="@+id/namePlayerSeeActivity"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPersonName">
@@ -56,10 +56,10 @@
                 android:layout_height="wrap_content"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:hint="Surname"
-                android:id="@+id/surnamePlayerEsterna">
+                android:id="@+id/surnamePlayerEsternaSeeActivity">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/surnamePlayer"
+                    android:id="@+id/surnamePlayerSeeActivity"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPersonName">
@@ -73,13 +73,13 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="20dp"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:hint="Data di nascita"
-        android:id="@+id/dataPlayerEsterna">
+        android:paddingBottom="15dp"
+        android:id="@+id/dataPlayerEsternaSeeActivity">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/dataPlayer"
+            android:id="@+id/dataPlayerSeeActivity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="date">
@@ -89,13 +89,13 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="20dp"
+        android:paddingBottom="15dp"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:hint="Phone number"
-        android:id="@+id/phonePlayerEsterna">
+        android:id="@+id/phonePlayerEsternaSeeActivity">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/phonePlayer"
+            android:id="@+id/phonePlayerSeeActivity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="phone">
@@ -105,13 +105,13 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="20dp"
+        android:paddingBottom="15dp"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:hint="Ruolo"
-        android:id="@+id/ruoloPlayerEsterna">
+        android:id="@+id/ruoloPlayerEsternaSeeActivity">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/ruoloPlayer"
+            android:id="@+id/ruoloPlayerSeeActivity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPersonName">
@@ -121,13 +121,13 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="20dp"
+        android:paddingBottom="15dp"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:hint="Results"
-        android:id="@+id/resultsPlayerEsterna">
+        android:id="@+id/resultsPlayerEsternaSeeActivity">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/resultsPlayer"
+            android:id="@+id/resultsPlayerSeeActivity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPersonName">
@@ -137,13 +137,13 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="20dp"
+        android:paddingBottom="15dp"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:hint="Certification"
-        android:id="@+id/certificationPlayerEsterna">
+        android:id="@+id/certificationPlayerEsternaSeeActivity">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/certificationPlayer"
+            android:id="@+id/certificationPlayerSeeActivity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPersonName">
@@ -154,8 +154,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/two_state_button"
-        android:text="AGGIUNGI"
-        android:onClick="checkAdd"
+        android:text="MODIFICA"
+        android:layout_marginBottom="5dp"
+        android:textColor="@color/white"/>
+
+    <android.widget.Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/black"
+        android:text="ELIMINA"
         android:textColor="@color/white"/>
 
 </LinearLayout>

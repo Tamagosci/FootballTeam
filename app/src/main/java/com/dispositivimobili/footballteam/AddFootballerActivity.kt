@@ -41,7 +41,7 @@ class AddFootballerActivity: AppCompatActivity() {
 
         if(correct_data == true){
             val helperClass: Player = Player(name, surname, date, phone, ruolo, results, certification)
-            reference.child(phone.toString()).setValue(helperClass)
+            reference.child(name.toString()+"+"+surname.toString()).setValue(helperClass)
             val intent = Intent(this, PrincipalActivity::class.java )
             startActivity(intent)
             Log.d(TAG, "createPlayer: Success")

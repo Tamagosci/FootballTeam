@@ -2,6 +2,7 @@ package com.dispositivimobili.footballteam
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -13,6 +14,7 @@ import android.widget.TextView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_principal.*
+import kotlinx.android.synthetic.main.row.*
 
 class PrincipalActivity : AppCompatActivity() {
 
@@ -24,7 +26,6 @@ class PrincipalActivity : AppCompatActivity() {
     private val mPlayer: MutableList<Player> = ArrayList()
     private val mAdapter: MyAdapter = MyAdapter(this, mPlayer)
     private var mPlayerChildListener: ChildEventListener = getPlayerChildEventListener()
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,7 +64,7 @@ class PrincipalActivity : AppCompatActivity() {
                 Log.d(TAG, "onChildChanged: " + snapshot.key!!)
                 val newPlayer = snapshot.getValue(Player::class.java)
                 val playerKey = snapshot.key
-                mPlayer.find{e -> e.toString().equals(playerKey)}?.set(newPlayer)
+                mPlayer.find{e -> e.toString().equals(playerKey)}?.set(newPlayer!!)
                 mAdapter.notifyDataSetChanged()
             }
 
@@ -97,6 +98,25 @@ class PrincipalActivity : AppCompatActivity() {
     fun plus(v: View?){
         val intent = Intent(this, AddFootballerActivity::class.java)
         startActivity(intent)
+    }
+
+    fun seePlayer(v: View){
+        val intent = Intent(this, SeePlayerActivity::class.java)
+        val name = textViewName.getText().toString()
+        intent.putExtra("name", name)
+        val surname = textViewSurname.getText().toString()
+        intent.putExtra("surname", surname)
+        val ruolo = textViewRuolo.getText().toString()
+        intent.putExtra("ruolo", ruolo)
+        startActivity(intent)
+    }
+
+    fun message(v: View){
+        val message = "Ciao, sono il mister, "
+        val uri: Uri = Uri.parse("smsto:")
+        val it = Intent(Intent.ACTION_SENDTO, uri)
+        it.putExtra("sms_body", message)
+        startActivity(it)
     }
 
     class MyAdapter(private val context: Context, val data: MutableList<Player>) : BaseAdapter() {
