@@ -23,6 +23,13 @@ class AddFootballerActivity: AppCompatActivity() {
         setContentView(R.layout.add_player)
     }
 
+    fun onReturn(v: View){
+        val intent = Intent(this, PrincipalActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
+
+
     fun checkAdd(v: View){
         var correct_data = false
         val name = namePlayer.getText().toString()
@@ -41,7 +48,7 @@ class AddFootballerActivity: AppCompatActivity() {
 
         if(correct_data == true){
             val helperClass: Player = Player(name, surname, date, phone, ruolo, results, certification)
-            reference.child(name.toString()+"+"+surname.toString()).setValue(helperClass)
+            reference.child(phone).setValue(helperClass)
             val intent = Intent(this, PrincipalActivity::class.java )
             startActivity(intent)
             Log.d(TAG, "createPlayer: Success")

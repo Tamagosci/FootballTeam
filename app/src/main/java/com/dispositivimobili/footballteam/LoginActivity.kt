@@ -1,21 +1,18 @@
 package com.dispositivimobili.footballteam
 
-import android.annotation.SuppressLint
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.TextView
+import android.widget.EditText
 import android.widget.Toast
+import androidx.annotation.NonNull
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.textfield.TextInputLayout
+import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
-import kotlinx.android.synthetic.main.activity_image_first.*
 import kotlinx.android.synthetic.main.activity_login.*
-import kotlinx.android.synthetic.main.activity_register.*
 import java.util.regex.Pattern
 
 
@@ -29,11 +26,31 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
         mAuth = FirebaseAuth.getInstance()
 
-        ButtonRegisteredLoginActivity.setOnClickListener{
+        ButtonRegisterLoginActivity.setOnClickListener{
             val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
         }
 
+    }
+
+    fun resetPassword(v:View){
+        val email = email_adressLoginActivity.getText().toString()
+        val resetMail = EditText(v.getContext())
+        val passwordResetDialog = AlertDialog.Builder(v.getContext())
+        passwordResetDialog.setTitle("Reset password?")
+        passwordResetDialog.setMessage("Enter your email to received reset linl")
+        passwordResetDialog.setView(resetMail)
+
+        mAuth.sendPasswordResetEmail(email)
+            .addOnCompleteListener( {
+                Toast.makeText(this, "Check your email", Toast.LENGTH_SHORT).show()
+                val intent = Intent(this, LoginActivity::class.java)
+                startActivity(intent)
+                finish()
+            })
+            .addOnFailureListener({
+                Toast.makeText(this, "No reset password", Toast.LENGTH_SHORT).show()
+            })
     }
 
     fun checkLogin(v: View?) {

@@ -1,33 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:padding="20dp"
     android:background="@color/white"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="20dp">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Dati personali"
-        android:textColor="@color/black"
-        android:textSize="30sp"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/personal_date"
         android:textAlignment="center"
-        android:layout_gravity="center_horizontal" />
+        android:textColor="@color/black"
+        android:textSize="30sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp">
+        android:layout_marginBottom="20dp"
+        android:orientation="horizontal">
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/ic_imagefootball_foreground"/>
+            android:src="@mipmap/ic_imagefootball_foreground" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -36,32 +35,36 @@
             android:paddingLeft="20dp">
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/namePlayerEsternaSeeActivity"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingBottom="20dp"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:hint="Name"
-                android:id="@+id/namePlayerEsternaSeeActivity">
+                android:hint="@string/insert_name"
+                android:paddingBottom="20dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/namePlayerSeeActivity"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:enabled="false"
+                    android:textColor="@color/black"
                     android:inputType="textPersonName">
                 </com.google.android.material.textfield.TextInputEditText>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/surnamePlayerEsternaSeeActivity"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:hint="Surname"
-                android:id="@+id/surnamePlayerEsternaSeeActivity">
+                android:hint="@string/insert_surname">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/surnamePlayerSeeActivity"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:enabled="false"
+                    android:textColor="@color/black"
                     android:inputType="textPersonName">
                 </com.google.android.material.textfield.TextInputEditText>
             </com.google.android.material.textfield.TextInputLayout>
@@ -71,81 +74,91 @@
     </LinearLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/dataPlayerEsternaSeeActivity"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:hint="Data di nascita"
-        android:paddingBottom="15dp"
-        android:id="@+id/dataPlayerEsternaSeeActivity">
+        android:hint="@string/insert_databirth"
+        android:paddingBottom="15dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/dataPlayerSeeActivity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:enabled="false"
+            android:textColor="@color/black"
             android:inputType="date">
         </com.google.android.material.textfield.TextInputEditText>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/phonePlayerEsternaSeeActivity"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="15dp"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:hint="Phone number"
-        android:id="@+id/phonePlayerEsternaSeeActivity">
+        android:hint="@string/insert_phone"
+        android:paddingBottom="15dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/phonePlayerSeeActivity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:enabled="false"
+            android:textColor="@color/black"
             android:inputType="phone">
         </com.google.android.material.textfield.TextInputEditText>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/ruoloPlayerEsternaSeeActivity"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="15dp"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:hint="Ruolo"
-        android:id="@+id/ruoloPlayerEsternaSeeActivity">
+        android:hint="@string/insert_role"
+        android:paddingBottom="15dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/ruoloPlayerSeeActivity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:enabled="false"
+            android:textColor="@color/black"
             android:inputType="textPersonName">
         </com.google.android.material.textfield.TextInputEditText>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/resultsPlayerEsternaSeeActivity"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="15dp"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:hint="Results"
-        android:id="@+id/resultsPlayerEsternaSeeActivity">
+        android:hint="@string/insert_results"
+        android:paddingBottom="15dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/resultsPlayerSeeActivity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:enabled="false"
+            android:textColor="@color/black"
             android:inputType="textPersonName">
         </com.google.android.material.textfield.TextInputEditText>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/certificationPlayerEsternaSeeActivity"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="15dp"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:hint="Certification"
-        android:id="@+id/certificationPlayerEsternaSeeActivity">
+        android:hint="@string/insert_certification"
+        android:paddingBottom="15dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/certificationPlayerSeeActivity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:enabled="false"
+            android:textColor="@color/black"
             android:inputType="textPersonName">
         </com.google.android.material.textfield.TextInputEditText>
     </com.google.android.material.textfield.TextInputLayout>
@@ -153,16 +166,18 @@
     <android.widget.Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/two_state_button"
-        android:text="MODIFICA"
         android:layout_marginBottom="5dp"
-        android:textColor="@color/white"/>
+        android:background="@drawable/two_state_button"
+        android:onClick="onReturn"
+        android:text="INDIETRO"
+        android:textColor="@color/white" />
 
-    <android.widget.Button
+    <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/black"
+        android:backgroundTint="@color/green_700"
+        android:onClick="delete"
         android:text="ELIMINA"
-        android:textColor="@color/white"/>
+        android:textColor="@color/white" />
 
 </LinearLayout>

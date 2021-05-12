@@ -37,6 +37,7 @@ class PrincipalActivity : AppCompatActivity() {
 
     override fun onStart(){
         super.onStart()
+        Log.d(TAG, "onStart")
         if(mPlayerChildListener == null){
             mPlayerChildListener = getPlayerChildEventListener()
         }
@@ -45,6 +46,7 @@ class PrincipalActivity : AppCompatActivity() {
 
     override fun onStop() {
         super.onStop()
+        Log.d(TAG, "onStop")
         if(mPlayerChildListener != null){
             reference!!.removeEventListener(mPlayerChildListener)
         }
@@ -71,7 +73,7 @@ class PrincipalActivity : AppCompatActivity() {
             override fun onChildRemoved(snapshot: DataSnapshot) {
                 Log.d(TAG, "onChildRemoved: " + snapshot.key!!)
                 val playerKey = snapshot.key
-                var p = mPlayer.find { e -> e.toString().equals(playerKey) }
+                val p = mPlayer.find { e -> e.toString().equals(playerKey) }
                 mPlayer.remove(p)
                 mAdapter.notifyDataSetChanged()
             }
@@ -98,6 +100,7 @@ class PrincipalActivity : AppCompatActivity() {
     fun plus(v: View?){
         val intent = Intent(this, AddFootballerActivity::class.java)
         startActivity(intent)
+        finish()
     }
 
     fun seePlayer(v: View){
@@ -108,7 +111,16 @@ class PrincipalActivity : AppCompatActivity() {
         intent.putExtra("surname", surname)
         val ruolo = textViewRuolo.getText().toString()
         intent.putExtra("ruolo", ruolo)
+        val data = textViewData.getText().toString()
+        intent.putExtra("data", data)
+        val phone = textViewPhone.getText().toString()
+        intent.putExtra("phone", phone)
+        val results = textViewResults.getText().toString()
+        intent.putExtra("results", results)
+        val certification = textViewCertification.getText().toString()
+        intent.putExtra("certification", certification)
         startActivity(intent)
+        finish()
     }
 
     fun message(v: View){
@@ -117,6 +129,7 @@ class PrincipalActivity : AppCompatActivity() {
         val it = Intent(Intent.ACTION_SENDTO, uri)
         it.putExtra("sms_body", message)
         startActivity(it)
+        finish()
     }
 
     class MyAdapter(private val context: Context, val data: MutableList<Player>) : BaseAdapter() {
@@ -140,10 +153,19 @@ class PrincipalActivity : AppCompatActivity() {
                 val personSurname: TextView = newView.findViewById<TextView>(R.id.textViewSurname)
                 val personName: TextView = newView.findViewById<TextView>(R.id.textViewName)
                 val personPosition: TextView = newView.findViewById<TextView>(R.id.textViewRuolo)
+                val personData: TextView = newView.findViewById<TextView>(R.id.textViewData)
+                val personPhone: TextView = newView.findViewById<TextView>(R.id.textViewPhone)
+                val personResults: TextView = newView.findViewById<TextView>(R.id.textViewResults)
+                val personCertification: TextView = newView.findViewById<TextView>(R.id.textViewCertification)
                 //val parts = data[position].split(" ")
                 personSurname.text = data[position].surname
                 personName.text = data[position].name
-                personPosition.text = "${data[position].ruolo}"
+                //personPosition.text = "${data[position].ruolo}"
+                personPosition.text = data[position].ruolo
+                personData.text = data[position].date
+                personPhone.text = data[position].phone
+                personCertification.text = data[position].certification
+                personResults.text = data[position].results
             }
             return newView
         }

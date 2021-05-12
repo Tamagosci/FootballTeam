@@ -1,12 +1,10 @@
 package com.dispositivimobili.footballteam
 
-import android.app.ActivityOptions
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
-import android.widget.ImageView
 import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_image_first.*
 
@@ -26,23 +24,23 @@ class imageFirstActivity : AppCompatActivity() {
         topAnim = AnimationUtils.loadAnimation(this, R.anim.top_anim)
         bottomAnim = AnimationUtils.loadAnimation(this, R.anim.bottom_anim)
 
-        nameApp = textViewImageFirstActivity_1
-        textApp = textViewImageFirstActivity_2
+        nameApp = nameappViewImageFirstActivity
+        textApp = textImageFirstActivity
 
         nameApp.setAnimation(topAnim)
         textApp.setAnimation(bottomAnim)
 
-        imageViewImageFirstActivity.setOnClickListener{
+        imageImageFirstActivity.setOnClickListener{
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
         }
 
-        textViewImageFirstActivity_1.setOnClickListener{
+        nameappViewImageFirstActivity.setOnClickListener{
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
         }
 
-        textViewImageFirstActivity_2.setOnClickListener{
+        textImageFirstActivity.setOnClickListener{
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
         }

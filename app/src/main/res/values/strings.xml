@@ -1,35 +1,50 @@
 <resources>
+    <!-- Strings used for name app -->
     <string name="app_name">Football Team</string>
-    <string name="action_settings">Settings</string>
-    <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
+
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
+    <!-- Strings used for imageFirstActivity -->
     <string name="press_continue">Press to continue</string>
 
-    <string name="select">Select what you want to do</string>
-    <string name="signin">LOGIN</string>
-    <string name="register">REGISTER</string>
-
+    <!-- Strings used for LoginActivity -->
+    <string name="hello">Hello there, Welcome Back!</string>
+    <string name="signiintocontinue">Sign in to continue</string>
     <string name="email_address">email address</string>
     <string name="password">password</string>
-    <string name="info_username_password">The password cannot be blank and must contain at least 8 characters or numbers and mustn\'t contains white spaces. The email address must be a valide address, with a @ and a .com or.it.</string>
+    <string name="forgetpassword">Forget password?</string>
+    <string name="login">LOGIN</string>
+    <string name="info_email_password">The password cannot be blank and must contain at least 8 characters or numbers and mustn\'t contains white spaces. The email address must be a valide address, with a @ and a .com or.it.</string>
     <string name="new_user_registered">New user? Registered</string>
     <string name="invalid_email">Invalid email</string>
     <string name="invalid_password">Invalid password</string>
-    <string name="invalid_phone_number">Invalid phone number</string>
 
-    <string name="insert_data">Insert your data</string>
+    <!-- Strings used for RegisterActivity -->
+    <string name="welcome">Welcome</string>
+    <string name="signup">SignUp and insert your data to start your new adventure</string>
+    <string name="invalid_phone_number">Invalid phone number</string>
     <string name="insert_name">Name</string>
     <string name="insert_surname">Surname</string>
     <string name="insert_email">Email</string>
     <string name="insert_phone">Phone</string>
     <string name="insert_password">Password</string>
+    <string name="register">REGISTER</string>
+    <string name="already_have_account">Already have an account? Login</string>
     <string name="field_not_empty">Field cannot be empty</string>
 
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <!-- Strings used for PrincipalActivity -->
+    <string name="your_team">Your team</string>
+
+    <!-- Strings used for AddFootballerActivity -->
+    <string name="insert_data">Insert the data</string>
+    <string name="insert_databirth">Date of birth</string>
+    <string name="insert_role">Role</string>
+    <string name="insert_certification">Certifications</string>
+    <string name="insert_results">Results</string>
+    <string name="add">ADD</string>
+
+
+    <string name="personal_date">Data of the player</string>
 
 </resources>

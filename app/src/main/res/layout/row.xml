@@ -51,4 +51,28 @@
         android:text="Ruolo"
         android:onClick="seePlayer"
         android:textSize="36sp"/>
+
+    <TextView
+        android:id="@+id/textViewData"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="invisible"/>
+
+    <TextView
+        android:id="@+id/textViewPhone"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="invisible"/>
+
+    <TextView
+        android:id="@+id/textViewCertification"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="invisible"/>
+
+    <TextView
+        android:id="@+id/textViewResults"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="invisible"/>
 </LinearLayout>
