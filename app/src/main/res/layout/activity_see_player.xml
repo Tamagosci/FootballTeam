@@ -19,8 +19,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:orientation="horizontal">
 
         <ImageView
@@ -79,7 +79,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/insert_databirth"
-        android:paddingBottom="15dp">
+        android:paddingBottom="10dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/dataPlayerSeeActivity"
@@ -97,7 +97,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/insert_phone"
-        android:paddingBottom="15dp">
+        android:paddingBottom="10dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/phonePlayerSeeActivity"
@@ -115,7 +115,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/insert_role"
-        android:paddingBottom="15dp">
+        android:paddingBottom="10dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/ruoloPlayerSeeActivity"
@@ -133,7 +133,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/insert_results"
-        android:paddingBottom="15dp">
+        android:paddingBottom="10dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/resultsPlayerSeeActivity"
@@ -151,7 +151,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/insert_certification"
-        android:paddingBottom="15dp">
+        android:paddingBottom="10dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/certificationPlayerSeeActivity"
@@ -163,7 +163,7 @@
         </com.google.android.material.textfield.TextInputEditText>
     </com.google.android.material.textfield.TextInputLayout>
 
-    <android.widget.Button
+    <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
@@ -175,8 +175,18 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:text="MODIFICA"
+        android:onClick="onModify"
+        android:textColor="@color/white"
+        android:background="@drawable/two_state_button"/>
+
+    <Button
+        android:id="@+id/eliminabutton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:backgroundTint="@color/green_700"
-        android:onClick="delete"
+        android:onClick="deleteORconfirm"
         android:text="ELIMINA"
         android:textColor="@color/white" />
 

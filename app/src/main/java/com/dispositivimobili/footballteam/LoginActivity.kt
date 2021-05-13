@@ -35,22 +35,18 @@ class LoginActivity : AppCompatActivity() {
 
     fun resetPassword(v:View){
         val email = email_adressLoginActivity.getText().toString()
-        val resetMail = EditText(v.getContext())
-        val passwordResetDialog = AlertDialog.Builder(v.getContext())
-        passwordResetDialog.setTitle("Reset password?")
-        passwordResetDialog.setMessage("Enter your email to received reset linl")
-        passwordResetDialog.setView(resetMail)
-
-        mAuth.sendPasswordResetEmail(email)
-            .addOnCompleteListener( {
-                Toast.makeText(this, "Check your email", Toast.LENGTH_SHORT).show()
-                val intent = Intent(this, LoginActivity::class.java)
-                startActivity(intent)
-                finish()
-            })
-            .addOnFailureListener({
-                Toast.makeText(this, "No reset password", Toast.LENGTH_SHORT).show()
-            })
+        if(validateEmail()){
+            mAuth.sendPasswordResetEmail(email)
+                .addOnCompleteListener( {
+                    Toast.makeText(this, "Check your email", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this, LoginActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                })
+                .addOnFailureListener({
+                    Toast.makeText(this, "No reset password", Toast.LENGTH_SHORT).show()
+                })
+        }
     }
 
     fun checkLogin(v: View?) {
