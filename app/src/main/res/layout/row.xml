@@ -13,7 +13,6 @@
         android:layout_height="100dp"
         android:layout_gravity="center_vertical"
         android:layout_weight="1"
-        android:onClick="seePlayer"
         app:srcCompat="@android:drawable/sym_def_app_icon" />
 
     <LinearLayout
@@ -29,7 +28,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Name"
-            android:onClick="seePlayer"
             android:textSize="24sp"
             android:textStyle="bold"/>
 
@@ -38,7 +36,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Surname"
-            android:onClick="seePlayer"
             android:textColor="@color/purple_700"/>
     </LinearLayout>
 
@@ -49,7 +46,6 @@
         android:layout_gravity="center_vertical"
         android:layout_weight="1"
         android:text="Ruolo"
-        android:onClick="seePlayer"
         android:textSize="36sp"/>
 
     <TextView

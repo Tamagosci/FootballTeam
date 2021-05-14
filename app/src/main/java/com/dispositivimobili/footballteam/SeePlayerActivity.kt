@@ -8,8 +8,6 @@ import android.view.View
 import android.widget.Toast
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_see_player.*
-import kotlinx.android.synthetic.main.add_player.*
-import kotlinx.android.synthetic.main.row.*
 
 class SeePlayerActivity : AppCompatActivity() {
     private var rootNode: FirebaseDatabase = FirebaseDatabase.getInstance()
@@ -20,21 +18,57 @@ class SeePlayerActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_see_player)
 
+        //recupero dati da firebase
         val intent: Intent = getIntent()
-        val name = intent.getStringExtra("name")
-        val surname = intent.getStringExtra("surname")
-        val ruolo = intent.getStringExtra("ruolo")
-        val data = intent.getStringExtra("data")
-        val phone = intent.getStringExtra("phone")
-        val results = intent.getStringExtra("results")
-        val certification = intent.getStringExtra("certification")
-        namePlayerSeeActivity.setText(name)
-        surnamePlayerSeeActivity.setText(surname)
-        ruoloPlayerSeeActivity.setText(ruolo)
-        dataPlayerSeeActivity.setText(data)
-        phonePlayerSeeActivity.setText(phone)
-        resultsPlayerSeeActivity.setText(results)
-        certificationPlayerSeeActivity.setText(certification)
+        val id = intent.getIntExtra("idnumero",0)
+
+        reference.child(id.toString()).get()
+            .addOnSuccessListener {
+                Log.i("firebase", "Got key ${it.key}")
+                Log.i("firebase", "Got value ${it.value}")
+                for(i in "${it.value}"){
+                    val name = it.child("name").getValue()
+                    val surname = it.child("surname").getValue()
+                    val ruolo = it.child("ruolo").getValue()
+                    val data = it.child("date").getValue()
+                    val phone = it.child("phone").getValue()
+                    val results = it.child("results").getValue()
+                    val certification = it.child("certification").getValue()
+                    val idnumero = it.child("idnumero").getValue()
+                    namePlayerSeeActivity.setText(name.toString())
+                    surnamePlayerSeeActivity.setText(surname.toString())
+                    ruoloPlayerSeeActivity.setText(ruolo.toString())
+                    dataPlayerSeeActivity.setText(data.toString())
+                    phonePlayerSeeActivity.setText(phone.toString())
+                    resultsPlayerSeeActivity.setText(results.toString())
+                    certificationPlayerSeeActivity.setText(certification.toString())
+                    idnumeroPlayerSeeActivity.setText(idnumero.toString())
+                }
+            }.addOnFailureListener{
+            Log.e("firebase", "Error getting data", it)
+            }
+
+        /*reference.addValueEventListener(object: ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                var sb = StringBuilder()
+                for(i in snapshot.children) {
+                    var name = i.child("name").getValue()
+                    var surname = i.child("surname").getValue()
+                    namePlayerSeeActivity.setText(name.toString())
+                    surnamePlayerSeeActivity.setText(surname.toString())
+                }
+
+                //seconda opzione
+                if(snapshot!!.exixst()){
+
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })*/
     }
 
     fun onReturn(v: View){
@@ -51,6 +85,7 @@ class SeePlayerActivity : AppCompatActivity() {
         phonePlayerSeeActivity.isEnabled = true
         resultsPlayerSeeActivity.isEnabled = true
         certificationPlayerSeeActivity.isEnabled = true
+        idnumeroPlayerSeeActivity.isEnabled = true
         eliminabutton.setText("CONFERMA")
     }
 
@@ -70,9 +105,10 @@ class SeePlayerActivity : AppCompatActivity() {
             val ruolo = ruoloPlayerSeeActivity.getText().toString()
             val results = resultsPlayerSeeActivity.getText().toString()
             val certification = certificationPlayerSeeActivity.getText().toString()
+            val idnumero = idnumeroPlayerSeeActivity.getText().toString()
 
-            val helperClass: Player = Player(name, surname, date, phone, ruolo, results, certification)
-            reference.child(phone).setValue(helperClass)
+            val helperClass: Player = Player(name, surname, date, phone, ruolo, results, certification, idnumero)
+            reference.child(idnumero).setValue(helperClass)
             val intent = Intent(this, PrincipalActivity::class.java )
             startActivity(intent)
             Log.d(TAG, "modifyPlayer: Success")

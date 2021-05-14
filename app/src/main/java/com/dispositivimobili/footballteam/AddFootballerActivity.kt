@@ -6,10 +6,8 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-import kotlinx.android.synthetic.main.activity_register.*
 import kotlinx.android.synthetic.main.add_player.*
 
 class AddFootballerActivity: AppCompatActivity() {
@@ -27,6 +25,7 @@ class AddFootballerActivity: AppCompatActivity() {
         val intent = Intent(this, PrincipalActivity::class.java)
         startActivity(intent)
         finish()
+        Log.w(TAG, "return to PrincipalActivity")
     }
 
 
@@ -39,6 +38,7 @@ class AddFootballerActivity: AppCompatActivity() {
         val ruolo = ruoloPlayer.getText().toString()
         val results = resultsPlayer.getText().toString()
         val certification = certificationPlayer.getText().toString()
+        val numeromaglia = numeromagliaPlayer.getText().toString()
 
         if(!validateName() || !validateSurname() || !validateDate() || !validatePhone() || !validateRuolo()) {
             correct_data = false
@@ -47,8 +47,8 @@ class AddFootballerActivity: AppCompatActivity() {
         }
 
         if(correct_data == true){
-            val helperClass: Player = Player(name, surname, date, phone, ruolo, results, certification)
-            reference.child(phone).setValue(helperClass)
+            val helperClass: Player = Player(name, surname, date, phone, ruolo, results, certification, numeromaglia)
+            reference.child(numeromaglia.toString()).setValue(helperClass)
             val intent = Intent(this, PrincipalActivity::class.java )
             startActivity(intent)
             Log.d(TAG, "createPlayer: Success")
@@ -111,7 +111,7 @@ class AddFootballerActivity: AppCompatActivity() {
         if(ruolo.isEmpty()){
             ruoloPlayerEsterna.setError(getString(R.string.field_not_empty))
             return false
-        }else  if(!(ruolo=="A" || ruolo=="C" || ruolo=="D" || ruolo=="P")) {
+        }else  if(!(ruolo=="Attaccante" || ruolo=="Centrocampista" || ruolo=="Difensore" || ruolo=="Portiere")) {
             ruoloPlayerEsterna.setError("Invalid ruolo")
             return false
         }else{

@@ -29,6 +29,7 @@ class LoginActivity : AppCompatActivity() {
         ButtonRegisterLoginActivity.setOnClickListener{
             val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
+            Log.d(TAG, "go to RegisterActivity")
         }
 
     }
@@ -39,12 +40,14 @@ class LoginActivity : AppCompatActivity() {
             mAuth.sendPasswordResetEmail(email)
                 .addOnCompleteListener( {
                     Toast.makeText(this, "Check your email", Toast.LENGTH_SHORT).show()
+                    Log.d(TAG, "sendPasswordResetEmail: Success")
                     val intent = Intent(this, LoginActivity::class.java)
                     startActivity(intent)
                     finish()
                 })
                 .addOnFailureListener({
                     Toast.makeText(this, "No reset password", Toast.LENGTH_SHORT).show()
+                    Log.d(TAG, "sendPasswordResetEmail: Failure")
                 })
         }
     }

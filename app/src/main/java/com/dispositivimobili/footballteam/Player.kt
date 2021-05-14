@@ -1,7 +1,5 @@
 package com.dispositivimobili.footballteam
 
-import java.util.*
-
 class Player {
 
     var name: String = ""
@@ -11,11 +9,12 @@ class Player {
     var ruolo: String = ""
     var results: String = ""
     var certification: String = ""
+    var idnumero: String = ""
 
     constructor(){
     }
 
-    constructor(name: String, surname: String, date: String, phone: String, ruolo: String, results: String, certification: String) {
+    constructor(name: String, surname: String, date: String, phone: String, ruolo: String, results: String, certification: String, idnumero: String) {
         this.name = name
         this.surname = surname
         this.date = date
@@ -23,6 +22,7 @@ class Player {
         this.ruolo = ruolo
         this.results = results
         this.certification = certification
+        this.idnumero = idnumero
     }
 
     fun set(newPlayer: Player) {

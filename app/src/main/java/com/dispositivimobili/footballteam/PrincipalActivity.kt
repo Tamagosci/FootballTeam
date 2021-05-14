@@ -9,8 +9,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.BaseAdapter
 import android.widget.TextView
+import android.widget.Toast
+import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_principal.*
@@ -33,6 +36,17 @@ class PrincipalActivity : AppCompatActivity() {
         mAuth = FirebaseAuth.getInstance()
 
         listViewPrincipalActivity.adapter = mAdapter
+
+        listViewPrincipalActivity.setOnItemClickListener { parent: AdapterView<*>, view: View, position: Int, id: Long ->
+            Log.d(TAG, "click on listView")
+            val intent = Intent(this, SeePlayerActivity::class.java)
+            intent.putExtra("idnumero", position+1)
+            startActivity(intent)
+            val valuerow = position+1
+            Toast.makeText(this, "you click on $valuerow", Toast.LENGTH_SHORT).show()
+            finish()
+        }
+
     }
 
     override fun onStart(){
@@ -101,26 +115,7 @@ class PrincipalActivity : AppCompatActivity() {
         val intent = Intent(this, AddFootballerActivity::class.java)
         startActivity(intent)
         finish()
-    }
-
-    fun seePlayer(v: View){
-        val intent = Intent(this, SeePlayerActivity::class.java)
-        val name = textViewName.getText().toString()
-        intent.putExtra("name", name)
-        val surname = textViewSurname.getText().toString()
-        intent.putExtra("surname", surname)
-        val ruolo = textViewRuolo.getText().toString()
-        intent.putExtra("ruolo", ruolo)
-        val data = textViewData.getText().toString()
-        intent.putExtra("data", data)
-        val phone = textViewPhone.getText().toString()
-        intent.putExtra("phone", phone)
-        val results = textViewResults.getText().toString()
-        intent.putExtra("results", results)
-        val certification = textViewCertification.getText().toString()
-        intent.putExtra("certification", certification)
-        startActivity(intent)
-        finish()
+        Log.d(TAG, "go to AddFootballerAcitvity")
     }
 
     fun message(v: View){
@@ -130,9 +125,11 @@ class PrincipalActivity : AppCompatActivity() {
         it.putExtra("sms_body", message)
         startActivity(it)
         finish()
+        Log.d(TAG, "go to send message")
     }
 
     class MyAdapter(private val context: Context, val data: MutableList<Player>) : BaseAdapter() {
+        private val TAG = "MyAdapter"
         override fun getCount(): Int {
             return data.size
         }
@@ -161,11 +158,13 @@ class PrincipalActivity : AppCompatActivity() {
                 personSurname.text = data[position].surname
                 personName.text = data[position].name
                 //personPosition.text = "${data[position].ruolo}"
-                personPosition.text = data[position].ruolo
+                val testo = data[position].ruolo
+                personPosition.text = testo[0].toString()
                 personData.text = data[position].date
                 personPhone.text = data[position].phone
                 personCertification.text = data[position].certification
                 personResults.text = data[position].results
+                Log.d(TAG, "create a view")
             }
             return newView
         }

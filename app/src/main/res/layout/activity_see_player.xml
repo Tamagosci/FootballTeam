@@ -14,13 +14,13 @@
         android:text="@string/personal_date"
         android:textAlignment="center"
         android:textColor="@color/black"
-        android:textSize="30sp" />
+        android:textSize="20sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
         android:orientation="horizontal">
 
         <ImageView
@@ -40,7 +40,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/insert_name"
-                android:paddingBottom="20dp">
+                android:paddingBottom="10dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/namePlayerSeeActivity"
@@ -79,7 +79,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/insert_databirth"
-        android:paddingBottom="10dp">
+        android:paddingBottom="5dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/dataPlayerSeeActivity"
@@ -97,7 +97,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/insert_phone"
-        android:paddingBottom="10dp">
+        android:paddingBottom="5dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/phonePlayerSeeActivity"
@@ -115,10 +115,28 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/insert_role"
-        android:paddingBottom="10dp">
+        android:paddingBottom="5dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/ruoloPlayerSeeActivity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:enabled="false"
+            android:textColor="@color/black"
+            android:inputType="textPersonName">
+        </com.google.android.material.textfield.TextInputEditText>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/numeromagliaPlayerEsternaSeeActivity"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="ID"
+        android:paddingBottom="5dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/idnumeroPlayerSeeActivity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:enabled="false"
@@ -133,7 +151,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/insert_results"
-        android:paddingBottom="10dp">
+        android:paddingBottom="5dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/resultsPlayerSeeActivity"
@@ -151,7 +169,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/insert_certification"
-        android:paddingBottom="10dp">
+        android:paddingBottom="5dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/certificationPlayerSeeActivity"
@@ -166,7 +184,7 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
+        android:layout_marginBottom="1dp"
         android:background="@drawable/two_state_button"
         android:onClick="onReturn"
         android:text="INDIETRO"
@@ -175,7 +193,7 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
+        android:layout_marginBottom="1dp"
         android:text="MODIFICA"
         android:onClick="onModify"
         android:textColor="@color/white"
