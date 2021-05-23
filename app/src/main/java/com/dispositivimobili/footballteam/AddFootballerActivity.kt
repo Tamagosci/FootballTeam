@@ -8,7 +8,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.add_player.*
+import java.util.regex.Pattern
 
 class AddFootballerActivity: AppCompatActivity() {
 
@@ -16,9 +18,11 @@ class AddFootballerActivity: AppCompatActivity() {
     private var rootNode: FirebaseDatabase = FirebaseDatabase.getInstance()
     private var reference: DatabaseReference = rootNode.getReference("player")
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.add_player)
+
     }
 
     fun onReturn(v: View){
@@ -30,6 +34,8 @@ class AddFootballerActivity: AppCompatActivity() {
 
 
     fun checkAdd(v: View){
+        val id = intent.getIntExtra("count",0) + 1
+        //Log.e(TAG, "count is" + id)
         var correct_data = false
         val name = namePlayer.getText().toString()
         val surname = surnamePlayer.getText().toString()
@@ -48,7 +54,7 @@ class AddFootballerActivity: AppCompatActivity() {
 
         if(correct_data == true){
             val helperClass: Player = Player(name, surname, date, phone, ruolo, results, certification, numeromaglia)
-            reference.child(numeromaglia.toString()).setValue(helperClass)
+            reference.child(id.toString()).setValue(helperClass)
             val intent = Intent(this, PrincipalActivity::class.java )
             startActivity(intent)
             Log.d(TAG, "createPlayer: Success")
@@ -83,8 +89,14 @@ class AddFootballerActivity: AppCompatActivity() {
 
     private fun validateDate(): Boolean{
         val surname: String = dataPlayer.getText().toString()
+        val DATE_VAL = "^(0?[1-9]|[12][0-9]|3[01])[\\/\\-](0?[1-9]|1[012])[\\/\\-]\\d{4}\$"
+        val pattern = Pattern.compile(DATE_VAL)
+        val matcher = pattern.matcher(surname)
         if(surname.isEmpty()){
             dataPlayerEsterna.setError(getString(R.string.field_not_empty))
+            return false
+        } else if(!matcher.matches()) {
+            dataPlayerEsterna.setError("Invalid date")
             return false
         } else{
             dataPlayerEsterna.setError(null)

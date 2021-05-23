@@ -33,4 +33,10 @@
     <string name="insert_results">Risultati</string>
     <string name="add">AGGIUNGI</string>
     <string name="personal_date">Dati del calciatore</string>
+    <string name="insert_jersey">Numero di maglia</string>
+    <string name="confirm">CONFERMA</string>
+    <string name="modify_data">MODIFICA I DATI</string>
+    <string name="back">INDIETRO</string>
+    <string name="modify">MODIFICA</string>
+    <string name="delete">ELIMINA</string>
 </resources>

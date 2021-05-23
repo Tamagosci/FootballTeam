@@ -34,7 +34,6 @@ class PrincipalActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_principal)
         mAuth = FirebaseAuth.getInstance()
-
         listViewPrincipalActivity.adapter = mAdapter
 
         listViewPrincipalActivity.setOnItemClickListener { parent: AdapterView<*>, view: View, position: Int, id: Long ->
@@ -43,10 +42,9 @@ class PrincipalActivity : AppCompatActivity() {
             intent.putExtra("idnumero", position+1)
             startActivity(intent)
             val valuerow = position+1
-            Toast.makeText(this, "you click on $valuerow", Toast.LENGTH_SHORT).show()
+            //Toast.makeText(this, "you click on $valuerow", Toast.LENGTH_SHORT).show()
             finish()
         }
-
     }
 
     override fun onStart(){
@@ -109,10 +107,12 @@ class PrincipalActivity : AppCompatActivity() {
         val intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)
         finish()
+        Log.d(TAG, "logout, go to LoginActivity")
     }
 
     fun plus(v: View?){
         val intent = Intent(this, AddFootballerActivity::class.java)
+        intent.putExtra("count", listViewPrincipalActivity.count)
         startActivity(intent)
         finish()
         Log.d(TAG, "go to AddFootballerAcitvity")
@@ -150,20 +150,12 @@ class PrincipalActivity : AppCompatActivity() {
                 val personSurname: TextView = newView.findViewById<TextView>(R.id.textViewSurname)
                 val personName: TextView = newView.findViewById<TextView>(R.id.textViewName)
                 val personPosition: TextView = newView.findViewById<TextView>(R.id.textViewRuolo)
-                val personData: TextView = newView.findViewById<TextView>(R.id.textViewData)
-                val personPhone: TextView = newView.findViewById<TextView>(R.id.textViewPhone)
-                val personResults: TextView = newView.findViewById<TextView>(R.id.textViewResults)
-                val personCertification: TextView = newView.findViewById<TextView>(R.id.textViewCertification)
                 //val parts = data[position].split(" ")
                 personSurname.text = data[position].surname
                 personName.text = data[position].name
                 //personPosition.text = "${data[position].ruolo}"
                 val testo = data[position].ruolo
-                personPosition.text = testo[0].toString()
-                personData.text = data[position].date
-                personPhone.text = data[position].phone
-                personCertification.text = data[position].certification
-                personResults.text = data[position].results
+                personPosition.text = testo[0].toUpperCase().toString()
                 Log.d(TAG, "create a view")
             }
             return newView

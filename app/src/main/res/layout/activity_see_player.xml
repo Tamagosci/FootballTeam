@@ -132,11 +132,11 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="ID"
+        android:hint="@string/insert_jersey"
         android:paddingBottom="5dp">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/idnumeroPlayerSeeActivity"
+            android:id="@+id/numeromagliaPlayerSeeActivity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:enabled="false"
@@ -187,14 +187,15 @@
         android:layout_marginBottom="1dp"
         android:background="@drawable/two_state_button"
         android:onClick="onReturn"
-        android:text="INDIETRO"
+        android:text="@string/back"
         android:textColor="@color/white" />
 
     <Button
+        android:id="@+id/modificabutton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="1dp"
-        android:text="MODIFICA"
+        android:text="@string/modify"
         android:onClick="onModify"
         android:textColor="@color/white"
         android:background="@drawable/two_state_button"/>
@@ -205,7 +206,7 @@
         android:layout_height="wrap_content"
         android:backgroundTint="@color/green_700"
         android:onClick="deleteORconfirm"
-        android:text="ELIMINA"
+        android:text="@string/delete"
         android:textColor="@color/white" />
 
 </LinearLayout>

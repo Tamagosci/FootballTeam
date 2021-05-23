@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Toast
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_see_player.*
 
@@ -24,8 +23,8 @@ class SeePlayerActivity : AppCompatActivity() {
 
         reference.child(id.toString()).get()
             .addOnSuccessListener {
-                Log.i("firebase", "Got key ${it.key}")
-                Log.i("firebase", "Got value ${it.value}")
+                //Log.i("firebase", "Got key ${it.key}")
+                //Log.i("firebase", "Got value ${it.value}")
                 for(i in "${it.value}"){
                     val name = it.child("name").getValue()
                     val surname = it.child("surname").getValue()
@@ -34,7 +33,7 @@ class SeePlayerActivity : AppCompatActivity() {
                     val phone = it.child("phone").getValue()
                     val results = it.child("results").getValue()
                     val certification = it.child("certification").getValue()
-                    val idnumero = it.child("idnumero").getValue()
+                    val numeromaglia = it.child("idnumero").getValue()
                     namePlayerSeeActivity.setText(name.toString())
                     surnamePlayerSeeActivity.setText(surname.toString())
                     ruoloPlayerSeeActivity.setText(ruolo.toString())
@@ -42,7 +41,7 @@ class SeePlayerActivity : AppCompatActivity() {
                     phonePlayerSeeActivity.setText(phone.toString())
                     resultsPlayerSeeActivity.setText(results.toString())
                     certificationPlayerSeeActivity.setText(certification.toString())
-                    idnumeroPlayerSeeActivity.setText(idnumero.toString())
+                    numeromagliaPlayerSeeActivity.setText(numeromaglia.toString())
                 }
             }.addOnFailureListener{
             Log.e("firebase", "Error getting data", it)
@@ -75,6 +74,7 @@ class SeePlayerActivity : AppCompatActivity() {
         val intent = Intent(this, PrincipalActivity::class.java)
         startActivity(intent)
         finish()
+        Log.d(TAG, "go to PrincipalAcitvity")
     }
 
     fun onModify(v: View){
@@ -85,15 +85,17 @@ class SeePlayerActivity : AppCompatActivity() {
         phonePlayerSeeActivity.isEnabled = true
         resultsPlayerSeeActivity.isEnabled = true
         certificationPlayerSeeActivity.isEnabled = true
-        idnumeroPlayerSeeActivity.isEnabled = true
-        eliminabutton.setText("CONFERMA")
+        numeromagliaPlayerSeeActivity.isEnabled = true
+        eliminabutton.setText(getString(R.string.confirm))
+        modificabutton.setText(getString(R.string.modify_data))
+        modificabutton.isEnabled = false
     }
 
     fun deleteORconfirm(v: View){
-        val phone = intent.getStringExtra("phone")
+        val id = intent.getIntExtra("idnumero",0)
         val testo = eliminabutton.getText().toString()
         if(testo == "ELIMINA") {
-            reference.child(phone.toString()).removeValue()
+            reference.child(id.toString()).removeValue()
             val intent = Intent(this, PrincipalActivity::class.java)
             startActivity(intent)
             finish()
@@ -105,14 +107,14 @@ class SeePlayerActivity : AppCompatActivity() {
             val ruolo = ruoloPlayerSeeActivity.getText().toString()
             val results = resultsPlayerSeeActivity.getText().toString()
             val certification = certificationPlayerSeeActivity.getText().toString()
-            val idnumero = idnumeroPlayerSeeActivity.getText().toString()
+            val numeromaglia = numeromagliaPlayerSeeActivity.getText().toString()
 
-            val helperClass: Player = Player(name, surname, date, phone, ruolo, results, certification, idnumero)
-            reference.child(idnumero).setValue(helperClass)
+            val helperClass: Player = Player(name, surname, date, phone, ruolo, results, certification, numeromaglia)
+            reference.child(id.toString()).setValue(helperClass)
             val intent = Intent(this, PrincipalActivity::class.java )
             startActivity(intent)
             Log.d(TAG, "modifyPlayer: Success")
-            Toast.makeText(this, "ModifyPlayer success", Toast.LENGTH_SHORT).show()
+            //Toast.makeText(this, "ModifyPlayer success", Toast.LENGTH_SHORT).show()
         }
     }
 }

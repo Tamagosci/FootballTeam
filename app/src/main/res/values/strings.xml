@@ -40,11 +40,16 @@
     <string name="insert_data">Insert the data</string>
     <string name="insert_databirth">Date of birth</string>
     <string name="insert_role">Role</string>
+    <string name="insert_jersey">Jersey number</string>
     <string name="insert_certification">Certifications</string>
     <string name="insert_results">Results</string>
     <string name="add">ADD</string>
 
-
+    <string name="confirm">CONFIRM</string>
+    <string name="modify_data">MODIFY THE DATA</string>
+    <string name="back">BACK</string>
+    <string name="modify">MODIFY</string>
+    <string name="delete">DELETE</string>
     <string name="personal_date">Data of the player</string>
 
 </resources>

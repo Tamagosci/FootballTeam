@@ -123,7 +123,7 @@
         android:layout_height="wrap_content"
         android:paddingBottom="10dp"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:hint="ID"
+        android:hint="@string/insert_jersey"
         android:id="@+id/numeromagliaPlayerEsterna">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -178,7 +178,7 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="INDIETRO"
+        android:text="@string/back"
         android:onClick="onReturn"
         android:backgroundTint="@color/green_700"/>
 
