@@ -14,27 +14,36 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_register.*
 import java.util.regex.Pattern
+import kotlin.concurrent.thread
 
 class RegisterActivity : AppCompatActivity() {
 
+    //variabili utilizzate nel codice
     private var TAG = "RegisterActivity"
     private lateinit var mAuth: FirebaseAuth
-    private var rootNode: FirebaseDatabase = FirebaseDatabase.getInstance()
-    private var reference: DatabaseReference = rootNode.getReference("users")
+    //private lateinit var rootNode: FirebaseDatabase
+    //private lateinit var reference: DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
-        mAuth = FirebaseAuth.getInstance()
+        thread(start=true){
+            //rootNode = FirebaseDatabase.getInstance()
+            //reference = rootNode.getReference("users")
+            mAuth = FirebaseAuth.getInstance()
+            Log.d(TAG, "db: istanza ottenuta")
+        }
     }
 
+    //listener per tornare a LoginActivity
     fun returnLogin(v: View?){
         val intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)
         finish()
-        Log.d(TAG, "go to LoginActivity")
+        Log.d(TAG, "click on login button, go to LoginActivity")
     }
 
+    //listener per controllare la registrazione
     fun checkRegister(v: View?) {
         var correct_data : Boolean = false
         val name: String = nameRegisterActivity.getText().toString()
@@ -49,14 +58,16 @@ class RegisterActivity : AppCompatActivity() {
             correct_data = true
         }
 
+        //sse i dati sono corretti, effettuiamo la registrazione
         if(correct_data == true){
             mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(OnCompleteListener<AuthResult>() {
                     //val helperClass: User = User(name, surname, email, phone, password)
                     //reference.child(phone.toString()).setValue(helperClass)
-                    Toast.makeText(this, "Authentication success", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Authentication success, go to PrincipalActivity", Toast.LENGTH_SHORT).show()
                     val intent = Intent(this, PrincipalActivity::class.java)
                     startActivity(intent)
+                    finish()
                     Log.d(TAG, "createUserWithEmail: Success")
                 })
                 .addOnFailureListener(OnFailureListener() {
@@ -66,6 +77,7 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
+    //metodo per controllare la validità del nome
     private fun validateName(): Boolean{
         val name: String = nameRegisterActivity.getText().toString()
         if(name.isEmpty()){
@@ -77,6 +89,7 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
+    //metodo per controllare la validità del cognome
     private fun validateSurname(): Boolean{
         val surname: String = surnameRegisterActivity.getText().toString()
         if(surname.isEmpty()){
@@ -88,6 +101,7 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
+    //metodo per controllare la validità del telefono
     private fun validatePhone(): Boolean{
         val phone: String = phoneRegisterActivity.getText().toString()
         if(phone.isEmpty()){
@@ -102,6 +116,7 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
+    //metodo per controllare la validità della password
     private fun validatePassword(): Boolean {
         val password: String = passwordRegisterActivity.getText().toString()
         val PASSWORD_VAL = "^" +
@@ -113,10 +128,6 @@ class RegisterActivity : AppCompatActivity() {
                 "(?=\\S+$)" +           //no white spaces
                 ".{8,}" +               //at least 8 characters
                 "$"
-
-        /*return if (password != null && password.length >= 4) {
-            true
-        } else false*/
 
         val pattern = Pattern.compile(PASSWORD_VAL)
         val matcher = pattern.matcher(password)
@@ -133,6 +144,7 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
+    //metodo per controllare la validità della e-mail
     private fun validateEmail(): Boolean {
         val email: String = emailRegisterActivity.getText().toString()
         val EMAIL_PATTERN = ("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"

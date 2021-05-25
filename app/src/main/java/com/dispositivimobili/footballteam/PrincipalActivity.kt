@@ -5,6 +5,7 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.telephony.SmsManager
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -124,8 +125,8 @@ class PrincipalActivity : AppCompatActivity() {
         val it = Intent(Intent.ACTION_SENDTO, uri)
         it.putExtra("sms_body", message)
         startActivity(it)
-        finish()
         Log.d(TAG, "go to send message")
+
     }
 
     class MyAdapter(private val context: Context, val data: MutableList<Player>) : BaseAdapter() {

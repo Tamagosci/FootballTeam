@@ -1,6 +1,7 @@
 package com.dispositivimobili.footballteam
 
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -17,10 +18,11 @@ class SeePlayerActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_see_player)
 
-        //recupero dati da firebase
+        //recupero dati da PrincipalActivity
         val intent: Intent = getIntent()
         val id = intent.getIntExtra("idnumero",0)
 
+        //recupero dati giocatore da firebase
         reference.child(id.toString()).get()
             .addOnSuccessListener {
                 //Log.i("firebase", "Got key ${it.key}")
@@ -46,37 +48,27 @@ class SeePlayerActivity : AppCompatActivity() {
             }.addOnFailureListener{
             Log.e("firebase", "Error getting data", it)
             }
-
-        /*reference.addValueEventListener(object: ValueEventListener{
-            override fun onDataChange(snapshot: DataSnapshot) {
-                var sb = StringBuilder()
-                for(i in snapshot.children) {
-                    var name = i.child("name").getValue()
-                    var surname = i.child("surname").getValue()
-                    namePlayerSeeActivity.setText(name.toString())
-                    surnamePlayerSeeActivity.setText(surname.toString())
-                }
-
-                //seconda opzione
-                if(snapshot!!.exixst()){
-
-                }
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
-            }
-
-        })*/
     }
 
+    //listener per ritornare alla PrincipalActivity
     fun onReturn(v: View){
         val intent = Intent(this, PrincipalActivity::class.java)
         startActivity(intent)
         finish()
-        Log.d(TAG, "go to PrincipalAcitvity")
+        Log.d(TAG, "click on back button, go to PrincipalAcitvity")
     }
 
+    //listener per inviare un messaggio al giocatore visualizzato
+    fun onMessagePlayer(v: View){
+        val message = "Ciao " + namePlayerSeeActivity.getText().toString() + ", sono il mister, "
+        val uri: Uri = Uri.parse("smsto: ${phonePlayerSeeActivity.getText().toString()}")
+        val intent = Intent(Intent.ACTION_SENDTO, uri)
+        intent.putExtra("sms_body", message)
+        startActivity(intent)
+        Log.d(TAG, "go to send message to one player")
+    }
+
+    //listener per modificare i dati del giocatore selezionato
     fun onModify(v: View){
         namePlayerSeeActivity.isEnabled = true
         surnamePlayerSeeActivity.isEnabled = true
@@ -89,16 +81,21 @@ class SeePlayerActivity : AppCompatActivity() {
         eliminabutton.setText(getString(R.string.confirm))
         modificabutton.setText(getString(R.string.modify_data))
         modificabutton.isEnabled = false
+        message_oneplayer.isEnabled = false
+        Log.d(TAG, "click on modify button, start to modify the data of player")
     }
 
+    //listener per eliminare il giocatore selezionato o confermare le modifiche effettuare
     fun deleteORconfirm(v: View){
         val id = intent.getIntExtra("idnumero",0)
         val testo = eliminabutton.getText().toString()
         if(testo == "ELIMINA") {
+            //eliminazione dal db del giocatore selezionato
             reference.child(id.toString()).removeValue()
             val intent = Intent(this, PrincipalActivity::class.java)
             startActivity(intent)
             finish()
+            Log.d(TAG, "click on delete button, delete player: Success")
         } else {
             val name = namePlayerSeeActivity.getText().toString()
             val surname = surnamePlayerSeeActivity.getText().toString()
@@ -108,12 +105,14 @@ class SeePlayerActivity : AppCompatActivity() {
             val results = resultsPlayerSeeActivity.getText().toString()
             val certification = certificationPlayerSeeActivity.getText().toString()
             val numeromaglia = numeromagliaPlayerSeeActivity.getText().toString()
-
             val helperClass: Player = Player(name, surname, date, phone, ruolo, results, certification, numeromaglia)
+
+            //ripristino sul db del giocatore modificato
             reference.child(id.toString()).setValue(helperClass)
             val intent = Intent(this, PrincipalActivity::class.java )
             startActivity(intent)
-            Log.d(TAG, "modifyPlayer: Success")
+            finish()
+            Log.d(TAG, "click on confirm button, modifyPlayer: Success")
             //Toast.makeText(this, "ModifyPlayer success", Toast.LENGTH_SHORT).show()
         }
     }
