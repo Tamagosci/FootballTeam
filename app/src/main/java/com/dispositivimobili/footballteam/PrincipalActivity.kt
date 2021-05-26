@@ -5,7 +5,6 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.telephony.SmsManager
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -13,15 +12,15 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.BaseAdapter
 import android.widget.TextView
-import android.widget.Toast
-import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_principal.*
-import kotlinx.android.synthetic.main.row.*
+import java.lang.StringBuilder
+import kotlin.concurrent.thread
 
 class PrincipalActivity : AppCompatActivity() {
 
+    //variabili utilizzate nel codice
     private val TAG = "PrincipalActivity"
     private lateinit var mAuth: FirebaseAuth
     private var rootNode: FirebaseDatabase = FirebaseDatabase.getInstance()
@@ -34,17 +33,21 @@ class PrincipalActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_principal)
-        mAuth = FirebaseAuth.getInstance()
+        thread(start=true) {
+            mAuth = FirebaseAuth.getInstance()
+        }
         listViewPrincipalActivity.adapter = mAdapter
 
-        listViewPrincipalActivity.setOnItemClickListener { parent: AdapterView<*>, view: View, position: Int, id: Long ->
-            Log.d(TAG, "click on listView")
-            val intent = Intent(this, SeePlayerActivity::class.java)
-            intent.putExtra("idnumero", position+1)
-            startActivity(intent)
-            val valuerow = position+1
-            //Toast.makeText(this, "you click on $valuerow", Toast.LENGTH_SHORT).show()
-            finish()
+        thread(start=true) {
+            listViewPrincipalActivity.setOnItemClickListener { parent: AdapterView<*>, view: View, position: Int, id: Long ->
+                Log.d(TAG, "click on listView")
+                val intent = Intent(this, SeePlayerActivity::class.java)
+                intent.putExtra("idnumero", position + 1)
+                startActivity(intent)
+                //val valuerow = position+1
+                //Toast.makeText(this, "you click on $valuerow", Toast.LENGTH_SHORT).show()
+                finish()
+            }
         }
     }
 
@@ -52,7 +55,9 @@ class PrincipalActivity : AppCompatActivity() {
         super.onStart()
         Log.d(TAG, "onStart")
         if(mPlayerChildListener == null){
-            mPlayerChildListener = getPlayerChildEventListener()
+            thread(start = true) {
+                mPlayerChildListener = getPlayerChildEventListener()
+            }
         }
         reference!!.addChildEventListener(mPlayerChildListener)
     }
@@ -103,8 +108,11 @@ class PrincipalActivity : AppCompatActivity() {
         return childEventListener
     }
 
+
     fun onLogout(v: View){
-        mAuth.signOut()
+        thread(start=true) {
+            mAuth.signOut()
+        }
         val intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)
         finish()
@@ -120,13 +128,34 @@ class PrincipalActivity : AppCompatActivity() {
     }
 
     fun message(v: View){
-        val message = "Ciao, sono il mister, "
-        val uri: Uri = Uri.parse("smsto:")
-        val it = Intent(Intent.ACTION_SENDTO, uri)
-        it.putExtra("sms_body", message)
-        startActivity(it)
-        Log.d(TAG, "go to send message")
+        var i = 1
+        var finito = false
+        val virgolaspazio = ", "
+        val sb = StringBuilder()
+        thread(start = true) {
+            while (i <= listViewPrincipalActivity.count) {
+                reference.child(i.toString()).get()
+                    .addOnSuccessListener {
+                        val phone = it.child("phone").getValue().toString()
+                        sb.append(phone).append(virgolaspazio)
+                    }
+                i++
+                if (i == listViewPrincipalActivity.count) {
+                    finito = true
+                }
+            }
 
+            Thread.sleep(100)
+            if (finito == true) {
+                sb.delete((sb.length)-2, sb.length)
+                val message = "Ciao ragazzi, sono il mister, "
+                val uri: Uri = Uri.parse("smsto: $sb")
+                val intent = Intent(Intent.ACTION_SENDTO, uri)
+                intent.putExtra("sms_body", message)
+                startActivity(intent)
+                Log.d(TAG, "go to send message to all player")
+            }
+        }
     }
 
     class MyAdapter(private val context: Context, val data: MutableList<Player>) : BaseAdapter() {

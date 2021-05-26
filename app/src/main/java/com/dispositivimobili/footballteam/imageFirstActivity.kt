@@ -8,6 +8,7 @@ import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_image_first.*
+import kotlin.concurrent.thread
 
 class imageFirstActivity : AppCompatActivity() {
 
@@ -23,34 +24,42 @@ class imageFirstActivity : AppCompatActivity() {
         setContentView(R.layout.activity_image_first)
 
         //animazione apertura applicazione
-        topAnim = AnimationUtils.loadAnimation(this, R.anim.top_anim)
-        bottomAnim = AnimationUtils.loadAnimation(this, R.anim.bottom_anim)
+        thread(start=true) {
+            topAnim = AnimationUtils.loadAnimation(this, R.anim.top_anim)
+            bottomAnim = AnimationUtils.loadAnimation(this, R.anim.bottom_anim)
 
-        nameApp = nameappViewImageFirstActivity
-        textApp = textImageFirstActivity
+            nameApp = nameappViewImageFirstActivity
+            textApp = textImageFirstActivity
 
-        nameApp.setAnimation(topAnim)
-        textApp.setAnimation(bottomAnim)
+            nameApp.setAnimation(topAnim)
+            textApp.setAnimation(bottomAnim)
+        }
 
         //listener sull'immagine di sfondo
-        imageImageFirstActivity.setOnClickListener{
-            val intent = Intent(this, LoginActivity::class.java)
-            startActivity(intent)
-            Log.d(TAG, "click on image background, go to LoginActivity")
+        thread(start=true) {
+            imageImageFirstActivity.setOnClickListener {
+                val intent = Intent(this, LoginActivity::class.java)
+                startActivity(intent)
+                Log.d(TAG, "click on image background, go to LoginActivity")
+            }
         }
 
         //listener sul nome dell'app (testo)
-        nameappViewImageFirstActivity.setOnClickListener{
-            val intent = Intent(this, LoginActivity::class.java)
-            startActivity(intent)
-            Log.d(TAG, "click on text name app, go to LoginActivity")
+        thread(start=true) {
+            nameappViewImageFirstActivity.setOnClickListener {
+                val intent = Intent(this, LoginActivity::class.java)
+                startActivity(intent)
+                Log.d(TAG, "click on text name app, go to LoginActivity")
+            }
         }
 
         //listener sul testo in basso
-        textImageFirstActivity.setOnClickListener{
-            val intent = Intent(this, LoginActivity::class.java)
-            startActivity(intent)
-            Log.d(TAG, "click on text bottom, go to LoginActivity")
+        thread(start=true) {
+            textImageFirstActivity.setOnClickListener {
+                val intent = Intent(this, LoginActivity::class.java)
+                startActivity(intent)
+                Log.d(TAG, "click on text bottom, go to LoginActivity")
+            }
         }
     }
 }

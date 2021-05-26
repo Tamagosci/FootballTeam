@@ -46,9 +46,6 @@ class RegisterActivity : AppCompatActivity() {
     //listener per controllare la registrazione
     fun checkRegister(v: View?) {
         var correct_data : Boolean = false
-        val name: String = nameRegisterActivity.getText().toString()
-        val surname: String = surnameRegisterActivity.getText().toString()
-        val phone: String = phoneRegisterActivity.getText().toString()
         val email: String = emailRegisterActivity.getText().toString()
         val password: String = passwordRegisterActivity.getText().toString()
 
@@ -59,23 +56,26 @@ class RegisterActivity : AppCompatActivity() {
         }
 
         //sse i dati sono corretti, effettuiamo la registrazione
-        if(correct_data == true){
-            mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(OnCompleteListener<AuthResult>() {
-                    //val helperClass: User = User(name, surname, email, phone, password)
-                    //reference.child(phone.toString()).setValue(helperClass)
-                    Toast.makeText(this, "Authentication success, go to PrincipalActivity", Toast.LENGTH_SHORT).show()
-                    val intent = Intent(this, PrincipalActivity::class.java)
-                    startActivity(intent)
-                    finish()
-                    Log.d(TAG, "createUserWithEmail: Success")
-                })
-                .addOnFailureListener(OnFailureListener() {
-                    Log.w(TAG, "createUserWithEmail: Failure")
-                    Toast.makeText(this, "Authentication failed", Toast.LENGTH_SHORT).show()
-                })
+        if(correct_data == true) {
+            thread(start = true) {
+                mAuth.createUserWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(OnCompleteListener<AuthResult>() {
+                        //val helperClass: User = User(name, surname, email, phone, password)
+                        //reference.child(phone.toString()).setValue(helperClass)
+                        Toast.makeText(this, "Authentication success, go to PrincipalActivity", Toast.LENGTH_SHORT).show()
+                        val intent = Intent(this, PrincipalActivity::class.java)
+                        startActivity(intent)
+                        finish()
+                        Log.d(TAG, "createUserWithEmail: Success")
+                    })
+                    .addOnFailureListener(OnFailureListener() {
+                        Log.w(TAG, "createUserWithEmail: Failure")
+                        Toast.makeText(this, "Authentication failed", Toast.LENGTH_SHORT).show()
+                    })
+            }
         }
     }
+
 
     //metodo per controllare la validità del nome
     private fun validateName(): Boolean{

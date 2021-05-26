@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.View
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_see_player.*
+import kotlin.concurrent.thread
 
 class SeePlayerActivity : AppCompatActivity() {
     private var rootNode: FirebaseDatabase = FirebaseDatabase.getInstance()
@@ -20,34 +21,36 @@ class SeePlayerActivity : AppCompatActivity() {
 
         //recupero dati da PrincipalActivity
         val intent: Intent = getIntent()
-        val id = intent.getIntExtra("idnumero",0)
+        val id = intent.getIntExtra("idnumero", 0)
 
         //recupero dati giocatore da firebase
-        reference.child(id.toString()).get()
-            .addOnSuccessListener {
-                //Log.i("firebase", "Got key ${it.key}")
-                //Log.i("firebase", "Got value ${it.value}")
-                for(i in "${it.value}"){
-                    val name = it.child("name").getValue()
-                    val surname = it.child("surname").getValue()
-                    val ruolo = it.child("ruolo").getValue()
-                    val data = it.child("date").getValue()
-                    val phone = it.child("phone").getValue()
-                    val results = it.child("results").getValue()
-                    val certification = it.child("certification").getValue()
-                    val numeromaglia = it.child("idnumero").getValue()
-                    namePlayerSeeActivity.setText(name.toString())
-                    surnamePlayerSeeActivity.setText(surname.toString())
-                    ruoloPlayerSeeActivity.setText(ruolo.toString())
-                    dataPlayerSeeActivity.setText(data.toString())
-                    phonePlayerSeeActivity.setText(phone.toString())
-                    resultsPlayerSeeActivity.setText(results.toString())
-                    certificationPlayerSeeActivity.setText(certification.toString())
-                    numeromagliaPlayerSeeActivity.setText(numeromaglia.toString())
+        thread(start = true) {
+            reference.child(id.toString()).get()
+                .addOnSuccessListener {
+                    //Log.i("firebase", "Got key ${it.key}")
+                    //Log.i("firebase", "Got value ${it.value}")
+                    for (i in "${it.value}") {
+                        val name = it.child("name").getValue()
+                        val surname = it.child("surname").getValue()
+                        val ruolo = it.child("ruolo").getValue()
+                        val data = it.child("date").getValue()
+                        val phone = it.child("phone").getValue()
+                        val results = it.child("results").getValue()
+                        val certification = it.child("certification").getValue()
+                        val numeromaglia = it.child("idnumero").getValue()
+                        namePlayerSeeActivity.setText(name.toString())
+                        surnamePlayerSeeActivity.setText(surname.toString())
+                        ruoloPlayerSeeActivity.setText(ruolo.toString())
+                        dataPlayerSeeActivity.setText(data.toString())
+                        phonePlayerSeeActivity.setText(phone.toString())
+                        resultsPlayerSeeActivity.setText(results.toString())
+                        certificationPlayerSeeActivity.setText(certification.toString())
+                        numeromagliaPlayerSeeActivity.setText(numeromaglia.toString())
+                    }
+                }.addOnFailureListener {
+                    Log.e("firebase", "Error getting data", it)
                 }
-            }.addOnFailureListener{
-            Log.e("firebase", "Error getting data", it)
-            }
+        }
     }
 
     //listener per ritornare alla PrincipalActivity
@@ -62,9 +65,11 @@ class SeePlayerActivity : AppCompatActivity() {
     fun onMessagePlayer(v: View){
         val message = "Ciao " + namePlayerSeeActivity.getText().toString() + ", sono il mister, "
         val uri: Uri = Uri.parse("smsto: ${phonePlayerSeeActivity.getText().toString()}")
-        val intent = Intent(Intent.ACTION_SENDTO, uri)
-        intent.putExtra("sms_body", message)
-        startActivity(intent)
+        thread(start=true) {
+            val intent = Intent(Intent.ACTION_SENDTO, uri)
+            intent.putExtra("sms_body", message)
+            startActivity(intent)
+        }
         Log.d(TAG, "go to send message to one player")
     }
 

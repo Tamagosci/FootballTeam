@@ -9,7 +9,6 @@
         android:roundIcon="@mipmap/ic_imagefootball_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FootballManager">
-        <activity android:name=".ModifyPlayerActivity"></activity>
         <activity android:name=".SeePlayerActivity" />
         <activity android:name=".AddFootballerActivity" />
         <activity android:name=".PrincipalActivity" />

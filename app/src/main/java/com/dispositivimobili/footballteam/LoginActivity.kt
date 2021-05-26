@@ -33,30 +33,33 @@ class LoginActivity : AppCompatActivity() {
         }
 
         //listener per andare a RegisterActivity
-        ButtonRegisterLoginActivity.setOnClickListener{
-            val intent = Intent(this, RegisterActivity::class.java)
-            startActivity(intent)
-            Log.d(TAG, "click on button register, go to RegisterActivity")
+        thread(start = true) {
+            ButtonRegisterLoginActivity.setOnClickListener {
+                val intent = Intent(this, RegisterActivity::class.java)
+                startActivity(intent)
+                Log.d(TAG, "click on button register, go to RegisterActivity")
+            }
         }
-
     }
 
     //listener per recuperare la password dimenticata
     fun resetPassword(v:View){
         val email = email_adressLoginActivity.getText().toString()
-        if(validateEmail()){
-            mAuth.sendPasswordResetEmail(email)
-                .addOnCompleteListener( {
-                    Toast.makeText(this, "Check your email", Toast.LENGTH_SHORT).show()
-                    Log.d(TAG, "sendPasswordResetEmail: Success")
-                    val intent = Intent(this, LoginActivity::class.java)
-                    startActivity(intent)
-                    finish()
-                })
-                .addOnFailureListener({
-                    Toast.makeText(this, "No reset password", Toast.LENGTH_SHORT).show()
-                    Log.d(TAG, "sendPasswordResetEmail: Failure")
-                })
+        if(validateEmail()) {
+            thread(start = true) {
+                mAuth.sendPasswordResetEmail(email)
+                    .addOnCompleteListener({
+                        Toast.makeText(this, "Check your email", Toast.LENGTH_SHORT).show()
+                        Log.d(TAG, "sendPasswordResetEmail: Success")
+                        val intent = Intent(this, LoginActivity::class.java)
+                        startActivity(intent)
+                        finish()
+                    })
+                    .addOnFailureListener({
+                        Toast.makeText(this, "No reset password", Toast.LENGTH_SHORT).show()
+                        Log.d(TAG, "sendPasswordResetEmail: Failure")
+                    })
+            }
         }
     }
 
@@ -73,9 +76,10 @@ class LoginActivity : AppCompatActivity() {
         }
 
         //sse i dati sono corretti, effettuiamo il login
-        if(correct_data == true){
-            mAuth.signInWithEmailAndPassword(email, password)
-                    .addOnSuccessListener( {
+        if(correct_data == true) {
+            thread(start = true) {
+                mAuth.signInWithEmailAndPassword(email, password)
+                    .addOnSuccessListener({
                         Toast.makeText(this, "Login successfully", Toast.LENGTH_SHORT).show()
                         val intent = Intent(this, PrincipalActivity::class.java)
                         startActivity(intent)
@@ -87,6 +91,9 @@ class LoginActivity : AppCompatActivity() {
                     })
             }
         }
+    }
+
+
 
     //metodo per controllare la validità della password
     private fun validatePassword(): Boolean {
