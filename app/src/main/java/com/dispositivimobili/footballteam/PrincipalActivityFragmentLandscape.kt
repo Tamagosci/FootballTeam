@@ -22,7 +22,7 @@ import kotlin.concurrent.thread
 class PrincipalActivityFragmentLandscape : Fragment(){
 
     //variabili utilizzate nel codice
-    private val TAG = "PrincipalActivityFragment"
+    private val TAG = "PrincipalActivityFragmentLandscape"
     val mPlayer: MutableList<Player> = ArrayList()
     private lateinit var mAuth: FirebaseAuth
     var mPlayerChildListener: ChildEventListener = getPlayerChildEventListener()
@@ -114,14 +114,6 @@ class PrincipalActivityFragmentLandscape : Fragment(){
                     Log.d(TAG, "position is  ${position.toString()}")
                 }
 
-                /*val count = listViewPrincipalActivity.count
-                Log.d(TAG, "v is $count")
-                val active = getActivity()
-                if(active is CoordinatorFragments) {
-                    active.countList(count)
-                    Log.d(TAG, "row count is ${count.toString()}")
-                }*/
-
             }
         }
 
@@ -183,6 +175,15 @@ class PrincipalActivityFragmentLandscape : Fragment(){
         return childEventListener
     }
 
+    fun method() {
+        val count = listViewPrincipalActivity.count
+        Log.d(TAG, "v is $count")
+        val active = getActivity()
+        if(active is CoordinatorFragments) {
+            active.countList(count)
+            Log.d(TAG, "row count is ${count.toString()}")
+        }
+    }
 
 
     class MyAdapter(private val context: Context, val data: MutableList<Player>) : BaseAdapter() {

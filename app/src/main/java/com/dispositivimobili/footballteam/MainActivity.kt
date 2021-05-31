@@ -8,6 +8,7 @@ import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import kotlinx.android.synthetic.main.activity_principal.*
 import kotlinx.android.synthetic.main.toolbarprincipal.*
 import kotlin.concurrent.thread
 
@@ -22,7 +23,7 @@ class MainActivity : AppCompatActivity(), CoordinatorFragments {
     lateinit var seePlayerDescription: SeePlayerActivityFragment
     lateinit var principalfragment: PrincipalActivityFragmentLandscape
     lateinit var principalfragmentportrait: PrincipalActivityFragmentPortrait
-    //lateinit var addplayer: AddFootballerActivityFragment
+    lateinit var addplayer: AddFootballerActivityFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,13 +35,15 @@ class MainActivity : AppCompatActivity(), CoordinatorFragments {
         seePlayerDescription = SeePlayerActivityFragment()
         //fragment principalactivityfragment portrait
         principalfragmentportrait = PrincipalActivityFragmentPortrait()
-        //addplayer = AddFootballerActivityFragment()
+        //fragment addfootballeractivityfragment
+        addplayer = AddFootballerActivityFragment()
 
         //aggiungere i vari fragments
         val fragTransaction = supportFragmentManager.beginTransaction()
         fragTransaction.add(R.id.fragmentPrincipalActivity, principalfragment)
         fragTransaction.add(R.id.fragmentSeePlayer, seePlayerDescription)
         fragTransaction.add(R.id.fragmentPrincipalActivityPortrait, principalfragmentportrait)
+        fragTransaction.add(R.id.fragmentAddPlayerActivity, addplayer)
         fragTransaction.commit()
 
         //listener per passare al logout (modalità landscape)
@@ -62,6 +65,7 @@ class MainActivity : AppCompatActivity(), CoordinatorFragments {
                     setReorderingAllowed(true)
                     Log.d(TAG, "pressed on addplayer, replace fragment")
                     replace<AddFootballerActivityFragment>(R.id.fragmentSeePlayer)
+                    principalfragment.method()
                 }
             }
         }
@@ -78,6 +82,6 @@ class MainActivity : AppCompatActivity(), CoordinatorFragments {
 
     //implementazione del metodo dell'interfaccian per la comunicazione tra fragment
     override fun countList(index: Int) {
-        //addplayer.RowCount(index)
+        addplayer.RowCount(index)
     }
 }

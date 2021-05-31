@@ -11,6 +11,18 @@ import androidx.fragment.app.Fragment
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_see_player.*
+import kotlinx.android.synthetic.main.activity_see_player.certificationPlayerSeeActivity
+import kotlinx.android.synthetic.main.activity_see_player.dataPlayerSeeActivity
+import kotlinx.android.synthetic.main.activity_see_player.eliminabutton
+import kotlinx.android.synthetic.main.activity_see_player.message_oneplayer
+import kotlinx.android.synthetic.main.activity_see_player.modificabutton
+import kotlinx.android.synthetic.main.activity_see_player.namePlayerSeeActivity
+import kotlinx.android.synthetic.main.activity_see_player.numeromagliaPlayerSeeActivity
+import kotlinx.android.synthetic.main.activity_see_player.phonePlayerSeeActivity
+import kotlinx.android.synthetic.main.activity_see_player.resultsPlayerSeeActivity
+import kotlinx.android.synthetic.main.activity_see_player.ruoloPlayerSeeActivity
+import kotlinx.android.synthetic.main.activity_see_player.surnamePlayerSeeActivity
+import kotlinx.android.synthetic.main.activity_see_player_fragment.*
 import kotlin.concurrent.thread
 
 
@@ -24,7 +36,6 @@ class SeePlayerActivityFragment : Fragment(){
         val v = inflater.inflate(R.layout.activity_see_player_fragment, container, false)
         numeroIndex = if(savedInstanceState?.getInt("numeroindex")== null) 0
         else { savedInstanceState.getInt("") } //aggiunta key numeroindex
-
         return v
     }
 
@@ -45,6 +56,7 @@ class SeePlayerActivityFragment : Fragment(){
             resultsPlayerSeeActivity.isEnabled = true
             certificationPlayerSeeActivity.isEnabled = true
             numeromagliaPlayerSeeActivity.isEnabled = true
+            eliminabutton.isEnabled=true
             eliminabutton.setText(getString(R.string.confirm))
             modificabutton.setText(getString(R.string.modify_data))
             modificabutton.isEnabled = false
@@ -69,7 +81,8 @@ class SeePlayerActivityFragment : Fragment(){
             Log.d(TAG, "numero index value is $num")
             //val id = intent.getIntExtra("idnumero",0)
             val testo = eliminabutton.getText().toString()
-            if(testo == "ELIMINA") {
+            val valore = getString(R.string.delete)
+            if(testo == valore) {
                 //eliminazione dal db del giocatore selezionato
                 reference.child(num.toString()).removeValue()
                 /*val intent = Intent(getActivity(), PrincipalActivity::class.java)
@@ -89,9 +102,6 @@ class SeePlayerActivityFragment : Fragment(){
 
                 //ripristino sul db del giocatore modificato
                 reference.child(num.toString()).setValue(helperClass)
-                /*val intent = Intent(this, PrincipalActivity::class.java )
-                startActivity(intent)
-                finish()*/
                 Log.d(TAG, "click on confirm button, modifyPlayer: Success")
                 namePlayerSeeActivity.isEnabled = false
                 surnamePlayerSeeActivity.isEnabled = false
@@ -101,12 +111,15 @@ class SeePlayerActivityFragment : Fragment(){
                 resultsPlayerSeeActivity.isEnabled = false
                 certificationPlayerSeeActivity.isEnabled = false
                 numeromagliaPlayerSeeActivity.isEnabled = false
-                eliminabutton.setText(getString(R.string.confirm))
-                modificabutton.setText(getString(R.string.modify_data))
+                eliminabutton.setText(getString(R.string.delete))
+                eliminabutton.isEnabled = false
                 modificabutton.isEnabled = true
                 modificabutton.setText(getString(R.string.modify_data))
                 message_oneplayer.isEnabled = true
                 pubblicadati(numeroIndex)
+                val intent = Intent(getActivity(), MainActivity::class.java )
+                startActivity(intent)
+                //finish()
                 //Toast.makeText(this, "ModifyPlayer success", Toast.LENGTH_SHORT).show()
             }
         }
@@ -151,10 +164,4 @@ class SeePlayerActivityFragment : Fragment(){
                 }
         }
     }
-
-
-
-
-
-
 }

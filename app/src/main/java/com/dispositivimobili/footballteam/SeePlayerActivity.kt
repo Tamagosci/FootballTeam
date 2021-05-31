@@ -142,10 +142,9 @@ class SeePlayerActivity : AppCompatActivity() {
                         }.addOnFailureListener {
                             Log.e("firebase", "Error getting data", it)
                         }
-                    val newid = (i - 1).toString()
-                    Log.d(TAG, "i new value is $newid")
-
-                    Log.d(TAG, "id new value is $id")
+                    //val newid = (i - 1).toString()
+                    //Log.d(TAG, "i new value is $newid")
+                    //Log.d(TAG, "id new value is $id")
                     i++
                 }
             }

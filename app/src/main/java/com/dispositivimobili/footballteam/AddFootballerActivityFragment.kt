@@ -22,7 +22,7 @@ class AddFootballerActivityFragment : Fragment() {
     private var TAG = "AddFootballerActivityFragment"
     private var rootNode: FirebaseDatabase = FirebaseDatabase.getInstance()
     private var reference: DatabaseReference = rootNode.getReference("player")
-    var rowcount = 0
+    var rowcount = 1
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.add_player, container, false)
@@ -51,7 +51,7 @@ class AddFootballerActivityFragment : Fragment() {
         //listener per poter controllare i dati inseriti
         addbuttonAddPlayer.setOnClickListener(){
             val id = rowcount + 1
-            Log.e(TAG, "count is" + rowcount)
+            Log.e(TAG, "count is $id")
             var correct_data = false
             val name = namePlayer.getText().toString()
             val surname = surnamePlayer.getText().toString()
@@ -71,9 +71,9 @@ class AddFootballerActivityFragment : Fragment() {
             //sse i dati sono corretti, passiamo ad aggiungere il giocatore al db
             if (correct_data == true) {
                 val helperClass: Player = Player(name, surname, date, phone, ruolo, results, certification, numeromaglia)
-                /*thread(start = true) {
-                    reference.child(rowcount.toString()).setValue(helperClass)
-                }*/
+                thread(start = true) {
+                    reference.child(id.toString()).setValue(helperClass)
+                }
                 val intent = Intent(getActivity(), MainActivity::class.java)
                 startActivity(intent)
                 Log.d(TAG, "createPlayer: Success")
@@ -86,9 +86,9 @@ class AddFootballerActivityFragment : Fragment() {
     }
 
     fun RowCount(index:Int) {
-        rowcount = index
-        println("NUMERO INDEX = $rowcount")
-        Log.d(TAG, "numeroindex is ${rowcount}")
+        rowcount = index+1
+        println("NUMERO row = $rowcount")
+        Log.d(TAG, "numerorow is ${rowcount}")
     }
 
     //metodo per controllare la validità del nome

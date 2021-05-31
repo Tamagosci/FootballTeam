@@ -215,6 +215,7 @@
         android:layout_height="wrap_content"
         android:backgroundTint="@color/green_700"
         android:onClick="deleteORconfirm"
+        android:enabled="false"
         android:text="@string/delete"
         android:textColor="@color/white" />
 </LinearLayout>
