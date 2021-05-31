@@ -1,6 +1,8 @@
 package com.dispositivimobili.footballteam
 
+import android.R.attr
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -8,16 +10,18 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.add_player.*
 import java.util.regex.Pattern
+import kotlin.concurrent.thread
+
 
 class AddFootballerActivity: AppCompatActivity() {
 
+    //variabili utilizzate nel codice
     private var TAG = "AddFootballerActivity"
     private var rootNode: FirebaseDatabase = FirebaseDatabase.getInstance()
     private var reference: DatabaseReference = rootNode.getReference("player")
-
+    val PICK_IMAGE = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,17 +29,39 @@ class AddFootballerActivity: AppCompatActivity() {
 
     }
 
+    //listener per poter ritornare alla PrincipalActivity
     fun onReturn(v: View){
-        val intent = Intent(this, PrincipalActivity::class.java)
-        startActivity(intent)
-        finish()
-        Log.w(TAG, "return to PrincipalActivity")
+        thread(start=true) {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+            Log.w(TAG, "return to MainActivity")
+        }
     }
 
+    //listener per poter prelevare dalla galleria l'immagine del giocatore
+    fun checkImage(v:View){
+        val intent = Intent()
+        intent.type = "image/*"
+        intent.action = Intent.ACTION_GET_CONTENT
+        startActivityForResult(Intent.createChooser(intent, ""), PICK_IMAGE)
+    }
 
+    //metodo per poter aggiungere l'immagine del giocatore
+    override fun onActivityResult(requestCode:Int, resultCode:Int, data:Intent?){
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode !== RESULT_CANCELED) {
+            if (requestCode === PICK_IMAGE) {
+                val selectedImageUri: Uri = data!!.getData()!!
+                imageViewAddPlayer.setImageURI(selectedImageUri)
+            }
+        }
+    }
+
+    //listener per poter controllare i dati inseriti
     fun checkAdd(v: View){
         val id = intent.getIntExtra("count",0) + 1
-        //Log.e(TAG, "count is" + id)
+        Log.d(TAG, "count is" + id)
         var correct_data = false
         val name = namePlayer.getText().toString()
         val surname = surnamePlayer.getText().toString()
@@ -52,19 +78,25 @@ class AddFootballerActivity: AppCompatActivity() {
             correct_data = true
         }
 
+        //sse i dati sono corretti, passiamo ad aggiungere il giocatore al db
         if(correct_data == true){
             val helperClass: Player = Player(name, surname, date, phone, ruolo, results, certification, numeromaglia)
-            reference.child(id.toString()).setValue(helperClass)
-            val intent = Intent(this, PrincipalActivity::class.java )
-            startActivity(intent)
-            Log.d(TAG, "createPlayer: Success")
-            Toast.makeText(this, "AddPlayer success", Toast.LENGTH_SHORT).show()
+            thread(start=true) {
+                reference.child(id.toString()).setValue(helperClass)
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+                Log.d(TAG, "createPlayer: Success")
+                val text = getString(R.string.addplayersuccess)
+                //Toast.makeText(this, "$text", Toast.LENGTH_SHORT).show()
+            }
         } else{
             Log.w(TAG, "createPlayer: Failure")
-            Toast.makeText(this, "AddPlayer failed", Toast.LENGTH_SHORT).show()
+            val text = getString(R.string.addplayerfailed)
+            //Toast.makeText(this, "$text", Toast.LENGTH_SHORT).show()
         }
     }
 
+    //metodo per controllare la validità del nome
     private fun validateName(): Boolean{
         val name: String = namePlayer.getText().toString()
         if(name.isEmpty()){
@@ -76,6 +108,7 @@ class AddFootballerActivity: AppCompatActivity() {
         }
     }
 
+    //metodo per controllare la validità del cognome
     private fun validateSurname(): Boolean{
         val surname: String = surnamePlayer.getText().toString()
         if(surname.isEmpty()){
@@ -87,6 +120,7 @@ class AddFootballerActivity: AppCompatActivity() {
         }
     }
 
+    ////metodo per controllare la validità della data
     private fun validateDate(): Boolean{
         val surname: String = dataPlayer.getText().toString()
         val DATE_VAL = "^(0?[1-9]|[12][0-9]|3[01])[\\/\\-](0?[1-9]|1[012])[\\/\\-]\\d{4}\$"
@@ -104,6 +138,7 @@ class AddFootballerActivity: AppCompatActivity() {
         }
     }
 
+    //metodo per controllare la validità del telefono
     private fun validatePhone(): Boolean{
         val phone: String = phonePlayer.getText().toString()
         if(phone.isEmpty()){
@@ -118,6 +153,7 @@ class AddFootballerActivity: AppCompatActivity() {
         }
     }
 
+    //metodo per controllare la validità del ruolo
     private fun validateRuolo(): Boolean{
         val ruolo: String = ruoloPlayer.getText().toString()
         if(ruolo.isEmpty()){

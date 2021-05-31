@@ -33,13 +33,17 @@ class PrincipalActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_principal)
+        //connessione al db remoto per ottenere l'istanza
         thread(start=true) {
             mAuth = FirebaseAuth.getInstance()
+            Log.d(TAG, "db: istanza ottenuta")
         }
-        listViewPrincipalActivity.adapter = mAdapter
+        listViewPrincipalActivity!!.adapter = mAdapter
 
+        //listener per la listView presente nell'activity
+        //in base a quale riga e' stata premuta, passiamo alla visualizzazione del giocatore
         thread(start=true) {
-            listViewPrincipalActivity.setOnItemClickListener { parent: AdapterView<*>, view: View, position: Int, id: Long ->
+            listViewPrincipalActivity!!.setOnItemClickListener { parent: AdapterView<*>, view: View, position: Int, id: Long ->
                 Log.d(TAG, "click on listView")
                 val intent = Intent(this, SeePlayerActivity::class.java)
                 intent.putExtra("idnumero", position + 1)
@@ -108,7 +112,7 @@ class PrincipalActivity : AppCompatActivity() {
         return childEventListener
     }
 
-
+    //listener per fare il logout, uscire dalla principalAcitivty e tornare al login iniziale
     fun onLogout(v: View){
         thread(start=true) {
             mAuth.signOut()
@@ -119,6 +123,7 @@ class PrincipalActivity : AppCompatActivity() {
         Log.d(TAG, "logout, go to LoginActivity")
     }
 
+    //listener per poter andare ad aggiungere un giocatore
     fun plus(v: View?){
         val intent = Intent(this, AddFootballerActivity::class.java)
         intent.putExtra("count", listViewPrincipalActivity.count)
@@ -127,6 +132,7 @@ class PrincipalActivity : AppCompatActivity() {
         Log.d(TAG, "go to AddFootballerAcitvity")
     }
 
+    //listener per spedire un messagio a tutti i giocatori presenti nella lista
     fun message(v: View){
         var i = 1
         var finito = false
@@ -158,6 +164,7 @@ class PrincipalActivity : AppCompatActivity() {
         }
     }
 
+    //classe adapter per riempire la listView in fase d'esecuzione
     class MyAdapter(private val context: Context, val data: MutableList<Player>) : BaseAdapter() {
         private val TAG = "MyAdapter"
         override fun getCount(): Int {

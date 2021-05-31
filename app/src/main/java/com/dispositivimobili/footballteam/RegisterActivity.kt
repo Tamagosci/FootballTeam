@@ -37,10 +37,12 @@ class RegisterActivity : AppCompatActivity() {
 
     //listener per tornare a LoginActivity
     fun returnLogin(v: View?){
-        val intent = Intent(this, LoginActivity::class.java)
-        startActivity(intent)
-        finish()
-        Log.d(TAG, "click on login button, go to LoginActivity")
+        thread(start=true) {
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+            finish()
+            Log.d(TAG, "click on login button, go to LoginActivity")
+        }
     }
 
     //listener per controllare la registrazione
@@ -62,15 +64,17 @@ class RegisterActivity : AppCompatActivity() {
                     .addOnCompleteListener(OnCompleteListener<AuthResult>() {
                         //val helperClass: User = User(name, surname, email, phone, password)
                         //reference.child(phone.toString()).setValue(helperClass)
-                        Toast.makeText(this, "Authentication success, go to PrincipalActivity", Toast.LENGTH_SHORT).show()
-                        val intent = Intent(this, PrincipalActivity::class.java)
+                        val text = getString(R.string.authenticationsuccess)
+                        Toast.makeText(this, "$text", Toast.LENGTH_SHORT).show()
+                        val intent = Intent(this, MainActivity::class.java)
                         startActivity(intent)
                         finish()
                         Log.d(TAG, "createUserWithEmail: Success")
                     })
                     .addOnFailureListener(OnFailureListener() {
+                        val text = getString(R.string.authenticationfailed)
                         Log.w(TAG, "createUserWithEmail: Failure")
-                        Toast.makeText(this, "Authentication failed", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "$text", Toast.LENGTH_SHORT).show()
                     })
             }
         }

@@ -30,11 +30,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nameappViewImageFirstActivity"
+        app:layout_constraintTop_toBottomOf="@+id/nameappImageFirstActivity"
         app:layout_constraintVertical_bias="0.959" />
 
     <TextView
-        android:id="@+id/nameappViewImageFirstActivity"
+        android:id="@+id/nameappImageFirstActivity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="280dp"

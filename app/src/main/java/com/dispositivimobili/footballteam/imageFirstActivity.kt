@@ -28,7 +28,7 @@ class imageFirstActivity : AppCompatActivity() {
             topAnim = AnimationUtils.loadAnimation(this, R.anim.top_anim)
             bottomAnim = AnimationUtils.loadAnimation(this, R.anim.bottom_anim)
 
-            nameApp = nameappViewImageFirstActivity
+            nameApp = nameappImageFirstActivity
             textApp = textImageFirstActivity
 
             nameApp.setAnimation(topAnim)
@@ -36,8 +36,8 @@ class imageFirstActivity : AppCompatActivity() {
         }
 
         //listener sull'immagine di sfondo
-        thread(start=true) {
-            imageImageFirstActivity.setOnClickListener {
+        imageImageFirstActivity.setOnClickListener {
+            thread(start=true) {
                 val intent = Intent(this, LoginActivity::class.java)
                 startActivity(intent)
                 Log.d(TAG, "click on image background, go to LoginActivity")
@@ -45,8 +45,8 @@ class imageFirstActivity : AppCompatActivity() {
         }
 
         //listener sul nome dell'app (testo)
-        thread(start=true) {
-            nameappViewImageFirstActivity.setOnClickListener {
+        nameappImageFirstActivity.setOnClickListener {
+            thread(start=true) {
                 val intent = Intent(this, LoginActivity::class.java)
                 startActivity(intent)
                 Log.d(TAG, "click on text name app, go to LoginActivity")
@@ -54,8 +54,8 @@ class imageFirstActivity : AppCompatActivity() {
         }
 
         //listener sul testo in basso
-        thread(start=true) {
-            textImageFirstActivity.setOnClickListener {
+        textImageFirstActivity.setOnClickListener {
+            thread(start=true) {
                 val intent = Intent(this, LoginActivity::class.java)
                 startActivity(intent)
                 Log.d(TAG, "click on text bottom, go to LoginActivity")

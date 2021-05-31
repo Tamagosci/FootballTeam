@@ -19,6 +19,10 @@
     <string name="new_user_registered">New user? Registered</string>
     <string name="invalid_email">Invalid email</string>
     <string name="invalid_password">Invalid password</string>
+    <string name="checkemail">Check your email</string>
+    <string name="noresetpassword">No reset password</string>
+    <string name="loginsuccessfully">Login successfully</string>
+    <string name="loginfailed">Login failed</string>
 
     <!-- Strings used for RegisterActivity -->
     <string name="welcome">Welcome</string>
@@ -32,6 +36,8 @@
     <string name="register">REGISTER</string>
     <string name="already_have_account">Already have an account? Login</string>
     <string name="field_not_empty">Field cannot be empty</string>
+    <string name="authenticationsuccess">Authentication success</string>
+    <string name="authenticationfailed">Authentication failed</string>
 
     <!-- Strings used for PrincipalActivity -->
     <string name="your_team">Your team</string>
@@ -44,6 +50,8 @@
     <string name="insert_certification">Certifications</string>
     <string name="insert_results">Results</string>
     <string name="add">ADD</string>
+    <string name="addplayersuccess">Add player success</string>
+    <string name="addplayerfailed">Add player failed</string>
 
     <string name="confirm">CONFIRM</string>
     <string name="modify_data">MODIFY THE DATA</string>

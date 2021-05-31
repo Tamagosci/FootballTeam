@@ -19,7 +19,7 @@ import kotlinx.android.synthetic.main.toolbarprincipal.*
 import java.lang.StringBuilder
 import kotlin.concurrent.thread
 
-class PrincipalActivityFragment : Fragment(){
+class PrincipalActivityFragmentLandscape : Fragment(){
 
     //variabili utilizzate nel codice
     private val TAG = "PrincipalActivityFragment"
@@ -38,7 +38,6 @@ class PrincipalActivityFragment : Fragment(){
             mAuth = FirebaseAuth.getInstance()
             Log.d(TAG, "db: istanza ottenuta")
         }
-
         return view
     }
 
@@ -57,6 +56,7 @@ class PrincipalActivityFragment : Fragment(){
                     while (i <= listViewPrincipalActivity.count) {
                         reference.child(i.toString()).get()
                             .addOnSuccessListener {
+                                //prelevo il numero di telefono di tutti i giocatori presenti nella listview
                                 val phone = it.child("phone").getValue().toString()
                                 sb.append(phone).append(virgolaspazio)
                             }
@@ -68,6 +68,7 @@ class PrincipalActivityFragment : Fragment(){
 
                     Thread.sleep(100)
                     if (finito == true) {
+                        //invio messaggio
                         sb.delete((sb.length) - 2, sb.length)
                         val message = "Ciao ragazzi, sono il mister, "
                         val uri: Uri = Uri.parse("smsto: $sb")
@@ -79,26 +80,6 @@ class PrincipalActivityFragment : Fragment(){
                 }
             }
         }
-
-        //listener per poter effettuare il logout
-        /*buttonLogoutToolbar.setOnClickListener(){
-            thread(start=true) {
-                mAuth.signOut()
-            }
-            val intent = Intent(getActivity(), LoginActivity::class.java)
-            startActivity(intent)
-            //finish()
-            Log.d(TAG, "logout, go to LoginActivity")
-        }
-
-        //listener per poter aggiungere un nuovo giocatore
-        AddPlayerButtonToolbar.setOnClickListener(){
-            /*val intent= Intent(getActivity(), AddFootballerActivity::class.java)
-            startActivity(intent)
-            Log.d(TAG, "pressed on addplayer, go to AddFootballerActivity")*/
-
-        }*/
-
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

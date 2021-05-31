@@ -9,7 +9,7 @@
     android:padding="16dp">
 
     <android.widget.Button
-        android:id="@+id/textViewMenuToolbar"
+        android:id="@+id/buttonLogoutToolbar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -25,7 +25,7 @@
 
     <TextView
         android:id="@+id/textViewNameToolbar"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
@@ -33,12 +33,13 @@
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:text="@string/your_team"
+        android:layout_weight="5"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="30sp" />
 
     <android.widget.Button
-        android:id="@+id/AddPlayerButton"
+        android:id="@+id/AddPlayerButtonToolbar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
