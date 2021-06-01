@@ -12,6 +12,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import kotlinx.android.synthetic.main.activityprincipal_notoolbar.*
 import kotlinx.android.synthetic.main.add_player.*
 import java.util.regex.Pattern
 import kotlin.concurrent.thread
@@ -22,23 +23,25 @@ class AddFootballerActivityFragment : Fragment() {
     private var TAG = "AddFootballerActivityFragment"
     private var rootNode: FirebaseDatabase = FirebaseDatabase.getInstance()
     private var reference: DatabaseReference = rootNode.getReference("player")
-    var rowcount = 1
+    var rowcount = 0
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.add_player, container, false)
         rowcount = if(savedInstanceState?.getInt("numerorow")== null) 0
-        else { savedInstanceState.getInt("") } //aggiunta key numeroindex
-
+        else { savedInstanceState.getInt("numerorow") } //aggiunta key numeroindex
+        Log.w(TAG, "sono in onCreateView, rowcount is $rowcount")
         return view
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
         outState.putInt("numerorow", rowcount)
+        Log.w(TAG, "sono in onSaveInstanceState, rowcount is $rowcount")
     }
 
     //callback chiamata quando tutti gli elementi dell'interfaccia grafica sono pronti
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        RowCount(rowcount)
+        //RowCount(rowcount)
+        Log.w(TAG, "sono in onViewCreated, rowcount is $rowcount")
 
         //listener per poter ritornare alla PrincipalActivity
         buttonReturnAddPlayer.setOnClickListener() {
@@ -50,8 +53,9 @@ class AddFootballerActivityFragment : Fragment() {
 
         //listener per poter controllare i dati inseriti
         addbuttonAddPlayer.setOnClickListener(){
-            val id = rowcount + 1
-            Log.e(TAG, "count is $id")
+            val id = rowcount
+            Log.e(TAG, "id count is $id")
+            //Log.d(TAG, "help is ${help}")
             var correct_data = false
             val name = namePlayer.getText().toString()
             val surname = surnamePlayer.getText().toString()
@@ -87,8 +91,10 @@ class AddFootballerActivityFragment : Fragment() {
 
     fun RowCount(index:Int) {
         rowcount = index+1
-        println("NUMERO row = $rowcount")
-        Log.d(TAG, "numerorow is ${rowcount}")
+        val help = rowcount
+        //println("method, NUMERO row = $rowcount")
+        Log.d(TAG, "method, numerorow is ${rowcount}")
+        Log.d(TAG, "method, help is ${help}")
     }
 
     //metodo per controllare la validità del nome

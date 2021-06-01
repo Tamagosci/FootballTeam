@@ -60,4 +60,11 @@
     <string name="delete">DELETE</string>
     <string name="personal_date">Data of the player</string>
 
+    <!-- Strings used for MessageAllPlayerActivity -->
+    <string name="presentation">Mister, here you can send a message to all your players</string>
+    <string name="presbottom">Write your message and send</string>
+    <string name="textmessage">Text message</string>
+    <string name="send">SEND</string>
+    <string name="descrmessage">The message is at your discretion, but it can contain a maximum of 130 characters</string>
+    <string name="invalidsms">Message text longer than 130 characters, re-write it</string>
 </resources>

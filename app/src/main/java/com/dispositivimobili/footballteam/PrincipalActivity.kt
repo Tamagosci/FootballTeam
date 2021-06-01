@@ -38,12 +38,12 @@ class PrincipalActivity : AppCompatActivity() {
             mAuth = FirebaseAuth.getInstance()
             Log.d(TAG, "db: istanza ottenuta")
         }
-        listViewPrincipalActivity!!.adapter = mAdapter
+        listViewPrincipalActivitynoToolbar!!.adapter = mAdapter
 
         //listener per la listView presente nell'activity
         //in base a quale riga e' stata premuta, passiamo alla visualizzazione del giocatore
         thread(start=true) {
-            listViewPrincipalActivity!!.setOnItemClickListener { parent: AdapterView<*>, view: View, position: Int, id: Long ->
+            listViewPrincipalActivitynoToolbar!!.setOnItemClickListener { parent: AdapterView<*>, view: View, position: Int, id: Long ->
                 Log.d(TAG, "click on listView")
                 val intent = Intent(this, SeePlayerActivity::class.java)
                 intent.putExtra("idnumero", position + 1)
@@ -126,7 +126,7 @@ class PrincipalActivity : AppCompatActivity() {
     //listener per poter andare ad aggiungere un giocatore
     fun plus(v: View?){
         val intent = Intent(this, AddFootballerActivity::class.java)
-        intent.putExtra("count", listViewPrincipalActivity.count)
+        intent.putExtra("count", listViewPrincipalActivitynoToolbar.count)
         startActivity(intent)
         finish()
         Log.d(TAG, "go to AddFootballerAcitvity")
@@ -139,14 +139,14 @@ class PrincipalActivity : AppCompatActivity() {
         val virgolaspazio = ", "
         val sb = StringBuilder()
         thread(start = true) {
-            while (i <= listViewPrincipalActivity.count) {
+            while (i <= listViewPrincipalActivitynoToolbar.count) {
                 reference.child(i.toString()).get()
                     .addOnSuccessListener {
                         val phone = it.child("phone").getValue().toString()
                         sb.append(phone).append(virgolaspazio)
                     }
                 i++
-                if (i == listViewPrincipalActivity.count) {
+                if (i == listViewPrincipalActivitynoToolbar.count) {
                     finito = true
                 }
             }

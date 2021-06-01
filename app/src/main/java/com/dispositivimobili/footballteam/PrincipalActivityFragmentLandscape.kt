@@ -15,7 +15,6 @@ import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_principal.*
-import kotlinx.android.synthetic.main.toolbarprincipal.*
 import java.lang.StringBuilder
 import kotlin.concurrent.thread
 
@@ -38,12 +37,14 @@ class PrincipalActivityFragmentLandscape : Fragment(){
             mAuth = FirebaseAuth.getInstance()
             Log.d(TAG, "db: istanza ottenuta")
         }
+        Log.w(TAG, "sono in onCreateView")
         return view
     }
 
     //callback chiamata quando tutti gli elementi dell'interfaccia grafica sono pronti
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        Log.w(TAG, "sono in onViewCreated")
 
         //listener per inviare un messaggio a tutti i giocatori presenti nella listView
         fabmessage.setOnClickListener(){
@@ -53,7 +54,7 @@ class PrincipalActivityFragmentLandscape : Fragment(){
                 val virgolaspazio = ", "
                 val sb = StringBuilder()
                 thread(start = true) {
-                    while (i <= listViewPrincipalActivity.count) {
+                    while (i <= listViewPrincipalActivitynoToolbar.count) {
                         reference.child(i.toString()).get()
                             .addOnSuccessListener {
                                 //prelevo il numero di telefono di tutti i giocatori presenti nella listview
@@ -61,7 +62,7 @@ class PrincipalActivityFragmentLandscape : Fragment(){
                                 sb.append(phone).append(virgolaspazio)
                             }
                         i++
-                        if (i == listViewPrincipalActivity.count) {
+                        if (i == listViewPrincipalActivitynoToolbar.count) {
                             finito = true
                         }
                     }
@@ -70,12 +71,9 @@ class PrincipalActivityFragmentLandscape : Fragment(){
                     if (finito == true) {
                         //invio messaggio
                         sb.delete((sb.length) - 2, sb.length)
-                        val message = "Ciao ragazzi, sono il mister, "
-                        val uri: Uri = Uri.parse("smsto: $sb")
-                        val intent = Intent(Intent.ACTION_SENDTO, uri)
-                        intent.putExtra("sms_body", message)
+                        val intent = Intent(getActivity(), MessageAllPlayerActivity::class.java)
+                        intent.putExtra("sb", sb.toString())
                         startActivity(intent)
-                        Log.d(TAG, "go to send message to all player")
                     }
                 }
             }
@@ -84,11 +82,12 @@ class PrincipalActivityFragmentLandscape : Fragment(){
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        listViewPrincipalActivity!!.adapter = mAdapter!!
+        listViewPrincipalActivitynoToolbar!!.adapter = mAdapter!!
+        Log.w(TAG, "sono in onActivityCreated")
 
         //listener per poter visualizzare il giocaotre selezionato dalla riga della listView
         thread(start=true) {
-            listViewPrincipalActivity!!.setOnItemClickListener { parent: AdapterView<*>, view: View, position: Int, id: Long ->
+            listViewPrincipalActivitynoToolbar!!.setOnItemClickListener { parent: AdapterView<*>, view: View, position: Int, id: Long ->
                 Log.d(TAG, "click on listView")
                 /*val intent = Intent(getActivity(), MainActivity::class.java)
                 intent.putExtra("idnumero", position + 1)
@@ -112,6 +111,14 @@ class PrincipalActivityFragmentLandscape : Fragment(){
                 if(activity is CoordinatorFragments) {
                     activity.onRowClicked(position + 1)
                     Log.d(TAG, "position is  ${position.toString()}")
+                }
+
+                val count = listViewPrincipalActivitynoToolbar.count
+                Log.d(TAG, "v is $count")
+                val active = getActivity()
+                if(active is CoordinatorFragments) {
+                    active.countList(count)
+                    Log.d(TAG, "row count is ${count.toString()}")
                 }
 
             }
@@ -175,14 +182,15 @@ class PrincipalActivityFragmentLandscape : Fragment(){
         return childEventListener
     }
 
-    fun method() {
-        val count = listViewPrincipalActivity.count
+    fun method(): Int {
+        val count = listViewPrincipalActivitynoToolbar.count
         Log.d(TAG, "v is $count")
         val active = getActivity()
         if(active is CoordinatorFragments) {
             active.countList(count)
             Log.d(TAG, "row count is ${count.toString()}")
         }
+        return count
     }
 
 

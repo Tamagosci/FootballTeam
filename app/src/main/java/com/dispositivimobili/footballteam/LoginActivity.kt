@@ -1,16 +1,11 @@
 package com.dispositivimobili.footballteam
 
-import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.EditText
 import android.widget.Toast
-import androidx.annotation.NonNull
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_login.*
 import java.util.regex.Pattern
@@ -44,7 +39,7 @@ class LoginActivity : AppCompatActivity() {
 
     //listener per recuperare la password dimenticata
     fun resetPassword(v:View){
-        val email = email_adressLoginActivity.getText().toString()
+        val email = textMessageAllPlayerActivity.getText().toString()
         //sse la mail inserita è corretta, inviamo una mail di ripristino password
         if(validateEmail()) {
             thread(start = true) {
@@ -67,9 +62,9 @@ class LoginActivity : AppCompatActivity() {
     }
 
     //listener per controllare il login
-    fun checkLogin(v: View?) {
+    fun checkmessageOK(v: View?) {
         var correct_data : Boolean = false
-        val email: String = email_adressLoginActivity.getText().toString()
+        val email: String = textMessageAllPlayerActivity.getText().toString()
         val password: String = passwordLoginActivity.getText().toString()
 
         if(!validateEmail() || !validatePassword()) {
@@ -87,7 +82,7 @@ class LoginActivity : AppCompatActivity() {
                         Toast.makeText(this, "$text", Toast.LENGTH_SHORT).show()
                         val intent = Intent(this, MainActivity::class.java)
                         startActivity(intent)
-                        Log.d(TAG, "signInUserWithEmail: Success, go to PrincipalActivity")
+                        Log.d(TAG, "signInUserWithEmail: Success, go to MainActivity")
                     })
                     .addOnFailureListener({
                         val text = getString(R.string.loginfailed)
@@ -130,7 +125,7 @@ class LoginActivity : AppCompatActivity() {
 
     //metodo per controllare la validità della e-mail
     private fun validateEmail(): Boolean {
-        val email: String = email_adressLoginActivity.text.toString()
+        val email: String = textMessageAllPlayerActivity.text.toString()
         val EMAIL_PATTERN = ("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
                 + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")
 
@@ -138,14 +133,14 @@ class LoginActivity : AppCompatActivity() {
         val matcher = pattern.matcher(email)
 
         if(email.isEmpty()){
-            email_adressLoginActivityEsterna.setError(getString(R.string.field_not_empty))
+            textMessageAllPlayerActivityEsterna.setError(getString(R.string.field_not_empty))
             return false
         } else {
             if (!matcher.matches()) {
-                email_adressLoginActivityEsterna.setError(getString(R.string.invalid_email))
+                textMessageAllPlayerActivityEsterna.setError(getString(R.string.invalid_email))
                 return false
             } else {
-                email_adressLoginActivityEsterna.setError(null)
+                textMessageAllPlayerActivityEsterna.setError(null)
                 return true
             }
         }

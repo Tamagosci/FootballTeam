@@ -23,7 +23,7 @@
         android:id="@+id/textViewPresentationMessageAllPlayerActivity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello"
+        android:text="@string/presentation"
         android:textSize="40sp"
         android:textColor="@color/black"/>
 
@@ -31,74 +31,50 @@
         android:id="@+id/textViewPres2MessageAllPlayerActivity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/signiintocontinue"
+        android:text="@string/presbottom"
         android:textSize="18sp" />
 
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
         android:orientation="vertical">
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="160dp"
             android:id="@+id/textMessageAllPlayerActivityEsterna"
-            android:hint="@string/email_address"
+            android:hint="@string/textmessage"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="150dp"
+                android:textAlignment="textStart"
                 android:id="@+id/textMessageAllPlayerActivity"
-                android:inputType="textEmailAddress">
+                android:inputType="textEmailAddress"
+                android:gravity="start">
 
             </com.google.android.material.textfield.TextInputEditText>
         </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/password"
-            android:id="@+id/passwordLoginActivityEsterna"
-            app:passwordToggleEnabled="true"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/passwordLoginActivity"
-                android:inputType="textPassword">
-
-            </com.google.android.material.textfield.TextInputEditText>
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <Button
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/two_state_button"
-            android:text="@string/forgetpassword"
-            android:layout_gravity="right"
-            android:elevation="0dp"
-            android:onClick="resetPassword"
-            android:layout_margin="5dp"/>
 
         <Button
             android:onClick="checkmessageOK"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/login"
+            android:text="@string/send"
             android:backgroundTint="@color/green_700"
             android:textColor="@color/white"
+            android:layout_marginTop="10dp"
             android:layout_marginBottom="5dp"/>
 
         <Button
-            android:id="@+id/ButtonRegisterLoginActivity"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/new_user_registered"
+            android:layout_height="wrap_content"
+            android:text="@string/back"
+            android:onClick="back"
             android:background="@drawable/two_state_button"
             android:textColor="@color/white"
             android:layout_marginBottom="5dp"
@@ -110,7 +86,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
-            android:text="@string/info_email_password"/>
+            android:text="@string/descrmessage" />
 
     </LinearLayout>
 

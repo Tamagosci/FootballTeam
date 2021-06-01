@@ -8,9 +8,11 @@ import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_principal.*
 import kotlinx.android.synthetic.main.toolbarprincipal.*
 import kotlin.concurrent.thread
+import com.dispositivimobili.footballteam.AddFootballerActivityFragment as AddFootballerActivityFragment
 
 class MainActivity : AppCompatActivity(), CoordinatorFragments {
 
@@ -65,6 +67,7 @@ class MainActivity : AppCompatActivity(), CoordinatorFragments {
                     setReorderingAllowed(true)
                     Log.d(TAG, "pressed on addplayer, replace fragment")
                     replace<AddFootballerActivityFragment>(R.id.fragmentSeePlayer)
+                    Log.d(TAG, "main, row count is ${listViewPrincipalActivitynoToolbar.count}")
                     principalfragment.method()
                 }
             }
@@ -80,8 +83,12 @@ class MainActivity : AppCompatActivity(), CoordinatorFragments {
             frag.changeDescription(index)*/
     }
 
-    //implementazione del metodo dell'interfaccian per la comunicazione tra fragment
+    //implementazione del metodo dell'interfaccia per la comunicazione tra fragment
     override fun countList(index: Int) {
+        /*val frag = fragmentAddPlayerActivity
+        if(frag is AddFootballerActivityFragment) {
+            frag.RowCount(index)
+        }*/
         addplayer.RowCount(index)
     }
 }

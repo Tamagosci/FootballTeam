@@ -47,4 +47,10 @@
     <string name="authenticationfailed">Autenticazione fallita</string>
     <string name="addplayersuccess">Aggiunta giocatore eseguita con successo</string>
     <string name="addplayerfailed">Aggiunta giocatore fallita</string>
+    <string name="descrmessage">Il messaggio è a tua discrezione, ma può contenere al massimo 130 caratteri</string>
+    <string name="send">INVIA</string>
+    <string name="textmessage">Testo del messaggio</string>
+    <string name="presbottom">Scrivi il tuo messaggio e invialo</string>
+    <string name="presentation">Mister, qui puoi inviare un messaggio a tutti i tuoi giocatori</string>
+    <string name="invalidsms">Testo del messaggio superiore a 130 caratteri, non valido</string>
 </resources>
