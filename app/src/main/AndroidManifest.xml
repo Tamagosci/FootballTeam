@@ -17,6 +17,7 @@
         <activity android:name=".RegisterActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".MessageAllPlayerActivity" />
+        <activity android:name=".MessageOnePlayerActivity" />
         <activity
             android:name=".imageFirstActivity"
             android:label="@string/app_name"

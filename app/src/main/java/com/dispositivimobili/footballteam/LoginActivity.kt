@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.activity_login.*
 import java.util.regex.Pattern
 import kotlin.concurrent.thread
 
-
+//activity per effettuare il login sul database dell'applicazione
 class LoginActivity : AppCompatActivity() {
 
     //variabili utilizzate nel codice
@@ -27,7 +27,7 @@ class LoginActivity : AppCompatActivity() {
             Log.d(TAG, "db: istanza ottenuta")
         }
 
-        //listener per andare a RegisterActivity
+        //listener per andare a registrarsi in RegisterActivity
         ButtonRegisterLoginActivity.setOnClickListener {
             thread(start = true) {
                 val intent = Intent(this, RegisterActivity::class.java)
@@ -61,7 +61,7 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    //listener per controllare il login
+    //listener per controllare i dati inseriti e se il login viene eseguito in modo corretto
     fun checkmessageOK(v: View?) {
         var correct_data : Boolean = false
         val email: String = textMessageAllPlayerActivity.getText().toString()
@@ -73,7 +73,7 @@ class LoginActivity : AppCompatActivity() {
             correct_data = true
         }
 
-        //sse i dati sono corretti, effettuiamo il login
+        //se e solo se i dati sono corretti, effettuiamo il login
         if(correct_data == true) {
             thread(start = true) {
                 mAuth.signInWithEmailAndPassword(email, password)
@@ -94,7 +94,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
 
-    //metodo per controllare la validità della password
+    //metodo privato per controllare la validità della password
     private fun validatePassword(): Boolean {
         //val pass: String = passwordLoginActivity.text.toString()
         val password: String = passwordLoginActivity.getText().toString()
@@ -123,7 +123,7 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    //metodo per controllare la validità della e-mail
+    //metodo privato per controllare la validità della e-mail
     private fun validateEmail(): Boolean {
         val email: String = textMessageAllPlayerActivity.text.toString()
         val EMAIL_PATTERN = ("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"

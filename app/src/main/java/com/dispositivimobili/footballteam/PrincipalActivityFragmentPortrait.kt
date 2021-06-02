@@ -19,6 +19,7 @@ import kotlinx.android.synthetic.main.toolbarprincipal.*
 import java.lang.StringBuilder
 import kotlin.concurrent.thread
 
+//fragment usato in modalità portrait per visualizzare l'elenco dei giocatori presenti nel database
 class PrincipalActivityFragmentPortrait : Fragment() {
 
     //variabili utilizzate nel codice
@@ -38,14 +39,14 @@ class PrincipalActivityFragmentPortrait : Fragment() {
             mAuth = FirebaseAuth.getInstance()
             Log.d(TAG, "db: istanza ottenuta")
         }
-        Log.w(TAG, "sono in onCreateView")
+        //Log.w(TAG, "sono in onCreateView")
         return view
     }
 
     //callback chiamata quando tutti gli elementi dell'interfaccia grafica sono pronti
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.w(TAG, "sono in onViewCreated")
+        //Log.w(TAG, "sono in onViewCreated")
 
         //listener per inviare un messaggio a tutti i giocatori presenti nella listView
         fabmessage.setOnClickListener(){
@@ -70,7 +71,7 @@ class PrincipalActivityFragmentPortrait : Fragment() {
 
                     Thread.sleep(100)
                     if (finito == true) {
-                        //invio messaggio
+                        //invio messaggio tramite l'activity messageallplayer
                         sb.delete((sb.length) - 2, sb.length)
                         val intent = Intent(getActivity(), MessageAllPlayerActivity::class.java)
                         intent.putExtra("sb", sb.toString())
@@ -96,7 +97,7 @@ class PrincipalActivityFragmentPortrait : Fragment() {
             thread(start = true) {
                 val intent = Intent(getActivity(), AddFootballerActivity::class.java)
                 intent.putExtra("count", listViewPrincipalActivitynoToolbar.count)
-                Log.d(TAG, "count is ${listViewPrincipalActivitynoToolbar.count}")
+                //Log.d(TAG, "count is ${listViewPrincipalActivitynoToolbar.count}")
                 startActivity(intent)
                 Log.d(TAG, "pressed on addplayer, go to AddFootballerActivity")
             }
@@ -107,48 +108,18 @@ class PrincipalActivityFragmentPortrait : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         listViewPrincipalActivitynoToolbar!!.adapter = mAdapter!!
-        Log.w(TAG, "sono in onActivityCreated")
+        //Log.w(TAG, "sono in onActivityCreated")
 
         //listener per poter visualizzare il giocatore selezionato dalla riga della listView
         thread(start=true) {
             listViewPrincipalActivitynoToolbar!!.setOnItemClickListener { parent: AdapterView<*>, view: View, position: Int, id: Long ->
                 Log.d(TAG, "click on listView")
                 val intent = Intent(getActivity(), SeePlayerActivity::class.java)
-                intent.putExtra("rowcount", listViewPrincipalActivitynoToolbar.count)
                 intent.putExtra("idnumero", position + 1)
-                Log.d(TAG, "position is $position")
-                Log.d(TAG, "rowcount is ${listViewPrincipalActivitynoToolbar.count}")
+                //Log.d(TAG, "position is $position")
+                //Log.d(TAG, "rowcount is ${listViewPrincipalActivitynoToolbar.count}")
                 Log.d(TAG, "go to SeePlayerActivity")
                 startActivity(intent)
-                /*val see = SeePlayerActivityFragment()
-                val p = PrincipalActivityFragment()
-                val bundle = Bundle()
-                bundle.putInt("idnumero", position+1)
-                Log.d(TAG, "bundle ${bundle.toString()}")
-                //p.setArguments(bundle)
-                see.setArguments(bundle)
-                requireFragmentManager().beginTransaction()
-                    .replace(R.id.fragmentSeePlayer, SeePlayerActivityFragment() )
-                    .commit();
-                //val valuerow = position+1
-                //Toast.makeText(this, "you click on $valuerow", Toast.LENGTH_SHORT).show()
-                //finish()*/
-
-
-                /*val activity = getActivity()
-                if(activity is CoordinatorFragments) {
-                    activity.onRowClicked(position + 1)
-                    Log.d(TAG, "position is  ${position.toString()}")
-                }*/
-
-                /*val count = listViewPrincipalActivity.count
-                Log.d(TAG, "v is $count")
-                val active = getActivity()
-                if(active is CoordinatorFragments) {
-                    active.countList(count)
-                    Log.d(TAG, "row count is ${count.toString()}")
-                }*/
-
             }
         }
 
@@ -173,6 +144,7 @@ class PrincipalActivityFragmentPortrait : Fragment() {
         }
     }
 
+    //metodo privato di tipo childEventListener per rimanere in ascolto di evenutali aggiunte/modifiche/cancellazioni... sul databse
     private fun getPlayerChildEventListener(): ChildEventListener {
         val childEventListener = object: ChildEventListener {
             override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
@@ -211,7 +183,7 @@ class PrincipalActivityFragmentPortrait : Fragment() {
     }
 
 
-
+    //classe utilizzata come adapter per poter riempire la listView in fase d'esecuzione
     class MyAdapter(private val context: Context, val data: MutableList<Player>) : BaseAdapter() {
         private val TAG = "MyAdapter"
         override fun getCount(): Int {

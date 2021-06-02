@@ -10,7 +10,10 @@ import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_see_player.*
 import kotlin.concurrent.thread
 
+//activity utilizzata per poter visualizzare i dati del giocatore selezionato nella listView
 class SeePlayerActivity : AppCompatActivity() {
+
+    //variabili utilizzate nel codice
     private var rootNode: FirebaseDatabase = FirebaseDatabase.getInstance()
     private var reference: DatabaseReference = rootNode.getReference("player")
     private var TAG = "SeePlayerActivity"
@@ -19,7 +22,7 @@ class SeePlayerActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_see_player)
 
-        //recupero dati da PrincipalActivity
+        //recupero dati da PrincipalActivityFragmentPortrait
         val intent: Intent = getIntent()
         val id = intent.getIntExtra("idnumero", 0)
 
@@ -30,6 +33,7 @@ class SeePlayerActivity : AppCompatActivity() {
                     //Log.i("firebase", "Got key ${it.key}")
                     //Log.i("firebase", "Got value ${it.value}")
                     for (i in "${it.value}") {
+                        //scrivo nelle textView i vari dati
                         val name = it.child("name").getValue()
                         val surname = it.child("surname").getValue()
                         val ruolo = it.child("ruolo").getValue()
@@ -65,11 +69,13 @@ class SeePlayerActivity : AppCompatActivity() {
 
     //listener per inviare un messaggio al giocatore visualizzato
     fun onMessagePlayer(v: View){
-        val message = "Ciao " + namePlayerSeeActivity.getText().toString() + ", sono il mister, "
-        val uri: Uri = Uri.parse("smsto: ${phonePlayerSeeActivity.getText().toString()}")
+        val phone = phonePlayerSeeActivity.getText().toString()
+        //val uri: Uri = Uri.parse("smsto: ${phonePlayerSeeActivity.getText().toString()}")
         thread(start=true) {
-            val intent = Intent(Intent.ACTION_SENDTO, uri)
-            intent.putExtra("sms_body", message)
+            //invio messaggio tramite l'activity messageoneplayer
+            val intent = Intent(this, MessageOnePlayerActivity::class.java)
+            intent.putExtra("phone", phone)
+            intent.putExtra("name", namePlayerSeeActivity.getText().toString())
             startActivity(intent)
         }
         Log.d(TAG, "go to send message to one player")
@@ -103,21 +109,21 @@ class SeePlayerActivity : AppCompatActivity() {
             Log.d(TAG, "click on delete button, delete player: Success")
             //quando eliminiamo un giocatore che non e' l'ultimo nella lista
             val rowcount = intent.getIntExtra("rowcount",0)
-            Log.d(TAG, "id numero is $id")
-            Log.d(TAG, "rowcount is $rowcount")
+            //Log.d(TAG, "id numero is $id")
+            //Log.d(TAG, "rowcount is $rowcount")
             if(id!=rowcount){
                 var i = (id + 1)
                 var idadd = id
                 var idremove = id + 1
                 while(i<=rowcount){
-                    Log.d(TAG, "i value is $i")
+                    //Log.d(TAG, "i value is $i")
                     reference.child(i.toString()).get()
                         .addOnSuccessListener {
                             //Log.i("firebase", "Got key ${it.key}")
                             //Log.i("firebase", "Got value ${it.value}")
                             thread(start=true) {
                                 for (j in "${it.value}") {
-                                    Log.d(TAG, "prendo i vari dati")
+                                    //Log.d(TAG, "prendo i vari dati")
                                     val name = it.child("name").getValue().toString()
                                     val surname = it.child("surname").getValue().toString()
                                     val ruolo = it.child("ruolo").getValue().toString()
@@ -128,12 +134,12 @@ class SeePlayerActivity : AppCompatActivity() {
                                     val numeromaglia = it.child("idnumero").getValue().toString()
                                     val helperClass: Player = Player(name, surname, data, phone, ruolo, results, certification, numeromaglia)
                                     Thread.sleep(100)
-                                    Log.d(TAG, "ho preso i dati")
-                                    Log.d(TAG, "id value is $id")
+                                    //Log.d(TAG, "ho preso i dati")
+                                    //Log.d(TAG, "id value is $id")
                                     reference.child(id.toString()).setValue(helperClass)
-                                    Log.d(TAG, "valori settati a $idadd")
+                                    //Log.d(TAG, "valori settati a $idadd")
                                     reference.child((id+1).toString()).removeValue()
-                                    Log.d(TAG, "valori rimossi a $idremove")
+                                    //Log.d(TAG, "valori rimossi a $idremove")
                                     idadd++
                                     idremove++
                                     break
@@ -155,6 +161,7 @@ class SeePlayerActivity : AppCompatActivity() {
             finish()
             Log.d(TAG, "click on delete button, change id player: Success")
         } else {
+            //prelevo dalle textView i vari dati
             val name = namePlayerSeeActivity.getText().toString()
             val surname = surnamePlayerSeeActivity.getText().toString()
             val date = dataPlayerSeeActivity.getText().toString()

@@ -14,6 +14,7 @@ import kotlinx.android.synthetic.main.toolbarprincipal.*
 import kotlin.concurrent.thread
 import com.dispositivimobili.footballteam.AddFootballerActivityFragment as AddFootballerActivityFragment
 
+//activity principale dell'applicazione, compresa della modalità landscape
 class MainActivity : AppCompatActivity(), CoordinatorFragments {
 
     //variabili utilizzate nel codice
@@ -48,7 +49,7 @@ class MainActivity : AppCompatActivity(), CoordinatorFragments {
         fragTransaction.add(R.id.fragmentAddPlayerActivity, addplayer)
         fragTransaction.commit()
 
-        //listener per passare al logout (modalità landscape)
+        //listener per efettuare il logout (modalità landscape)
         //val butLogout = findViewById<Button>(R.id.buttonLogoutToolbar)
         buttonLogoutToolbar?.setOnClickListener() {
             thread(start = true) {
@@ -59,7 +60,7 @@ class MainActivity : AppCompatActivity(), CoordinatorFragments {
             }
         }
 
-        //listener per rimpiazzare il fragment seeplayer con l'aggiunta del giocatore (modalità landscape)
+        //listener per rimpiazzare il fragment seeplayer con addplayer (modalità landscape)
         //val butAddPlayer = findViewById<Button>(R.id.AddPlayerButtonToolbar)
         AddPlayerButtonToolbar?.setOnClickListener{
             thread(start=true) {
@@ -67,8 +68,8 @@ class MainActivity : AppCompatActivity(), CoordinatorFragments {
                     setReorderingAllowed(true)
                     Log.d(TAG, "pressed on addplayer, replace fragment")
                     replace<AddFootballerActivityFragment>(R.id.fragmentSeePlayer)
-                    Log.d(TAG, "main, row count is ${listViewPrincipalActivitynoToolbar.count}")
-                    principalfragment.method()
+                    //Log.d(TAG, "main, row count is ${listViewPrincipalActivitynoToolbar.count}")
+                    //principalfragment.method()
                 }
             }
         }

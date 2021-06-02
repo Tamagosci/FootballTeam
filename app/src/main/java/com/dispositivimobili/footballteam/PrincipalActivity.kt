@@ -1,5 +1,5 @@
 package com.dispositivimobili.footballteam
-
+/*
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -18,6 +18,7 @@ import kotlinx.android.synthetic.main.activity_principal.*
 import java.lang.StringBuilder
 import kotlin.concurrent.thread
 
+//activity utilizzata inizialmente, prima dello sviluppo dei fragment, per modalità solo portrait
 class PrincipalActivity : AppCompatActivity() {
 
     //variabili utilizzate nel codice
@@ -199,3 +200,4 @@ class PrincipalActivity : AppCompatActivity() {
         }
     }
 }
+*/

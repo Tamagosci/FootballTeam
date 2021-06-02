@@ -16,11 +16,14 @@ import kotlinx.android.synthetic.main.activity_register.*
 import java.util.regex.Pattern
 import kotlin.concurrent.thread
 
+//activity per registrarsi nell'applicazione come nuovo utente
 class RegisterActivity : AppCompatActivity() {
 
     //variabili utilizzate nel codice
     private var TAG = "RegisterActivity"
     private lateinit var mAuth: FirebaseAuth
+
+    //nel caso in cui si volessero registrare anche i dati degli utenti
     //private lateinit var rootNode: FirebaseDatabase
     //private lateinit var reference: DatabaseReference
 
@@ -35,7 +38,7 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
-    //listener per tornare a LoginActivity
+    //listener per tornare ad effettuare il login in LoginActivity
     fun returnLogin(v: View?){
         thread(start=true) {
             val intent = Intent(this, LoginActivity::class.java)
@@ -45,7 +48,7 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
-    //listener per controllare la registrazione
+    //listener per controllare i dati inseriti e se la registrazione viene eseguita in modo corretto
     fun checkRegister(v: View?) {
         var correct_data : Boolean = false
         val email: String = emailRegisterActivity.getText().toString()
@@ -57,7 +60,7 @@ class RegisterActivity : AppCompatActivity() {
             correct_data = true
         }
 
-        //sse i dati sono corretti, effettuiamo la registrazione
+        //se e solo se i dati sono corretti, effettuiamo la registrazione
         if(correct_data == true) {
             thread(start = true) {
                 mAuth.createUserWithEmailAndPassword(email, password)
@@ -81,7 +84,7 @@ class RegisterActivity : AppCompatActivity() {
     }
 
 
-    //metodo per controllare la validità del nome
+    //metodo privato per controllare la validità del nome
     private fun validateName(): Boolean{
         val name: String = nameRegisterActivity.getText().toString()
         if(name.isEmpty()){
@@ -93,7 +96,7 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
-    //metodo per controllare la validità del cognome
+    //metodo privato per controllare la validità del cognome
     private fun validateSurname(): Boolean{
         val surname: String = surnameRegisterActivity.getText().toString()
         if(surname.isEmpty()){
@@ -105,7 +108,7 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
-    //metodo per controllare la validità del telefono
+    //metodo privato per controllare la validità del telefono
     private fun validatePhone(): Boolean{
         val phone: String = phoneRegisterActivity.getText().toString()
         if(phone.isEmpty()){
@@ -120,7 +123,7 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
-    //metodo per controllare la validità della password
+    //metodo privato per controllare la validità della password
     private fun validatePassword(): Boolean {
         val password: String = passwordRegisterActivity.getText().toString()
         val PASSWORD_VAL = "^" +
@@ -148,7 +151,7 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
-    //metodo per controllare la validità della e-mail
+    //metodo privato per controllare la validità della e-mail
     private fun validateEmail(): Boolean {
         val email: String = emailRegisterActivity.getText().toString()
         val EMAIL_PATTERN = ("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"

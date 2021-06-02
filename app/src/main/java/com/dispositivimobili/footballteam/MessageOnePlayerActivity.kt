@@ -7,24 +7,24 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.messageallplayer.*
 import kotlin.concurrent.thread
 
-//activity per inviare un messaggio a tutti i componenti della squadra
-class MessageAllPlayerActivity : AppCompatActivity() {
+//activity per inviare un messaggio al giocatore di cui si stanno visualizzando i dati
+class MessageOnePlayerActivity : AppCompatActivity() {
 
     //variabili utilizzate nel codice
-    private val TAG = "MessageAllPlayerActivity"
+    private val TAG = "MessageOnePlayerActivity"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.messageallplayer)
+        setContentView(R.layout.messageoneplayeractivity)
+        val name = intent.getStringExtra("name")
+        textViewPresentationMessageOnePlayerActivity.setText("Mister, here you can send a message to ${name}")
     }
 
     //listener per ritornare a MainActivity
-    fun back(v: View){
+    fun backoneplayer(v: View){
         thread(start=true) {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
@@ -34,8 +34,9 @@ class MessageAllPlayerActivity : AppCompatActivity() {
     }
 
     //listener per inviare il messaggio
-    fun checkmessageOK(v:View){
-        val sb = intent.getStringExtra("sb")
+    fun checkmessageoneplayerOK(v: View){
+        val phone = intent.getStringExtra("phone")
+        val name = intent.getStringExtra("name")
         val testo = textMessageAllPlayerActivity.getText().toString()
         //test per controllare se la lunghezza del testo è superiore a 130 caratteri
         if(testo.length > 130) {
@@ -44,8 +45,8 @@ class MessageAllPlayerActivity : AppCompatActivity() {
             Toast.makeText(this, "$testo", Toast.LENGTH_SHORT).show()
         } else {
             //apertura applicazione invio messaggi
-            val message = "Ciao ragazzi, sono il mister, " + testo
-            val uri: Uri = Uri.parse("smsto: $sb")
+            val message = "Ciao $name, sono il mister, " + testo
+            val uri: Uri = Uri.parse("smsto: $phone")
             val intent = Intent(Intent.ACTION_SENDTO, uri)
             //Log.d(TAG, "message is $message")
             //Log.d(TAG, "lunghezza is ${testo.length}")

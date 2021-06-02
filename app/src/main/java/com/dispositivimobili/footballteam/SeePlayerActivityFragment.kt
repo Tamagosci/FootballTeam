@@ -25,26 +25,33 @@ import kotlinx.android.synthetic.main.activity_see_player.surnamePlayerSeeActivi
 import kotlinx.android.synthetic.main.activity_see_player_fragment.*
 import kotlin.concurrent.thread
 
-
+//fragment utilizzato per poter visualizzare i dati del giocatore selezionato nella listView
 class SeePlayerActivityFragment : Fragment(){
+
+    //variabili utilizzate nel codice
     private var rootNode: FirebaseDatabase = FirebaseDatabase.getInstance()
     private var reference: DatabaseReference = rootNode.getReference("player")
     private var TAG = "SeePlayerActivityFragment"
     var numeroIndex = 1
 
+    //callback simile a onCreate per le activity
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val v = inflater.inflate(R.layout.activity_see_player_fragment, container, false)
         numeroIndex = if(savedInstanceState?.getInt("numeroindex")== null) 0
         else { savedInstanceState.getInt("") } //aggiunta key numeroindex
+        //Log.w(TAG, "sono in onCreateView, numeroindex is $numeroIndex")
         return v
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
         outState.putInt("numeroindex", numeroIndex)
+        //Log.w(TAG, "sono in onCreateView, numeroindex is $numeroIndex")
     }
 
+    //callback chiamata quando tutti gli elementi dell'interfaccia grafica sono pronti
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         changeDescription(numeroIndex)
+        //Log.w(TAG, "sono in onCreateView, numeroindex is $numeroIndex")
 
         //listener per modificare i dati del giocatore selezionato
         modificabutton.setOnClickListener{
@@ -64,18 +71,21 @@ class SeePlayerActivityFragment : Fragment(){
             Log.d(TAG, "click on modify button, start to modify the data of player")
         }
 
+        //listener per inviare un messaggio al giocatore visualizzato
         message_oneplayer.setOnClickListener(){
-            val message = "Ciao " + namePlayerSeeActivity.getText().toString() + ", sono il mister, "
-            val uri: Uri = Uri.parse("smsto: ${phonePlayerSeeActivity.getText().toString()}")
+            val phone = phonePlayerSeeActivity.getText().toString()
+            //val uri: Uri = Uri.parse("smsto: ${phonePlayerSeeActivity.getText().toString()}")
             thread(start=true) {
-                val intent = Intent(Intent.ACTION_SENDTO, uri)
-                intent.putExtra("sms_body", message)
+                //invio messaggio tramite l'activity messageoneplayer
+                val intent = Intent(getActivity(), MessageOnePlayerActivity::class.java)
+                intent.putExtra("phone", phone)
+                intent.putExtra("name", namePlayerSeeActivity.getText().toString())
                 startActivity(intent)
             }
             Log.d(TAG, "go to send message to one player")
         }
 
-        //listener per eliminare il giocatore selezionato o confermare le modifiche effettuare
+        //listener per eliminare il giocatore selezionato o confermare le modifiche effettuate
         eliminabutton.setOnClickListener(){
             val num = numeroIndex
             Log.d(TAG, "numero index value is $num")
@@ -85,11 +95,9 @@ class SeePlayerActivityFragment : Fragment(){
             if(testo == valore) {
                 //eliminazione dal db del giocatore selezionato
                 reference.child(num.toString()).removeValue()
-                /*val intent = Intent(getActivity(), PrincipalActivity::class.java)
-                startActivity(intent)
-                finish()*/
                 Log.d(TAG, "click on delete button, delete player: Success")
             } else {
+                //prelevo dalle textView i vari dati
                 val name = namePlayerSeeActivity.getText().toString()
                 val surname = surnamePlayerSeeActivity.getText().toString()
                 val date = dataPlayerSeeActivity.getText().toString()
@@ -132,6 +140,7 @@ class SeePlayerActivityFragment : Fragment(){
         pubblicadati(numeroIndex)
     }
 
+    //metodo utilizzato per pubblicare e scrivere sulle textView tutti i dati del giocatore selezionato
     fun pubblicadati(index: Int){
         //recupero dati giocatore da firebase
         thread(start = true) {
@@ -142,7 +151,7 @@ class SeePlayerActivityFragment : Fragment(){
                     //Log.i("firebase", "Got value ${it.value}")
                     for (i in "${it.value}") {
                         val name = it.child("name").getValue()
-                        Log.d(TAG, "name is $name")
+                        //Log.d(TAG, "name is $name")
                         val surname = it.child("surname").getValue()
                         val ruolo = it.child("ruolo").getValue()
                         val data = it.child("date").getValue()

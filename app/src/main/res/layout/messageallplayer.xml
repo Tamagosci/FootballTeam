@@ -20,7 +20,7 @@
         app:srcCompat="@mipmap/ic_imagefootball_foreground" />
 
     <TextView
-        android:id="@+id/textViewPresentationMessageAllPlayerActivity"
+        android:id="@+id/textViewPresentationMessageOnePlayerActivity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/presentation"
@@ -28,7 +28,7 @@
         android:textColor="@color/black"/>
 
     <TextView
-        android:id="@+id/textViewPres2MessageAllPlayerActivity"
+        android:id="@+id/textViewPres2MessageOnePlayerActivity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/presbottom"

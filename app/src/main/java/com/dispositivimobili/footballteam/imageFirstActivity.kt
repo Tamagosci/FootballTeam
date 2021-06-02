@@ -10,6 +10,7 @@ import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_image_first.*
 import kotlin.concurrent.thread
 
+//activity di ingresso per l'applicazione, compresa di animazioni
 class imageFirstActivity : AppCompatActivity() {
 
     //Variabili utilizzate nel codice

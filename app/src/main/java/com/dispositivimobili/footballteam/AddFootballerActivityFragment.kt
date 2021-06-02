@@ -17,6 +17,7 @@ import kotlinx.android.synthetic.main.add_player.*
 import java.util.regex.Pattern
 import kotlin.concurrent.thread
 
+//fragment utilizzato per poter aggiungere un nuovo giocatore
 class AddFootballerActivityFragment : Fragment() {
 
     //variabili utilizzate nel codice
@@ -25,23 +26,24 @@ class AddFootballerActivityFragment : Fragment() {
     private var reference: DatabaseReference = rootNode.getReference("player")
     var rowcount = 0
 
+    //callback simile a onCreate per le activity
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.add_player, container, false)
-        rowcount = if(savedInstanceState?.getInt("numerorow")== null) 0
-        else { savedInstanceState.getInt("numerorow") } //aggiunta key numeroindex
-        Log.w(TAG, "sono in onCreateView, rowcount is $rowcount")
+        //rowcount = if(savedInstanceState?.getInt("numerorow")== null) 0
+        //else { savedInstanceState.getInt("numerorow") } //aggiunta key numeroindex
+        //Log.w(TAG, "sono in onCreateView, rowcount is $rowcount")
         return view
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
-        outState.putInt("numerorow", rowcount)
-        Log.w(TAG, "sono in onSaveInstanceState, rowcount is $rowcount")
+        //outState.putInt("numerorow", rowcount)
+        //Log.w(TAG, "sono in onSaveInstanceState, rowcount is $rowcount")
     }
 
     //callback chiamata quando tutti gli elementi dell'interfaccia grafica sono pronti
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         //RowCount(rowcount)
-        Log.w(TAG, "sono in onViewCreated, rowcount is $rowcount")
+        //Log.w(TAG, "sono in onViewCreated, rowcount is $rowcount")
 
         //listener per poter ritornare alla PrincipalActivity
         buttonReturnAddPlayer.setOnClickListener() {
@@ -72,7 +74,7 @@ class AddFootballerActivityFragment : Fragment() {
                 correct_data = true
             }
 
-            //sse i dati sono corretti, passiamo ad aggiungere il giocatore al db
+            //se e solo se i dati sono corretti, passiamo ad aggiungere il giocatore al db
             if (correct_data == true) {
                 val helperClass: Player = Player(name, surname, date, phone, ruolo, results, certification, numeromaglia)
                 thread(start = true) {
@@ -93,11 +95,12 @@ class AddFootballerActivityFragment : Fragment() {
         rowcount = index+1
         val help = rowcount
         //println("method, NUMERO row = $rowcount")
-        Log.d(TAG, "method, numerorow is ${rowcount}")
-        Log.d(TAG, "method, help is ${help}")
+        //Log.d(TAG, "method, numerorow is ${rowcount}")
+        //Log.d(TAG, "method, help is ${help}")
     }
 
-    //metodo per controllare la validità del nome
+
+    //metodo privato per controllare la validità del nome
     private fun validateName(): Boolean{
         val name: String = namePlayer.getText().toString()
         if(name.isEmpty()){
@@ -109,7 +112,7 @@ class AddFootballerActivityFragment : Fragment() {
         }
     }
 
-    //metodo per controllare la validità del cognome
+    //metodo privato per controllare la validità del cognome
     private fun validateSurname(): Boolean{
         val surname: String = surnamePlayer.getText().toString()
         if(surname.isEmpty()){
@@ -121,7 +124,7 @@ class AddFootballerActivityFragment : Fragment() {
         }
     }
 
-    ////metodo per controllare la validità della data
+    //metodo privato per controllare la validità della data
     private fun validateDate(): Boolean{
         val surname: String = dataPlayer.getText().toString()
         val DATE_VAL = "^(0?[1-9]|[12][0-9]|3[01])[\\/\\-](0?[1-9]|1[012])[\\/\\-]\\d{4}\$"
@@ -139,7 +142,7 @@ class AddFootballerActivityFragment : Fragment() {
         }
     }
 
-    //metodo per controllare la validità del telefono
+    //metodo privato per controllare la validità del telefono
     private fun validatePhone(): Boolean{
         val phone: String = phonePlayer.getText().toString()
         if(phone.isEmpty()){
@@ -154,7 +157,7 @@ class AddFootballerActivityFragment : Fragment() {
         }
     }
 
-    //metodo per controllare la validità del ruolo
+    //metodo privato per controllare la validità del ruolo
     private fun validateRuolo(): Boolean{
         val ruolo: String = ruoloPlayer.getText().toString()
         if(ruolo.isEmpty()){
@@ -168,6 +171,4 @@ class AddFootballerActivityFragment : Fragment() {
             return true
         }
     }
-
-
 }
