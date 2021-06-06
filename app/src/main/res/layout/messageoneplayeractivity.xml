@@ -10,10 +10,10 @@
 
 
     <ImageView
-        android:id="@+id/imageViewMessageAllPlayerActivity"
+        android:id="@+id/imageViewMessageOnePlayerActivity"
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        app:layout_constraintBottom_toTopOf="@+id/editTextUserNameLoginActivity"
+        app:layout_constraintBottom_toTopOf="@+id/textViewPresentationMessageOnePlayerActivity"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -44,16 +44,16 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="160dp"
-            android:id="@+id/textMessageAllPlayerActivityEsterna"
+            android:layout_height="140dp"
+            android:id="@+id/textMessageOnePlayerActivityEsterna"
             android:hint="@string/textmessage"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="130dp"
                 android:textAlignment="textStart"
-                android:id="@+id/textMessageAllPlayerActivity"
+                android:id="@+id/textMessageOnePlayerActivity"
                 android:inputType="textEmailAddress"
                 android:gravity="start">
 

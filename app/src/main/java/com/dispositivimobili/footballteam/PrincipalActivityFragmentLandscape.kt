@@ -14,7 +14,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
-import kotlinx.android.synthetic.main.activity_principal.*
+import kotlinx.android.synthetic.main.activityprincipal_notoolbar.*
 import java.lang.StringBuilder
 import kotlin.concurrent.thread
 
@@ -91,6 +91,7 @@ class PrincipalActivityFragmentLandscape : Fragment(){
             listViewPrincipalActivitynoToolbar!!.setOnItemClickListener { parent: AdapterView<*>, view: View, position: Int, id: Long ->
                 Log.d(TAG, "click on listView")
 
+                //chiamata del metodo per il passaggio del numero di righe nella listView
                 val activity = getActivity()
                 if(activity is CoordinatorFragments) {
                     activity.onRowClicked(position + 1)
@@ -120,7 +121,7 @@ class PrincipalActivityFragmentLandscape : Fragment(){
         }
     }
 
-    //metodo privato di tipo childEventListener per rimanere in ascolto di evenutali aggiunte/modifiche/cancellazioni... sul databse
+    //metodo privato di tipo childEventListener per rimanere in ascolto di evenutali aggiunte/modifiche/cancellazioni... sul database
     private fun getPlayerChildEventListener(): ChildEventListener {
         val childEventListener = object: ChildEventListener{
             override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {

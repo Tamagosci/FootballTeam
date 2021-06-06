@@ -12,7 +12,6 @@
         android:theme="@style/Theme.FootballManager">
         <activity android:name=".SeePlayerActivity" />
         <activity android:name=".AddFootballerActivity" />
-        <activity android:name=".PrincipalActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".MainActivity" />

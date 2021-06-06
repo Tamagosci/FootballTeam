@@ -56,7 +56,7 @@ class PrincipalActivityFragmentPortrait : Fragment() {
                 val virgolaspazio = ", "
                 val sb = StringBuilder()
                 thread(start = true) {
-                    while (i <= listViewPrincipalActivitynoToolbar.count) {
+                    while (i <= listViewPrincipalActivity.count) {
                         reference.child(i.toString()).get()
                             .addOnSuccessListener {
                                 //prelevo il numero di telefono di tutti i giocatori presenti nella listview
@@ -64,7 +64,7 @@ class PrincipalActivityFragmentPortrait : Fragment() {
                                 sb.append(phone).append(virgolaspazio)
                             }
                         i++
-                        if (i == listViewPrincipalActivitynoToolbar.count) {
+                        if (i == listViewPrincipalActivity.count) {
                             finito = true
                         }
                     }
@@ -96,7 +96,7 @@ class PrincipalActivityFragmentPortrait : Fragment() {
         AddPlayerButtonToolbar.setOnClickListener() {
             thread(start = true) {
                 val intent = Intent(getActivity(), AddFootballerActivity::class.java)
-                intent.putExtra("count", listViewPrincipalActivitynoToolbar.count)
+                intent.putExtra("count", listViewPrincipalActivity.count)
                 //Log.d(TAG, "count is ${listViewPrincipalActivitynoToolbar.count}")
                 startActivity(intent)
                 Log.d(TAG, "pressed on addplayer, go to AddFootballerActivity")
@@ -107,12 +107,12 @@ class PrincipalActivityFragmentPortrait : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        listViewPrincipalActivitynoToolbar!!.adapter = mAdapter!!
+        listViewPrincipalActivity!!.adapter = mAdapter!!
         //Log.w(TAG, "sono in onActivityCreated")
 
         //listener per poter visualizzare il giocatore selezionato dalla riga della listView
         thread(start=true) {
-            listViewPrincipalActivitynoToolbar!!.setOnItemClickListener { parent: AdapterView<*>, view: View, position: Int, id: Long ->
+            listViewPrincipalActivity!!.setOnItemClickListener { parent: AdapterView<*>, view: View, position: Int, id: Long ->
                 Log.d(TAG, "click on listView")
                 val intent = Intent(getActivity(), SeePlayerActivity::class.java)
                 intent.putExtra("idnumero", position + 1)
@@ -144,7 +144,7 @@ class PrincipalActivityFragmentPortrait : Fragment() {
         }
     }
 
-    //metodo privato di tipo childEventListener per rimanere in ascolto di evenutali aggiunte/modifiche/cancellazioni... sul databse
+    //metodo privato di tipo childEventListener per rimanere in ascolto di evenutali aggiunte/modifiche/cancellazioni... sul database
     private fun getPlayerChildEventListener(): ChildEventListener {
         val childEventListener = object: ChildEventListener {
             override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {

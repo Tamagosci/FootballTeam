@@ -20,7 +20,7 @@
         tools:ignore="MissingConstraints" />
 
     <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragmentPrincipalActivity"
+        android:id="@+id/fragmentPrincipalActivityLandscape"
         android:layout_width="wrap_content"
         android:visibility="invisible"
         android:layout_height="wrap_content"

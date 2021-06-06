@@ -22,7 +22,7 @@
     <string name="checkemail">Check your email</string>
     <string name="noresetpassword">No reset password</string>
     <string name="loginsuccessfully">Login successfully</string>
-    <string name="loginfailed">Login failed</string>
+    <string name="loginfailed">Login failed, check your data</string>
 
     <!-- Strings used for RegisterActivity -->
     <string name="welcome">Welcome</string>
@@ -62,6 +62,7 @@
 
     <!-- Strings used for MessageAllPlayerActivity -->
     <string name="presentation">Mister, here you can send a message to all your players</string>
+    <string name="testooneplayer">Mister, here you can send a message to </string>
     <string name="presbottom">Write your message and send</string>
     <string name="textmessage">Text message</string>
     <string name="send">SEND</string>

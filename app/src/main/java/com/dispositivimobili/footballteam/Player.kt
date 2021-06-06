@@ -1,6 +1,6 @@
 package com.dispositivimobili.footballteam
 
-//classe utilizzata come supporto per creare i vari giocatori
+//classe di supporto utilizzata per creare i vari giocatori
 class Player {
 
     var name: String = ""

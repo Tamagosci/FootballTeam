@@ -6,6 +6,7 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_main.*
@@ -20,20 +21,25 @@ class MainActivity : AppCompatActivity(), CoordinatorFragments {
     //variabili utilizzate nel codice
     private var rootNode: FirebaseDatabase = FirebaseDatabase.getInstance()
     private var reference: DatabaseReference = rootNode.getReference("player")
+    private lateinit var mAuth: FirebaseAuth
     private val TAG = "MainActivity"
 
     //creazione istanze fragments
     lateinit var seePlayerDescription: SeePlayerActivityFragment
-    lateinit var principalfragment: PrincipalActivityFragmentLandscape
+    lateinit var principalfragmentlandscape: PrincipalActivityFragmentLandscape
     lateinit var principalfragmentportrait: PrincipalActivityFragmentPortrait
     lateinit var addplayer: AddFootballerActivityFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        thread(start=true) {
+            mAuth = FirebaseAuth.getInstance()
+            Log.d(TAG, "db: istanza ottenuta")
+        }
 
         //fragment principalactivityfragment landscape
-        principalfragment = PrincipalActivityFragmentLandscape()
+        principalfragmentlandscape = PrincipalActivityFragmentLandscape()
         //fragment seeplayeractivityfragment
         seePlayerDescription = SeePlayerActivityFragment()
         //fragment principalactivityfragment portrait
@@ -43,16 +49,17 @@ class MainActivity : AppCompatActivity(), CoordinatorFragments {
 
         //aggiungere i vari fragments
         val fragTransaction = supportFragmentManager.beginTransaction()
-        fragTransaction.add(R.id.fragmentPrincipalActivity, principalfragment)
+        fragTransaction.add(R.id.fragmentPrincipalActivityLandscape, principalfragmentlandscape)
         fragTransaction.add(R.id.fragmentSeePlayer, seePlayerDescription)
         fragTransaction.add(R.id.fragmentPrincipalActivityPortrait, principalfragmentportrait)
         fragTransaction.add(R.id.fragmentAddPlayerActivity, addplayer)
         fragTransaction.commit()
 
-        //listener per efettuare il logout (modalità landscape)
+        //listener per effettuare il logout (modalità landscape)
         //val butLogout = findViewById<Button>(R.id.buttonLogoutToolbar)
         buttonLogoutToolbar?.setOnClickListener() {
             thread(start = true) {
+                mAuth.signOut()
                 val intent = Intent(this, LoginActivity::class.java)
                 Log.d(TAG, "pressed on buttonlogout, go to logout")
                 startActivity(intent)
@@ -75,6 +82,7 @@ class MainActivity : AppCompatActivity(), CoordinatorFragments {
         }
     }
 
+
     //implementazione del metodo dell'interfaccian per la comunicazione tra fragment
     override fun onRowClicked(index: Int) {
         seePlayerDescription.changeDescription(index)
@@ -86,10 +94,10 @@ class MainActivity : AppCompatActivity(), CoordinatorFragments {
 
     //implementazione del metodo dell'interfaccia per la comunicazione tra fragment
     override fun countList(index: Int) {
-        /*val frag = fragmentAddPlayerActivity
-        if(frag is AddFootballerActivityFragment) {
-            frag.RowCount(index)
-        }*/
         addplayer.RowCount(index)
+
+        /*val frag = fragmentAddPlayerActivity
+        if(frag is AddFootballerActivityFragment)
+            frag.RowCount(index)*/
     }
 }

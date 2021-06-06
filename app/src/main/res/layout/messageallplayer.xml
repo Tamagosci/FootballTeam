@@ -13,14 +13,14 @@
         android:id="@+id/imageViewMessageAllPlayerActivity"
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        app:layout_constraintBottom_toTopOf="@+id/editTextUserNameLoginActivity"
+        app:layout_constraintBottom_toTopOf="@+id/textViewPresentationMessageAllPlayerActivity"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@mipmap/ic_imagefootball_foreground" />
 
     <TextView
-        android:id="@+id/textViewPresentationMessageOnePlayerActivity"
+        android:id="@+id/textViewPresentationMessageAllPlayerActivity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/presentation"
@@ -28,7 +28,7 @@
         android:textColor="@color/black"/>
 
     <TextView
-        android:id="@+id/textViewPres2MessageOnePlayerActivity"
+        android:id="@+id/textViewPres2MessageAllPlayerActivity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/presbottom"
@@ -44,14 +44,14 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="160dp"
+            android:layout_height="140dp"
             android:id="@+id/textMessageAllPlayerActivityEsterna"
             android:hint="@string/textmessage"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="130dp"
                 android:textAlignment="textStart"
                 android:id="@+id/textMessageAllPlayerActivity"
                 android:inputType="textEmailAddress"

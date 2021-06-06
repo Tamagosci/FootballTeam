@@ -7,7 +7,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.synthetic.main.messageallplayer.*
+import kotlinx.android.synthetic.main.messageoneplayeractivity.*
 import kotlin.concurrent.thread
 
 //activity per inviare un messaggio al giocatore di cui si stanno visualizzando i dati
@@ -20,7 +20,8 @@ class MessageOnePlayerActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.messageoneplayeractivity)
         val name = intent.getStringExtra("name")
-        textViewPresentationMessageOnePlayerActivity.setText("Mister, here you can send a message to ${name}")
+        val testo = getString(R.string.testooneplayer) +" "+ name
+        textViewPresentationMessageOnePlayerActivity.setText(testo)
     }
 
     //listener per ritornare a MainActivity
@@ -37,7 +38,7 @@ class MessageOnePlayerActivity : AppCompatActivity() {
     fun checkmessageoneplayerOK(v: View){
         val phone = intent.getStringExtra("phone")
         val name = intent.getStringExtra("name")
-        val testo = textMessageAllPlayerActivity.getText().toString()
+        val testo = textMessageOnePlayerActivity.getText().toString()
         //test per controllare se la lunghezza del testo è superiore a 130 caratteri
         if(testo.length > 130) {
             //Log.d(TAG, "testo superiore a 130 caratteri")

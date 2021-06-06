@@ -10,7 +10,7 @@
 
 
     <ImageView
-        android:id="@+id/imageViewMessageAllPlayerActivity"
+        android:id="@+id/imageViewLoginActivity"
         android:layout_width="match_parent"
         android:layout_height="150dp"
         app:layout_constraintBottom_toTopOf="@+id/editTextUserNameLoginActivity"
@@ -20,7 +20,7 @@
         app:srcCompat="@mipmap/ic_imagefootball_foreground" />
 
     <TextView
-        android:id="@+id/textViewPresentationMessageOnePlayerActivity"
+        android:id="@+id/textViewPresentationLoginActivity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/hello"
@@ -28,7 +28,7 @@
         android:textColor="@color/black"/>
 
     <TextView
-        android:id="@+id/textViewPres2MessageOnePlayerActivity"
+        android:id="@+id/textViewPres2LoginActivity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/signiintocontinue"
@@ -45,14 +45,14 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/textMessageAllPlayerActivityEsterna"
+            android:id="@+id/emailLoginActivityEsterna"
             android:hint="@string/email_address"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/textMessageAllPlayerActivity"
+                android:id="@+id/emailLoginActivity"
                 android:inputType="textEmailAddress">
 
             </com.google.android.material.textfield.TextInputEditText>
@@ -86,7 +86,7 @@
             android:layout_margin="5dp"/>
 
         <Button
-            android:onClick="checkmessageOK"
+            android:onClick="login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/login"

@@ -32,6 +32,7 @@ class SeePlayerActivityFragment : Fragment(){
     private var rootNode: FirebaseDatabase = FirebaseDatabase.getInstance()
     private var reference: DatabaseReference = rootNode.getReference("player")
     private var TAG = "SeePlayerActivityFragment"
+    private lateinit var main : MainActivity
     var numeroIndex = 1
 
     //callback simile a onCreate per le activity
@@ -40,6 +41,7 @@ class SeePlayerActivityFragment : Fragment(){
         numeroIndex = if(savedInstanceState?.getInt("numeroindex")== null) 0
         else { savedInstanceState.getInt("") } //aggiunta key numeroindex
         //Log.w(TAG, "sono in onCreateView, numeroindex is $numeroIndex")
+        main = MainActivity()
         return v
     }
 
@@ -52,6 +54,7 @@ class SeePlayerActivityFragment : Fragment(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         changeDescription(numeroIndex)
         //Log.w(TAG, "sono in onCreateView, numeroindex is $numeroIndex")
+
 
         //listener per modificare i dati del giocatore selezionato
         modificabutton.setOnClickListener{

@@ -45,7 +45,7 @@ class AddFootballerActivityFragment : Fragment() {
         //RowCount(rowcount)
         //Log.w(TAG, "sono in onViewCreated, rowcount is $rowcount")
 
-        //listener per poter ritornare alla PrincipalActivity
+        //listener per poter ritornare alla MainActivity
         buttonReturnAddPlayer.setOnClickListener() {
             val intent = Intent(getActivity(), MainActivity::class.java)
             startActivity(intent)
@@ -94,6 +94,9 @@ class AddFootballerActivityFragment : Fragment() {
     fun RowCount(index:Int) {
         rowcount = index+1
         val help = rowcount
+
+        //altro metodo? Utilizzare un contatore e quando è dispari fare una cosa quando è pari farne unaltra?
+        //passaggio altro parametro contatore??
         //println("method, NUMERO row = $rowcount")
         //Log.d(TAG, "method, numerorow is ${rowcount}")
         //Log.d(TAG, "method, help is ${help}")

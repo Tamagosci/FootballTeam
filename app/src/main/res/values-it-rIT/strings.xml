@@ -42,7 +42,7 @@
     <string name="checkemail">Controlla la tua e-mail</string>
     <string name="noresetpassword">Non è possibile recuperare la password</string>
     <string name="loginsuccessfully">Login eseguito con successo</string>
-    <string name="loginfailed">Login fallito</string>
+    <string name="loginfailed">Login fallito, controlla i dati</string>
     <string name="authenticationsuccess">Autenticazione eseguita con successo</string>
     <string name="authenticationfailed">Autenticazione fallita</string>
     <string name="addplayersuccess">Aggiunta giocatore eseguita con successo</string>
@@ -53,4 +53,5 @@
     <string name="presbottom">Scrivi il tuo messaggio e invialo</string>
     <string name="presentation">Mister, qui puoi inviare un messaggio a tutti i tuoi giocatori</string>
     <string name="invalidsms">Testo del messaggio superiore a 130 caratteri, non valido</string>
+    <string name="testooneplayer">"Mister, qui puoi inviare un messaggio a "</string>
 </resources>

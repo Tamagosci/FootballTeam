@@ -1,6 +1,6 @@
 package com.dispositivimobili.footballteam
 /*
-//classe utilizzata nel caso in cui si volessero salvare i dati dei vari utenti
+//classe di supporto utilizzata nel caso in cui si volessero salvare i dati dei vari utenti
 class User {
 
     var name: String = ""

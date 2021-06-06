@@ -28,7 +28,7 @@ class AddFootballerActivity: AppCompatActivity() {
         setContentView(R.layout.add_player)
     }
 
-    //listener per poter ritornare alla PrincipalActivity
+    //listener per poter ritornare alla MainActivity
     fun onReturn(v: View){
         thread(start=true) {
             val intent = Intent(this, MainActivity::class.java)
